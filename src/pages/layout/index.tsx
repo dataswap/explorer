@@ -1,5 +1,7 @@
 "use client"
-import { Breadcrumb, Layout, Menu, theme } from "antd"
+import { Breadcrumb, Layout, theme, Image } from "antd"
+import Menu from "@/pages/menu"
+import { UserOutlined, GithubOutlined } from "@ant-design/icons"
 
 const { Header, Content, Footer } = Layout
 
@@ -10,27 +12,19 @@ const App: React.FC = () => {
 
     return (
         <Layout className="layout">
-            <Header style={{ display: "flex", alignItems: "center" }}>
-                <div className="demo-logo" />
-                <Menu
-                    theme="dark"
-                    mode="horizontal"
-                    defaultSelectedKeys={["2"]}
-                    items={new Array(3).fill(null).map((_, index) => {
-                        const key = index + 1
-                        return {
-                            key,
-                            label: `nav ${key}`,
-                        }
-                    })}
-                />
+            <Header
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                }}
+            >
+                <Menu />
+                <div>
+                    <UserOutlined style={{ color: "white" }} />
+                </div>
             </Header>
             <Content style={{ padding: "0 50px" }}>
-                <Breadcrumb style={{ margin: "16px 0" }}>
-                    <Breadcrumb.Item>Home</Breadcrumb.Item>
-                    <Breadcrumb.Item>List</Breadcrumb.Item>
-                    <Breadcrumb.Item>App</Breadcrumb.Item>
-                </Breadcrumb>
                 <div
                     className="site-layout-content"
                     style={{ background: colorBgContainer }}
@@ -39,7 +33,10 @@ const App: React.FC = () => {
                 </div>
             </Content>
             <Footer style={{ textAlign: "center" }}>
-                Dataswap ©2023 Created by Dataswap
+                Dataswap ©2023 Created by Dataswap &nbsp;&nbsp;
+                <a href="https://github.com/dataswap">
+                    <GithubOutlined />
+                </a>
             </Footer>
         </Layout>
     )
