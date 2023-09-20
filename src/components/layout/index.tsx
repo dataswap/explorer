@@ -1,11 +1,12 @@
 "use client"
-import { Breadcrumb, Layout, theme, Image } from "antd"
-import Menu from "@/pages/menu"
+import type { ReactElement, ReactNode } from "react"
+import { Layout, theme, Image } from "antd"
+import Menu from "@/components/menu"
 import { UserOutlined, GithubOutlined } from "@ant-design/icons"
 
 const { Header, Content, Footer } = Layout
 
-const App: React.FC = () => {
+export default ({ children }: any) => {
     const {
         token: { colorBgContainer },
     } = theme.useToken()
@@ -29,7 +30,7 @@ const App: React.FC = () => {
                     className="site-layout-content"
                     style={{ background: colorBgContainer }}
                 >
-                    Content
+                    <main>{children}</main>
                 </div>
             </Content>
             <Footer style={{ textAlign: "center" }}>
@@ -41,5 +42,3 @@ const App: React.FC = () => {
         </Layout>
     )
 }
-
-export default App

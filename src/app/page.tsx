@@ -1,7 +1,11 @@
 import Image from "next/image"
 import styles from "./page.module.css"
-import Layout from "@/pages/layout"
+import Home from "@/pages/home"
 
-export default function Home() {
-    return <Layout />
+export default () => {
+    return (
+        <>
+            <Home></Home>
+        </>
+    )
 }

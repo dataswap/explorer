@@ -1,6 +1,14 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import type { MenuProps } from "antd"
 import { Menu } from "antd"
+import { useRouter } from "next/router"
+import {
+    HomeOutlined,
+    CloudServerOutlined,
+    AuditOutlined,
+    SwapOutlined,
+    GlobalOutlined,
+} from "@ant-design/icons"
 
 export type MenuItem = Required<MenuProps>["items"][number]
 
@@ -20,18 +28,29 @@ export function getItem(
     } as MenuItem
 }
 
-interface IProps {
-    param: MenuItem[]
-}
+const items: MenuItem[] = [
+    getItem("Home", "/home", <HomeOutlined />),
+    getItem("Dataset", "/dataset", <AuditOutlined />),
+
+    getItem("Matching", "/matching", <SwapOutlined />),
+
+    getItem("Storage", "/storage", <CloudServerOutlined />),
+    getItem("Community members", "/members", <GlobalOutlined />),
+]
 
 // eslint-disable-next-line import/no-anonymous-default-export, react/display-name
-export default ({ param }: IProps) => {
-    const [current, setCurrent] = useState("Dataset")
+export default () => {
+    const router = useRouter()
+    const [current, setCurrent] = useState("/home")
 
     const onClick: MenuProps["onClick"] = (e) => {
-        console.log("click ", e)
+        router.push(e.key)
         setCurrent(e.key)
     }
+
+    useEffect(() => {
+        router.push(current)
+    }, [current])
 
     return (
         <Menu
@@ -40,7 +59,7 @@ export default ({ param }: IProps) => {
             onClick={onClick}
             selectedKeys={[current]}
             mode="horizontal"
-            items={param}
+            items={items}
         />
     )
 }
