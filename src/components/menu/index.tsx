@@ -30,7 +30,10 @@ export function getItem(
 
 const items: MenuItem[] = [
     getItem("Home", "/home", <HomeOutlined />),
-    getItem("Dataset", "/dataset", <AuditOutlined />),
+    getItem("Dataset", "/datasetNull", <AuditOutlined />, [
+        getItem("Overview", "/dataset"),
+        getItem("Create Dataset", "/dataset/submit/dataset"),
+    ]),
 
     getItem("Matching", "/matching", <SwapOutlined />),
 
