@@ -6,4 +6,11 @@ export interface DatasetOverviewType {
     size: string
     submitter: string
     state: string
+    operate: string
+}
+
+export interface DatasetProofType {
+    hash: string
+    cid: string
+    size: string
 }

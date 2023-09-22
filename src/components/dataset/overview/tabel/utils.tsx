@@ -25,6 +25,13 @@ export function getDatasetOverviewTabel(
             size: datasetOverview.size,
             submitter: datasetOverview.submitter,
             state: datasetOverview.state,
+            operate: (
+                <Link
+                    href={`/dataset/submit/${datasetOverview.operate}/${datasetOverview.id}`}
+                >
+                    submit {datasetOverview.operate}
+                </Link>
+            ),
         }
     })
 

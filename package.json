@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently \"next dev\" \"json-server -p 3001 public/mock.json\" \"node server/fileserver.js/\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -22,5 +22,11 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.1",
+    "express": "^4.18.2",
+    "json-server": "^0.17.3",
+    "multer": "^1.4.5-lts.1"
   }
 }

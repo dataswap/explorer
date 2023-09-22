@@ -18,15 +18,7 @@ export default function IndexPage({}: InferGetServerSidePropsType<
 >) {
     const [datasetList, setDatasetList] = useState<IDatasetOverviewTabel[]>()
     useEffect(() => {
-        // axios.post("http://localhost:3001/datasetapi", {
-        //     name: "dataset2",
-        //     createdHeight: "123",
-        //     createdTime: "string",
-        //     source: "string",
-        //     size: "string",
-        //     state: "string",
-        // })
-        axios("http://localhost:3001/datasetapi").then((res) => {
+        axios("http://localhost:3001/datasetInfo").then((res) => {
             const datasetOveriew: DatasetOverviewType[] = res.data
             setDatasetList(getDatasetOverviewTabel(datasetOveriew))
         })

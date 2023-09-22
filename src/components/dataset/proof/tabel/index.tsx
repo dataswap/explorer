@@ -3,71 +3,36 @@ import { Space, Table } from "antd"
 import type { ColumnsType } from "antd/es/table"
 import type { TableRowSelection } from "antd/es/table/interface"
 
-export interface IDatasetOverviewTabel {
+export interface IDatasetProofTabel {
     key: React.ReactNode
-    id: React.ReactNode
-    name: React.ReactNode
-    createdHeight: string
-    createdTime: string
+    hash: string
+    cid: string
     size: string
-    submitter: string
-    state: string
-    operate: React.ReactNode
 }
 
-const columns: ColumnsType<IDatasetOverviewTabel> = [
+const columns: ColumnsType<IDatasetProofTabel> = [
     {
-        title: "Id",
-        dataIndex: "id",
-        key: "id",
-        width: "7%",
+        title: "Hash",
+        dataIndex: "hash",
+        key: "hash",
+        width: "33.3%",
     },
     {
-        title: "Name",
-        dataIndex: "name",
-        key: "name",
-        width: "15%",
+        title: "Cid",
+        dataIndex: "cid",
+        key: "cid",
+        width: "33.3%",
     },
     {
         title: "Size",
         dataIndex: "size",
         key: "size",
-        width: "8%",
-    },
-    {
-        title: "Created Height",
-        dataIndex: "createdHeight",
-        key: "createdHeight",
-        width: "15%",
-    },
-    {
-        title: "Created Time",
-        dataIndex: "createdTime",
-        key: "createdTime",
-        width: "15%",
-    },
-    {
-        title: "Submitter",
-        dataIndex: "submitter",
-        key: "submitter",
-        width: "15%",
-    },
-    {
-        title: "State",
-        dataIndex: "state",
-        key: "state",
-        width: "15%",
-    },
-    {
-        title: "Operate",
-        dataIndex: "operate",
-        key: "operate",
-        width: "15%",
+        width: "33.3%",
     },
 ]
 
 // rowSelection objects indicates the need for row selection
-const rowSelection: TableRowSelection<IDatasetOverviewTabel> = {
+const rowSelection: TableRowSelection<IDatasetProofTabel> = {
     onChange: (selectedRowKeys, selectedRows) => {
         console.log(
             `selectedRowKeys: ${selectedRowKeys}`,
@@ -84,7 +49,7 @@ const rowSelection: TableRowSelection<IDatasetOverviewTabel> = {
 }
 
 interface IProps {
-    data: IDatasetOverviewTabel[]
+    data: IDatasetProofTabel[]
 }
 // eslint-disable-next-line import/no-anonymous-default-export, react/display-name
 export default ({ data }: IProps) => {

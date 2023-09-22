@@ -31,13 +31,17 @@ function formatCurrentDateTime(): string {
 }
 
 const onFinish = (values: any) => {
-    axios.post("http://localhost:3001/datasetapi", {
+    axios.post("http://localhost:3001/datasetInfo", {
         ...values,
         createdTime: formatCurrentDateTime(),
         createdHeight: "9999",
         submitter: "0x00000000000000000000",
         state: "MetadataSubmitted",
+        operate: "proof",
     })
+    // axios.patch("http://localhost:3001/datasetInfo/4", {
+    //     state: "xxxx",
+    // })
 }
 
 export default () => (
@@ -215,9 +219,8 @@ export default () => (
                         {fields.map((field, index) => (
                             <Form.Item
                                 {...(index === 0
-                                    ? formItemLayout
+                                    ? formItemLayoutWithOutLabel
                                     : formItemLayoutWithOutLabel)}
-                                label={index === 0 ? "Countries" : ""}
                                 required={false}
                                 key={field.key}
                             >
@@ -255,17 +258,7 @@ export default () => (
                                 style={{ width: "60%" }}
                                 icon={<PlusOutlined />}
                             >
-                                Add field
-                            </Button>
-                            <Button
-                                type="dashed"
-                                onClick={() => {
-                                    add("The head item", 0)
-                                }}
-                                style={{ width: "60%", marginTop: "20px" }}
-                                icon={<PlusOutlined />}
-                            >
-                                Add field at head
+                                Add country
                             </Button>
                             <Form.ErrorList errors={errors} />
                         </Form.Item>
@@ -276,6 +269,15 @@ export default () => (
 
         <Form.Item name="isPublic" label="Is public" valuePropName="checked">
             <Switch />
+        </Form.Item>
+
+        <Form.Item label="DP Fee">
+            <Form.Item name="dpFee">
+                <InputNumber />
+                <span className="ant-form-text" style={{ marginLeft: 8 }}>
+                    FIL
+                </span>
+            </Form.Item>
         </Form.Item>
 
         <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
