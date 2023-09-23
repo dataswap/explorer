@@ -29,7 +29,7 @@ export function getDatasetOverviewTabel(
                 <Link
                     href={`/dataset/submit/${datasetOverview.operate}/${datasetOverview.id}`}
                 >
-                    submit {datasetOverview.operate}
+                    {datasetOverview.operate}
                 </Link>
             ),
         }

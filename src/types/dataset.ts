@@ -9,10 +9,17 @@ export interface DatasetOverviewType {
     operate: string
     rootHash?: string
     completed?: string
+    proofChallenge?: Array<DatasetChallengeProofType>
 }
 
 export interface DatasetProofType {
     hash: string
     cid: string
     size: string
+}
+
+export interface DatasetChallengeProofType {
+    da: string
+    challenge: string
+    operate: string
 }

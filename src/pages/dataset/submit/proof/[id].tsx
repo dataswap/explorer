@@ -125,7 +125,7 @@ export default () => {
             case "yes":
                 form.setFieldsValue({ note: "submit completed!" })
                 axios.patch(`http://localhost:3001/datasetInfo/${id}`, {
-                    state: "ProofSubmitted",
+                    state: "DatasetProofSubmitted",
                     operate: "challengeProof",
                 })
                 break
