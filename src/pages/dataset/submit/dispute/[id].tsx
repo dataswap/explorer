@@ -2,7 +2,12 @@ import { useRouter } from "next/router"
 
 export default () => {
     const router = useRouter()
-    const { id } = router.query
+    const { id, da } = router.query
 
-    return <>submit dispute for dataset{id}</>
+    console.log(router.query)
+    return (
+        <>
+            submit dispute for dataset:{id},da:{da}
+        </>
+    )
 }

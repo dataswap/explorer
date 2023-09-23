@@ -3,8 +3,7 @@ import { IDatasetChallengeProofTabel } from "@/components/dataset/challenge/tabe
 import Link from "next/link"
 
 export function getDatasetProofChallengeTabel(
-    datasetProofs: DatasetChallengeProofType[],
-    id: number
+    datasetProofs: DatasetChallengeProofType[]
 ): IDatasetChallengeProofTabel[] {
     const result: IDatasetChallengeProofTabel[] = []
 
@@ -16,7 +15,7 @@ export function getDatasetProofChallengeTabel(
                 challenge: datasetProof.challenge,
                 operate: (
                     <Link
-                        href={`/dataset/submit/${datasetProof.operate}/${id}?da=${datasetProof.da}`}
+                        href={`/dataset/submit/${datasetProof.operate}/${datasetProof.da}`}
                     >
                         submit {datasetProof.operate}
                     </Link>

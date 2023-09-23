@@ -49,10 +49,11 @@ function getDescriptionItems(
 export default () => {
     const [challengeList, setChallengeList] =
         useState<IDatasetChallengeProofTabel[]>()
+    const [challenge, setChallenge] = useState<DatasetChallengeProofType>()
+
     const [datasetOverview, setDatasetOverview] =
         useState<DatasetOverviewType>()
     const [complete, setComplete] = useState<boolean>()
-    const [challenge, setChallenge] = useState<DatasetChallengeProofType>()
     const router = useRouter()
     const { id } = router.query
     const [form] = Form.useForm()
@@ -63,20 +64,33 @@ export default () => {
             challenge: values.challengeProof,
             operate: "dispute",
         }
-        const newChallenges: DatasetChallengeProofType[] = [
-            ...(datasetOverview?.proofChallenge
-                ? datasetOverview.proofChallenge
-                : []),
-            addChallenge,
-        ]
+
+        const oldChallenges = datasetOverview?.proofChallenge || {}
+
+        const newChallenges = {
+            ...oldChallenges,
+            [addChallenge.da]: addChallenge,
+        }
+
         axios
             .patch(`http://localhost:3001/datasetInfo/${id}`, {
                 proofChallenge: newChallenges,
             })
             .then(() => {
-                setChallengeList(getDatasetProofChallengeTabel(newChallenges))
+                const newChallengesArray = Object.values(
+                    newChallenges
+                ) as DatasetChallengeProofType[]
+
+                id &&
+                    setChallengeList(
+                        getDatasetProofChallengeTabel(
+                            newChallengesArray,
+                            Number(id)
+                        )
+                    )
                 setChallenge(addChallenge)
-                if (newChallenges.length >= 3) {
+
+                if (newChallengesArray.length >= 3) {
                     axios
                         .patch(`http://localhost:3001/datasetInfo/${id}`, {
                             proofChallengeCompleted: true,
@@ -104,9 +118,19 @@ export default () => {
             axios(`http://localhost:3001/datasetInfo/${id}`).then((res) => {
                 setDatasetOverview(res.data)
                 setComplete(res.data.proofChallengeCompleted)
-                setChallengeList(
-                    getDatasetProofChallengeTabel(res.data.proofChallenge)
-                )
+                const newChallengesArray =
+                    res.data.proofChallenge &&
+                    (Object.values(
+                        res.data.proofChallenge
+                    ) as DatasetChallengeProofType[])
+
+                id &&
+                    setChallengeList(
+                        getDatasetProofChallengeTabel(
+                            newChallengesArray,
+                            Number(id)
+                        )
+                    )
             })
     }, [challenge])
 
