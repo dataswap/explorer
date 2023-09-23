@@ -7,6 +7,8 @@ export interface DatasetOverviewType {
     submitter: string
     state: string
     operate: string
+    rootHash?: string
+    completed?: string
 }
 
 export interface DatasetProofType {

@@ -74,19 +74,25 @@ function getProps(id: string, setProofList: any): UploadProps {
                             const oldProofs = res.data.proofs
                             const updateProofs = { ...oldProofs, ...newProofs }
                             //patch new proof params to the proofs
-                            axios.patch(
-                                `http://localhost:3001/datasetInfo/${id}`,
-                                {
-                                    proofs: updateProofs,
-                                }
-                            )
-                            setProofList(
-                                Object.keys(updateProofs).map((key) => ({
-                                    key: key,
-                                    hash: key,
-                                    ...updateProofs[key],
-                                }))
-                            )
+                            axios
+                                .patch(
+                                    `http://localhost:3001/datasetInfo/${id}`,
+                                    {
+                                        proofs: updateProofs,
+                                    }
+                                )
+                                .then(() => {
+                                    setProofList(
+                                        Object.keys(updateProofs).map(
+                                            (key) => ({
+                                                key: key,
+                                                hash: key,
+                                                ...updateProofs[key],
+                                            })
+                                        )
+                                    )
+                                })
+
                             message.success(
                                 `${info.file.name} file uploaded successfully.`
                             )
@@ -118,13 +124,20 @@ export default () => {
                 break
             case "yes":
                 form.setFieldsValue({ note: "submit completed!" })
+                axios.patch(`http://localhost:3001/datasetInfo/${id}`, {
+                    state: "ProofSubmitted",
+                    operate: "challengeProof",
+                })
                 break
             default:
         }
     }
 
     const onFinish = (values: any) => {
-        console.log(values)
+        axios.patch(`http://localhost:3001/datasetInfo/${id}`, {
+            rootHash: values.rootHash,
+            completed: values.completed,
+        })
     }
 
     const onReset = () => {
@@ -144,6 +157,13 @@ export default () => {
                             ...oldProofs[key],
                         }))
                     )
+
+                if (res.data.completed) {
+                    form.setFieldsValue({ completed: res.data.completed })
+                }
+                if (res.data.rootHash) {
+                    form.setFieldsValue({ rootHash: res.data.rootHash })
+                }
             })
     }, [])
 
@@ -170,7 +190,12 @@ export default () => {
                         label="Root Hash"
                         rules={[{ required: true }]}
                     >
-                        <Input />
+                        <Input
+                            disabled={
+                                datasetOverview?.rootHash != undefined &&
+                                datasetOverview?.rootHash != ""
+                            }
+                        />
                     </Form.Item>
                     <Form.Item
                         name="completed"
@@ -181,6 +206,7 @@ export default () => {
                             placeholder="Select a option and change input text above"
                             onChange={onCompletedChange}
                             allowClear
+                            disabled={datasetOverview?.completed == "yes"}
                         >
                             <Option value="no">No</Option>
                             <Option value="yes">Yes</Option>
@@ -205,16 +231,27 @@ export default () => {
                         }
                     </Form.Item>
                     <Form.Item {...tailLayout}>
-                        <Button type="primary" htmlType="submit">
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                            disabled={datasetOverview?.completed == "yes"}
+                        >
                             Submit
                         </Button>
-                        <Button htmlType="button" onClick={onReset}>
+                        <Button
+                            htmlType="button"
+                            onClick={onReset}
+                            disabled={datasetOverview?.completed == "yes"}
+                        >
                             Reset
                         </Button>
                     </Form.Item>
                 </Form>
 
-                <Dragger {...getProps(id, setProofList)}>
+                <Dragger
+                    {...getProps(id, setProofList)}
+                    disabled={datasetOverview?.completed == "yes"}
+                >
                     <p className="ant-upload-drag-icon">
                         <InboxOutlined />
                     </p>
@@ -222,6 +259,7 @@ export default () => {
                         Click or drag file to this area to upload
                     </p>
                 </Dragger>
+
                 {proofList && <DatasetProofTabel data={proofList} />}
             </>
         )
