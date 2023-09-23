@@ -1,14 +1,26 @@
 export interface DatasetOverviewType {
     id: number
     name: string
+    description?: string
+    size: string
+    industry?: string
+    source?: string
+    accessMethod?: string
+    version?: string
+    ownername?: string
+    ownercountry?: string
+    ownerwebsite?: string
+    isPublic?: string
+    replicasRequiredNumber?: string
+    replicasCountries?: Array<string>
     createdHeight: string
     createdTime: string
-    size: string
     submitter: string
     state: string
     operate: string
     rootHash?: string
     completed?: string
+    proofs?: any
     proofChallenge?: any
     disputes?: any
 }

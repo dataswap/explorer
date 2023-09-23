@@ -114,9 +114,9 @@ export default () => {
             axios(`http://localhost:3001/datasetInfo/${id}`).then((res) => {
                 setDatasetOverview(res.data)
 
-                const newDisputesArray = Object.values(
-                    res.data.disputes
-                ) as DatasetDisputeType[]
+                const newDisputesArray =
+                    res.data.disputes &&
+                    (Object.values(res.data.disputes) as DatasetDisputeType[])
                 newDisputesArray &&
                     setDisputeList(
                         getDatasetDisputeChallengeTabel(newDisputesArray)
