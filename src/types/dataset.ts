@@ -9,7 +9,8 @@ export interface DatasetOverviewType {
     operate: string
     rootHash?: string
     completed?: string
-    proofChallenge?: Array<DatasetChallengeProofType>
+    proofChallenge?: any
+    disputes?: any
 }
 
 export interface DatasetProofType {
@@ -22,4 +23,12 @@ export interface DatasetChallengeProofType {
     da: string
     challenge: string
     operate: string
+}
+
+export interface DatasetDisputeType {
+    submitter: string
+    da: string
+    challenge: string
+    disputeProof: string
+    result: string
 }

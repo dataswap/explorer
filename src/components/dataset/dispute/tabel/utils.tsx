@@ -1,25 +1,20 @@
-import { DatasetChallengeProofType } from "@/types/dataset"
-import { IDatasetChallengeProofTabel } from "@/components/dataset/challenge/tabel"
-import Link from "next/link"
+import { DatasetDisputeType } from "@/types/dataset"
+import { IDatasetDisputeTabel } from "@/components/dataset/dispute/tabel"
 
-export function getDatasetProofChallengeTabel(
-    datasetProofs: DatasetChallengeProofType[]
-): IDatasetChallengeProofTabel[] {
-    const result: IDatasetChallengeProofTabel[] = []
+export function getDatasetDisputeChallengeTabel(
+    datasetProofs: DatasetDisputeType[]
+): IDatasetDisputeTabel[] {
+    const result: IDatasetDisputeTabel[] = []
 
     datasetProofs &&
         datasetProofs.forEach((datasetProof, index) => {
             result[index] = {
                 key: datasetProof.da,
+                submitter: datasetProof.submitter,
                 da: datasetProof.da,
                 challenge: datasetProof.challenge,
-                operate: (
-                    <Link
-                        href={`/dataset/submit/${datasetProof.operate}/${datasetProof.da}`}
-                    >
-                        submit {datasetProof.operate}
-                    </Link>
-                ),
+                disputeProof: datasetProof.disputeProof,
+                result: datasetProof.result,
             }
         })
 
