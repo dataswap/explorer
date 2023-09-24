@@ -64,12 +64,12 @@ export function getDatasetDetailDescriptionItems(
         {
             key: "12",
             label: "Replicas Required Number",
-            children: datasetOverview.replicasRequiredNumber,
+            children: datasetOverview.replicasCountries?.length,
         },
         {
             key: "13",
             label: "Replicas Required Countries",
-            children: datasetOverview.replicasCountries,
+            children: datasetOverview.replicasCountries?.join(","),
         },
         {
             key: "14",
@@ -158,6 +158,18 @@ export function getDatasetDisputeDescriptionItems(
             children: datasetOverview.disputes
                 ? Object.values(datasetOverview.disputes).length
                 : 0,
+        },
+    ]
+}
+
+export function getDatasetReplicasDescriptionItems(
+    datasetOverview: DatasetOverviewType
+): DescriptionsProps["items"] {
+    return [
+        {
+            key: "1",
+            label: "Replicas Count",
+            children: datasetOverview.replicasCountries?.length,
         },
     ]
 }

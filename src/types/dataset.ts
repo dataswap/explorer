@@ -44,3 +44,11 @@ export interface DatasetDisputeType {
     disputeProof: string
     result: string
 }
+
+export interface DatasetReplicasType {
+    id: string
+    country: string
+    dp: string
+    state: string
+    operate: string
+}

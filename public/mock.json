@@ -1,9 +1,9 @@
 {
   "datasetInfo": [
     {
-      "name": "11",
+      "name": "11111",
       "description": "description_example",
-      "size": "11",
+      "size": "222",
       "industry": "description_example",
       "source": "source_example",
       "accessMethod": "accessMethod_example",
@@ -17,108 +17,50 @@
         "country2"
       ],
       "isPublic": true,
-      "createdTime": "2023-09-21 23:57:08",
+      "createdTime": "2023-09-24 12:00:56",
+      "replicasState": "",
+      "replicasOperate": "",
       "createdHeight": "9999",
       "submitter": "0x00000000000000000000",
-      "state": "xxxx",
-      "operate": "proof",
-      "id": 4
-    },
-    {
-      "name": "22",
-      "description": "description_example",
-      "size": "22",
-      "industry": "description_example",
-      "source": "source_example",
-      "accessMethod": "accessMethod_example",
-      "version": "version_example",
-      "ownername": "ownername_example",
-      "ownercountry": "country1",
-      "ownerwebsite": "ownerwebsite_example",
-      "replicasRequiredNumber": 10,
-      "replicasCountries": [
-        "country1",
-        "country2"
-      ],
-      "isPublic": true,
-      "createdTime": "2023-09-22 00:02:38",
-      "createdHeight": "9999",
-      "submitter": "0x00000000000000000000",
-      "state": "MetadataSubmitted",
-      "operate": "proof",
-      "id": 5
-    },
-    {
-      "name": "55",
-      "description": "description_example",
-      "size": "55",
-      "industry": "description_example",
-      "source": "source_example",
-      "accessMethod": "accessMethod_example",
-      "version": "version_example",
-      "ownername": "ownername_example",
-      "ownercountry": "country1",
-      "ownerwebsite": "ownerwebsite_example",
-      "replicasRequiredNumber": 10,
-      "replicasCountries": [
-        "country1",
-        "country2"
-      ],
-      "isPublic": true,
-      "createdTime": "2023-09-22 00:21:50",
-      "createdHeight": "9999",
-      "submitter": "0x00000000000000000000",
-      "state": "MetadataSubmitted",
-      "operate": "proof",
-      "id": 6
-    },
-    {
-      "name": "66",
-      "description": "description_example",
-      "size": "66",
-      "industry": "description_example",
-      "source": "source_example",
-      "accessMethod": "accessMethod_example",
-      "version": "version_example",
-      "ownername": "ownername_example",
-      "ownercountry": "country1",
-      "ownerwebsite": "ownerwebsite_example",
-      "replicasRequiredNumber": 10,
-      "replicasCountries": [
-        "country1",
-        "country2"
-      ],
-      "isPublic": true,
-      "createdTime": "2023-09-22 00:22:41",
-      "createdHeight": "9999",
-      "submitter": "0x00000000000000000000",
-      "state": "MetadataSubmitted",
-      "operate": "proof",
-      "id": 7
-    },
-    {
-      "name": "11",
-      "description": "description_example",
-      "size": "123123",
-      "industry": "description_example",
-      "source": "source_example",
-      "accessMethod": "accessMethod_example",
-      "version": "version_example",
-      "ownername": "ownername_example",
-      "ownercountry": "country1",
-      "ownerwebsite": "ownerwebsite_example",
-      "replicasRequiredNumber": 10,
-      "replicasCountries": [
-        "country1",
-        "country2"
-      ],
-      "isPublic": true,
-      "createdTime": "2023-09-22 09:36:04",
-      "createdHeight": "9999",
-      "submitter": "0x00000000000000000000",
-      "state": "MetadataSubmitted",
-      "operate": "proof",
-      "id": 8
+      "state": "Approved",
+      "operate": "",
+      "replicasDetail": {
+        "1": {
+          "id": "1",
+          "country": "country1",
+          "dp": "",
+          "state": "",
+          "operate": ""
+        },
+        "2": {
+          "id": "2",
+          "country": "country2",
+          "dp": "",
+          "state": "",
+          "operate": ""
+        }
+      },
+      "id": 1,
+      "rootHash": "1111",
+      "completed": "yes",
+      "proofChallenge": {
+        "1": {
+          "da": "1",
+          "challenge": "2",
+          "operate": "dispute"
+        },
+        "12": {
+          "da": "12",
+          "challenge": "2",
+          "operate": "dispute"
+        },
+        "123": {
+          "da": "123",
+          "challenge": "2",
+          "operate": "dispute"
+        }
+      },
+      "proofChallengeCompleted": true
     }
   ]
 }

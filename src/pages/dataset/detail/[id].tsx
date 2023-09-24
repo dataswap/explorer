@@ -4,6 +4,7 @@ import { Descriptions, Button, Form, Input, Select, InputNumber } from "antd"
 import ChallengeDetail from "@/pages/dataset/detail/challengeProof"
 import ProofDetail from "@/pages/dataset/detail/proof"
 import DisputeDetail from "@/pages/dataset/detail/dispute"
+import ReplicasDetail from "@/pages/dataset/detail/replicas"
 import { useRouter } from "next/router"
 import {
     getDatasetDetailDescriptionItems,
@@ -33,6 +34,11 @@ function getItems(id: number): TabsProps["items"] {
             key: "Dispute",
             label: "Dispute",
             children: <DisputeDetail id={id} />,
+        },
+        {
+            key: "Replicas",
+            label: "Replicas",
+            children: <ReplicasDetail id={id} />,
         },
     ]
 }

@@ -34,14 +34,27 @@ const onFinish = (values: any) => {
     axios.post("http://localhost:3001/datasetInfo", {
         ...values,
         createdTime: formatCurrentDateTime(),
+        replicasState: "",
+        replicasOperate: "",
         createdHeight: "9999",
         submitter: "0x00000000000000000000",
         state: "MetadataSubmitted",
         operate: "proof",
+        replicasDetail: values.replicasCountries.reduce(
+            (result: any, country: any, index: number) => {
+                const datasetReplica = {
+                    id: `${index + 1}`,
+                    country,
+                    dp: "",
+                    state: "",
+                    operate: "",
+                }
+                result[datasetReplica.id] = datasetReplica
+                return result
+            },
+            {}
+        ),
     })
-    // axios.patch("http://localhost:3001/datasetInfo/4", {
-    //     state: "xxxx",
-    // })
 }
 
 export default () => (
