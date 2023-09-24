@@ -1,27 +1,8 @@
-// import React, { useEffect, useState } from "react"
-import type { DescriptionsProps } from "antd"
-// import { useRouter } from "next/router"
-// import axios from "axios"
 import { DatasetOverviewType, DatasetDisputeType } from "@/types/dataset"
-// import DatasetDisputeTabel, {
-//     IDatasetDisputeTabel,
-// } from "@/components/dataset/dispute/tabel"
-// import { getDatasetDisputeChallengeTabel } from "@/components/dataset/dispute/tabel/utils"
 import {
     getDatasetDescriptionItems,
     getReplicasDescriptionItems,
 } from "@/components/dataset/utils"
-
-// export default () => {
-//     const router = useRouter()
-//     const { datasetId, replicaId } = router.query
-//     return (
-//         <div>
-//             dataset ID: {datasetId} <br></br>
-//             replicas ID:{replicaId}
-//         </div>
-//     )
-// }
 import {
     Descriptions,
     Button,
@@ -31,17 +12,13 @@ import {
     Input,
     Select,
     Space,
-    Switch,
 } from "antd"
 import { useRouter } from "next/router"
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons"
 import axios from "axios"
-import { date } from "zod"
 import { useEffect, useState } from "react"
 
 const { RangePicker } = DatePicker
 const { Option } = Select
-const { TextArea } = Input
 
 const formItemLayout = {
     labelCol: { span: 9 },
@@ -68,29 +45,8 @@ function formatCurrentDateTime(): string {
 }
 
 const onFinish = (values: any) => {
-    axios.post("http://localhost:3001/datasetInfo", {
+    axios.post("http://localhost:3001/matchingsInfo", {
         ...values,
-        createdTime: formatCurrentDateTime(),
-        replicasState: "",
-        replicasOperate: "",
-        createdHeight: "9999",
-        submitter: "0x00000000000000000000",
-        state: "MetadataSubmitted",
-        operate: "proof",
-        replicasDetail: values.replicasCountries.reduce(
-            (result: any, country: any, index: number) => {
-                const datasetReplica = {
-                    id: `${index + 1}`,
-                    country,
-                    dp: "MockDP",
-                    state: "",
-                    operate: "",
-                }
-                result[datasetReplica.id] = datasetReplica
-                return result
-            },
-            {}
-        ),
     })
 }
 

@@ -177,7 +177,46 @@
       "proofChallengeCompleted": true
     }
   ],
-  "matchingsInfo":[
-    {}
+  "matchingsInfo": [
+    {
+      "submmiter": "1111",
+      "initialPrice": 10,
+      "storageCompletePeriod": 30,
+      "storageLifecycle": 540,
+      "dataTransferType": "online",
+      "datalocation": "country1111",
+      "dpBandwidthSpeed": "10Gbps",
+      "spLocation": "country222",
+      "spBandwidthSpeed": "10Gbps",
+      "id": 1
+    },
+    {
+      "submmiter": "11",
+      "initialPrice": 10,
+      "storageCompletePeriod": 30,
+      "storageLifecycle": 540,
+      "dataTransferType": "online",
+      "datalocation": "country1111",
+      "dpBandwidthSpeed": "10Gbps",
+      "spLocation": "country222",
+      "spBandwidthSpeed": "10Gbps",
+      "id": 2
+    },
+    {
+      "submmiter": "11",
+      "auctionPeriod": [
+        "2023-09-05T06:33:23.278Z",
+        "2023-09-25T06:33:23.278Z"
+      ],
+      "initialPrice": 10,
+      "storageCompletePeriod": 30,
+      "storageLifecycle": 540,
+      "dataTransferType": "online",
+      "datalocation": "country1111",
+      "dpBandwidthSpeed": "10Gbps",
+      "spLocation": "country222",
+      "spBandwidthSpeed": "10Gbps",
+      "id": 3
+    }
   ]
 }
