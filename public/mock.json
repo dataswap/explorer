@@ -179,34 +179,10 @@
   ],
   "matchingsInfo": [
     {
-      "submmiter": "1111",
-      "initialPrice": 10,
-      "storageCompletePeriod": 30,
-      "storageLifecycle": 540,
-      "dataTransferType": "online",
-      "datalocation": "country1111",
-      "dpBandwidthSpeed": "10Gbps",
-      "spLocation": "country222",
-      "spBandwidthSpeed": "10Gbps",
-      "id": 1
-    },
-    {
-      "submmiter": "11",
-      "initialPrice": 10,
-      "storageCompletePeriod": 30,
-      "storageLifecycle": 540,
-      "dataTransferType": "online",
-      "datalocation": "country1111",
-      "dpBandwidthSpeed": "10Gbps",
-      "spLocation": "country222",
-      "spBandwidthSpeed": "10Gbps",
-      "id": 2
-    },
-    {
-      "submmiter": "11",
+      "submitter": "1111",
       "auctionPeriod": [
-        "2023-09-05T06:33:23.278Z",
-        "2023-09-25T06:33:23.278Z"
+        "2023-09-28T14:50:27.943Z",
+        "2023-10-30T14:50:27.943Z"
       ],
       "initialPrice": 10,
       "storageCompletePeriod": 30,
@@ -216,7 +192,140 @@
       "dpBandwidthSpeed": "10Gbps",
       "spLocation": "country222",
       "spBandwidthSpeed": "10Gbps",
+      "datasetId": "1",
+      "replicaId": "1",
+      "size": "222",
+      "createdTime": "2023-09-24 22:50:31",
+      "state": "Complete",
+      "operate": "",
+      "id": 1,
+      "bids": {
+        "11": {
+          "bidder": "11",
+          "bid": "22",
+          "bidTime": "2023-09-25 00:46:33"
+        },
+        "111": {
+          "bidder": "111",
+          "bid": "2222",
+          "bidTime": "2023-09-25 00:26:23"
+        },
+        "1112": {
+          "bidder": "1112",
+          "bid": "222",
+          "bidTime": "2023-09-25 00:26:29"
+        },
+        "11123": {
+          "bidder": "11123",
+          "bid": "222",
+          "bidTime": "2023-09-25 00:26:33"
+        }
+      },
+      "winner": {
+        "bidder": "111",
+        "bid": "2222",
+        "bidTime": "2023-09-25 00:26:23"
+      }
+    },
+    {
+      "submitter": "3333",
+      "auctionPeriod": [
+        "2023-10-29T15:23:46.631Z",
+        "2023-10-31T15:23:46.631Z"
+      ],
+      "initialPrice": 10,
+      "storageCompletePeriod": 30,
+      "storageLifecycle": 540,
+      "dataTransferType": "online",
+      "datalocation": "country1111",
+      "dpBandwidthSpeed": "10Gbps",
+      "spLocation": "country222",
+      "spBandwidthSpeed": "10Gbps",
+      "datasetId": "1",
+      "replicaId": "2",
+      "size": "222",
+      "createdTime": "2023-09-24 23:23:51",
+      "state": "Failed",
+      "operate": "",
+      "id": 2
+    },
+    {
+      "submitter": "111",
+      "auctionPeriod": [
+        "2023-09-27T17:37:20.057Z",
+        "2023-09-28T17:37:20.057Z"
+      ],
+      "initialPrice": 10,
+      "storageCompletePeriod": 30,
+      "storageLifecycle": 540,
+      "dataTransferType": "online",
+      "datalocation": "country1111",
+      "dpBandwidthSpeed": "10Gbps",
+      "spLocation": "country222",
+      "spBandwidthSpeed": "10Gbps",
+      "datasetId": "3",
+      "replicaId": "1",
+      "size": "3333",
+      "createdTime": "2023-09-25 01:37:23",
+      "state": "Failed",
+      "operate": "",
       "id": 3
+    },
+    {
+      "submitter": "2222",
+      "auctionPeriod": [
+        "2023-09-27T17:39:15.691Z",
+        "2023-09-28T17:39:15.691Z"
+      ],
+      "initialPrice": 10,
+      "storageCompletePeriod": 30,
+      "storageLifecycle": 540,
+      "dataTransferType": "online",
+      "datalocation": "country1111",
+      "dpBandwidthSpeed": "10Gbps",
+      "spLocation": "country222",
+      "spBandwidthSpeed": "10Gbps",
+      "datasetId": "3",
+      "replicaId": "2",
+      "size": "3333",
+      "createdTime": "2023-09-25 01:39:18",
+      "state": "Complete",
+      "operate": "",
+      "id": 4,
+      "bids": {
+        "111": {
+          "bidder": "111",
+          "bid": "22",
+          "bidTime": "2023-09-25 01:39:29"
+        }
+      },
+      "winner": {
+        "bidder": "111",
+        "bid": "22",
+        "bidTime": "2023-09-25 01:39:29"
+      }
+    },
+    {
+      "submitter": "111",
+      "auctionPeriod": [
+        "2023-09-28T18:01:15.792Z",
+        "2023-09-29T18:01:15.792Z"
+      ],
+      "initialPrice": 10,
+      "storageCompletePeriod": 30,
+      "storageLifecycle": 540,
+      "dataTransferType": "online",
+      "datalocation": "country1111",
+      "dpBandwidthSpeed": "10Gbps",
+      "spLocation": "country222",
+      "spBandwidthSpeed": "10Gbps",
+      "datasetId": "3",
+      "replicaId": "2",
+      "size": "3333",
+      "createdTime": "2023-09-25 02:01:19",
+      "state": "Matching",
+      "operate": "bidding",
+      "id": 5
     }
   ]
 }

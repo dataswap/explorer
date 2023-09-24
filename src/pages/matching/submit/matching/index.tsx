@@ -44,12 +44,6 @@ function formatCurrentDateTime(): string {
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
 }
 
-const onFinish = (values: any) => {
-    axios.post("http://localhost:3001/matchingsInfo", {
-        ...values,
-    })
-}
-
 export default () => {
     const router = useRouter()
     const { datasetId, replicaId } = router.query as {
@@ -59,6 +53,18 @@ export default () => {
 
     const [datasetOverview, setDatasetOverview] =
         useState<DatasetOverviewType>()
+
+    const onFinish = (values: any) => {
+        axios.post("http://localhost:3001/matchingsInfo", {
+            ...values,
+            datasetId: datasetId,
+            replicaId: replicaId,
+            size: datasetOverview?.size,
+            createdTime: formatCurrentDateTime(),
+            state: "Matching",
+            operate: "bidding",
+        })
+    }
 
     useEffect(() => {
         datasetId &&
@@ -104,7 +110,7 @@ export default () => {
             >
                 <Form.Item label="Create Matching"></Form.Item>
                 <Form.Item
-                    name="submmiter"
+                    name="submitter"
                     label="Mock Submitter"
                     hasFeedback
                     rules={[
