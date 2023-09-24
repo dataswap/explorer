@@ -20,7 +20,7 @@ export function getDatasetReplicasTabel(
                     <Link
                         href={`/matching/submit/${datasetProof.operate}?datasetId=${datasetId}&replicaId=${datasetProof.id} `}
                     >
-                        submit {datasetProof.operate}
+                        {datasetProof.operate}
                     </Link>
                 ),
             }
