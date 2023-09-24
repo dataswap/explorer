@@ -15,7 +15,8 @@ export default () => {
     const { datasetId, replicaId } = router.query
     return (
         <div>
-            {datasetId}-{replicaId}
+            dataset ID: {datasetId} <br></br>
+            replicas ID:{replicaId}
         </div>
     )
 }
