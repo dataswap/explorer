@@ -134,6 +134,50 @@ export function getDatasetProofDescriptionItems(
     ]
 }
 
+export function getReplicasDescriptionItems(
+    datasetOverview: DatasetOverviewType,
+    id: number
+): DescriptionsProps["items"] {
+    return [
+        {
+            key: "1",
+            label: "replica id",
+            children: id,
+        },
+        {
+            key: "2",
+            label: "replica country",
+            children: datasetOverview.replicasDetail[id].country,
+        },
+    ]
+}
+export function getDatasetDescriptionItems(
+    datasetOverview: DatasetOverviewType
+): DescriptionsProps["items"] {
+    return [
+        {
+            key: "1",
+            label: "Id",
+            children: datasetOverview.id,
+        },
+        {
+            key: "2",
+            label: "Name",
+            children: datasetOverview.name,
+        },
+        {
+            key: "3",
+            label: "Size",
+            children: datasetOverview.size,
+        },
+        {
+            key: "4",
+            label: "Client",
+            children: datasetOverview.submitter,
+        },
+    ]
+}
+
 export function getDatasetChallengeDescriptionItems(
     datasetOverview: DatasetOverviewType
 ): DescriptionsProps["items"] {

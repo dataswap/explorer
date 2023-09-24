@@ -23,6 +23,7 @@ export interface DatasetOverviewType {
     proofs?: any
     proofChallenge?: any
     disputes?: any
+    replicasDetail?: any
 }
 
 export interface DatasetProofType {
