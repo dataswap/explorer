@@ -49,8 +49,29 @@ export default () => {
     }
 
     useEffect(() => {
-        router.push(current)
-    }, [current])
+        const handleRouteChange = (url: any) => {
+            const currentPath = url
+            if (currentPath.startsWith("/matching")) {
+                setCurrent("/matching")
+            } else if (currentPath.startsWith("/dataset")) {
+                setCurrent("/dataset")
+            } else if (currentPath.startsWith("/home")) {
+                setCurrent("/home")
+            } else if (currentPath.startsWith("/storage")) {
+                setCurrent("/storage")
+            } else if (currentPath.startsWith("/members")) {
+                setCurrent("/members")
+            } else {
+                setCurrent(currentPath)
+            }
+        }
+
+        router.events.on("routeChangeComplete", handleRouteChange)
+
+        return () => {
+            router.events.off("routeChangeComplete", handleRouteChange)
+        }
+    }, [router])
 
     return (
         <Menu
