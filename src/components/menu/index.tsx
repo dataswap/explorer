@@ -41,7 +41,7 @@ const items: MenuItem[] = [
 // eslint-disable-next-line import/no-anonymous-default-export, react/display-name
 export default () => {
     const router = useRouter()
-    const [current, setCurrent] = useState("/home")
+    const [current, setCurrent] = useState(router.pathname)
 
     const onClick: MenuProps["onClick"] = (e) => {
         router.push(e.key)
@@ -67,6 +67,7 @@ export default () => {
         }
 
         router.events.on("routeChangeComplete", handleRouteChange)
+        setCurrent(router.pathname)
 
         return () => {
             router.events.off("routeChangeComplete", handleRouteChange)
