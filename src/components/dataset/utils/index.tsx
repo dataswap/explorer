@@ -9,7 +9,11 @@ export function getDatasetDetailDescriptionItems(
         {
             key: "1",
             label: "Id",
-            children: datasetOverview.id,
+            children: (
+                <Link href={`/dataset/detail/${datasetOverview.id}`}>
+                    {datasetOverview.id}
+                </Link>
+            ),
         },
         {
             key: "2",
@@ -158,7 +162,11 @@ export function getDatasetDescriptionItems(
         {
             key: "1",
             label: "Id",
-            children: datasetOverview.id,
+            children: (
+                <Link href={`/dataset/detail/${datasetOverview.id}`}>
+                    {datasetOverview.id}
+                </Link>
+            ),
         },
         {
             key: "2",

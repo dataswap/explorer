@@ -8,6 +8,7 @@ import DatasetChallengeTabel, {
     IDatasetChallengeProofTabel,
 } from "@/components/dataset/challenge/tabel"
 import { getDatasetProofChallengeTabel } from "@/components/dataset/challenge/tabel/utils"
+import Link from "next/link"
 
 const { TextArea } = Input
 const layout = {
@@ -26,7 +27,11 @@ function getDescriptionItems(
         {
             key: "1",
             label: "Id",
-            children: datasetOverview.id,
+            children: (
+                <Link href={`/dataset/detail/${datasetOverview.id}`}>
+                    {datasetOverview.id}
+                </Link>
+            ),
         },
         {
             key: "2",

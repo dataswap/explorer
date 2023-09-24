@@ -8,6 +8,7 @@ import DatasetDisputeTabel, {
     IDatasetDisputeTabel,
 } from "@/components/dataset/dispute/tabel"
 import { getDatasetDisputeChallengeTabel } from "@/components/dataset/dispute/tabel/utils"
+import Link from "next/link"
 
 const { TextArea } = Input
 const layout = {
@@ -43,7 +44,11 @@ function getDescriptionItems(
         {
             key: "1",
             label: "Id",
-            children: datasetOverview.id,
+            children: (
+                <Link href={`/dataset/detail/${datasetOverview.id}`}>
+                    {datasetOverview.id}
+                </Link>
+            ),
         },
         {
             key: "2",

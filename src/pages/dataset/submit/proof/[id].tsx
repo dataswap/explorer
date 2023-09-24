@@ -16,6 +16,7 @@ import DatasetProofTabel, {
     IDatasetProofTabel,
 } from "@/components/dataset/proof/tabel"
 import { DatasetOverviewType } from "@/types/dataset"
+import Link from "next/link"
 
 const { Dragger } = Upload
 const { Option } = Select
@@ -35,7 +36,11 @@ function getDescriptionItems(
         {
             key: "1",
             label: "Id",
-            children: datasetOverview.id,
+            children: (
+                <Link href={`/dataset/detail/${datasetOverview.id}`}>
+                    {datasetOverview.id}
+                </Link>
+            ),
         },
         {
             key: "2",
