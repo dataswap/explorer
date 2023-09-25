@@ -224,12 +224,6 @@ export default () => {
                 <Input placeholder="Please input dataset owner website" />
             </Form.Item>
 
-            <Form.Item label="Replicas Required(1~10)">
-                <Form.Item name="replicasRequiredNumber">
-                    <InputNumber min={1} max={10} />
-                </Form.Item>
-            </Form.Item>
-
             <Form.Item label="Replicas Country Required(1~10)">
                 <Form.List
                     name="replicasCountries"
@@ -274,6 +268,7 @@ export default () => {
                                         ]}
                                         noStyle
                                     >
+                                        {index + 1}:
                                         <Input
                                             placeholder="country name"
                                             style={{ width: "60%" }}
