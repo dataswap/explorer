@@ -55,15 +55,21 @@ export default () => {
         useState<DatasetOverviewType>()
 
     const onFinish = (values: any) => {
-        axios.post("http://localhost:3001/matchingsInfo", {
-            ...values,
-            datasetId: datasetId,
-            replicaId: replicaId,
-            size: datasetOverview?.size,
-            createdTime: formatCurrentDateTime(),
-            state: "Matching",
-            operate: "bidding",
-        })
+        axios
+            .post("http://localhost:3001/matchingsInfo", {
+                ...values,
+                datasetId: datasetId,
+                replicaId: replicaId,
+                size: datasetOverview?.size,
+                createdTime: formatCurrentDateTime(),
+                state: "Matching",
+                operate: "bidding",
+            })
+            .then((res) => {
+                router.push(
+                    `http://localhost:3000/matching/detail/${res.data.id}`
+                )
+            })
     }
 
     useEffect(() => {

@@ -102,7 +102,8 @@ export function getMatchingDetailDescriptionItems(
         {
             key: "8",
             label: "Auction Period",
-            children: overview.auctionPeriod.join("-"),
+            children:
+                overview.auctionPeriod && overview.auctionPeriod.join("-"),
         },
         {
             key: "9",
