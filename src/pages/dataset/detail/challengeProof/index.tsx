@@ -37,6 +37,7 @@ export default ({ id }: IProps) => {
                     ? setChallengeList(
                           getDatasetProofChallengeTabel(
                               newChallengesArray,
+                              res.data,
                               Number(id)
                           )
                       )

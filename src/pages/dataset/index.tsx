@@ -20,13 +20,45 @@ export default function IndexPage({}: InferGetServerSidePropsType<
     typeof getServerSideProps
 >) {
     const [datasetList, setDatasetList] = useState<IDatasetOverviewTabel[]>()
+    const [closeAction, setCloseAction] = useState<boolean>()
     const router = useRouter()
+
+    const handleClose = (id: number) => {
+        axios(`http://localhost:3001/datasetInfo/${id}`).then((res) => {
+            const overview: any = res.data
+            const fail =
+                overview.disputes &&
+                Object.values(overview.disputes).some(
+                    (dispute: any) => dispute.result === "valid"
+                )
+            console.log(fail)
+            if (fail) {
+                axios
+                    .patch(`http://localhost:3001/datasetInfo/${id}`, {
+                        state: "Reject",
+                        operate: "",
+                    })
+                    .then((res) => {
+                        setCloseAction(!closeAction)
+                    })
+            } else {
+                axios
+                    .patch(`http://localhost:3001/datasetInfo/${id}`, {
+                        state: "Approved",
+                        operate: "",
+                    })
+                    .then((res) => {
+                        setCloseAction(!closeAction)
+                    })
+            }
+        })
+    }
     useEffect(() => {
         axios("http://localhost:3001/datasetInfo").then((res) => {
             const datasetOveriew: DatasetOverviewType[] = res.data
-            setDatasetList(getDatasetOverviewTabel(datasetOveriew))
+            setDatasetList(getDatasetOverviewTabel(datasetOveriew, handleClose))
         })
-    }, [])
+    }, [closeAction])
 
     const onClick = () => {
         router.push("/dataset/submit/dataset")

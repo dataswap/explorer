@@ -1,9 +1,10 @@
-import { DatasetChallengeProofType } from "@/types/dataset"
+import { DatasetOverviewType, DatasetChallengeProofType } from "@/types/dataset"
 import { IDatasetChallengeProofTabel } from "@/components/dataset/challenge/tabel"
 import Link from "next/link"
 
 export function getDatasetProofChallengeTabel(
     datasetProofs: DatasetChallengeProofType[],
+    overview: DatasetOverviewType,
     id: number
 ): IDatasetChallengeProofTabel[] {
     const result: IDatasetChallengeProofTabel[] = []
@@ -14,13 +15,14 @@ export function getDatasetProofChallengeTabel(
                 key: datasetProof.da,
                 da: datasetProof.da,
                 challenge: datasetProof.challenge,
-                operate: (
-                    <Link
-                        href={`/dataset/submit/${datasetProof.operate}/${id}?da=${datasetProof.da}`}
-                    >
-                        submit {datasetProof.operate}
-                    </Link>
-                ),
+                operate: overview.state !== "Approved" &&
+                    overview.state !== "Reject" && (
+                        <Link
+                            href={`/dataset/submit/${datasetProof.operate}/${id}?da=${datasetProof.da}`}
+                        >
+                            submit {datasetProof.operate}
+                        </Link>
+                    ),
             }
         })
 

@@ -82,36 +82,39 @@ export default () => {
                 proofChallenge: newChallenges,
             })
             .then(() => {
-                const newChallengesArray = Object.values(
-                    newChallenges
-                ) as DatasetChallengeProofType[]
+                axios(`http://localhost:3001/datasetInfo/${id}`).then((res) => {
+                    const newChallengesArray = Object.values(
+                        newChallenges
+                    ) as DatasetChallengeProofType[]
 
-                id &&
-                    setChallengeList(
-                        getDatasetProofChallengeTabel(
-                            newChallengesArray,
-                            Number(id)
-                        )
-                    )
-                setChallenge(addChallenge)
-
-                if (newChallengesArray.length >= 3) {
-                    axios
-                        .patch(`http://localhost:3001/datasetInfo/${id}`, {
-                            proofChallengeCompleted: true,
-                        })
-                        .then(() => {
-                            setComplete(true)
-                            axios.patch(
-                                `http://localhost:3001/datasetInfo/${id}`,
-                                {
-                                    state: "Approved",
-                                    operate: "",
-                                }
+                    id &&
+                        setChallengeList(
+                            getDatasetProofChallengeTabel(
+                                newChallengesArray,
+                                res.data,
+                                Number(id)
                             )
-                        })
-                }
-                router.push(`http://localhost:3000/dataset/detail/${id}`)
+                        )
+                    setChallenge(addChallenge)
+
+                    if (newChallengesArray.length >= 3) {
+                        axios
+                            .patch(`http://localhost:3001/datasetInfo/${id}`, {
+                                proofChallengeCompleted: true,
+                            })
+                            .then(() => {
+                                setComplete(true)
+                                axios.patch(
+                                    `http://localhost:3001/datasetInfo/${id}`,
+                                    {
+                                        state: "DisputeInitiationPeriod",
+                                        operate: "",
+                                    }
+                                )
+                            })
+                    }
+                    router.push(`http://localhost:3000/dataset/detail/${id}`)
+                })
             })
     }
 
@@ -134,6 +137,7 @@ export default () => {
                     setChallengeList(
                         getDatasetProofChallengeTabel(
                             newChallengesArray,
+                            res.data,
                             Number(id)
                         )
                     )

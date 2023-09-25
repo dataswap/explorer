@@ -1,9 +1,11 @@
 import { DatasetOverviewType } from "@/types/dataset"
 import Link from "next/link"
 import { IDatasetOverviewTabel } from "@/components/dataset/overview/tabel"
+import { Button, Form, InputNumber, Input, Select, Space, Switch } from "antd"
 
 export function getDatasetOverviewTabel(
-    datasetOverviews: DatasetOverviewType[]
+    datasetOverviews: DatasetOverviewType[],
+    handleClose: (id: number) => void
 ): IDatasetOverviewTabel[] {
     const result: IDatasetOverviewTabel[] = []
 
@@ -26,11 +28,23 @@ export function getDatasetOverviewTabel(
             submitter: datasetOverview.submitter,
             state: datasetOverview.state,
             operate: (
-                <Link
-                    href={`/dataset/submit/${datasetOverview.operate}/${datasetOverview.id}`}
-                >
-                    {datasetOverview.operate}
-                </Link>
+                <>
+                    <Link
+                        href={`/dataset/submit/${datasetOverview.operate}/${datasetOverview.id}`}
+                    >
+                        {datasetOverview.operate}
+                    </Link>
+                    {datasetOverview.state === "DisputeInitiationPeriod" && (
+                        <Button
+                            type="text"
+                            htmlType="button"
+                            onClick={() => handleClose(datasetOverview.id)}
+                        >
+                            {/* <CloseCircleOutlined style={{ color: "blue" }} /> */}
+                            <span style={{ color: "blue" }}>Close</span>
+                        </Button>
+                    )}
+                </>
             ),
         }
     })

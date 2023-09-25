@@ -10,6 +10,7 @@ import DatasetDisputeTabel, {
 import { getDatasetDisputeChallengeTabel } from "@/components/dataset/dispute/tabel/utils"
 import Link from "next/link"
 
+const { Option } = Select
 const { TextArea } = Input
 const layout = {
     labelCol: { span: 8 },
@@ -83,7 +84,7 @@ export default () => {
             da: da,
             challenge: datasetOverview?.proofChallenge[da].challenge,
             disputeProof: values.disputeProof,
-            result: "true",
+            result: values.result,
         }
 
         const oldDisputes = datasetOverview?.disputes || {}
@@ -181,6 +182,19 @@ export default () => {
                             rows={4}
                             placeholder="Please input dataset dispute proof"
                         />
+                    </Form.Item>
+                    <Form.Item
+                        name="result"
+                        label="Mock Result"
+                        rules={[{ required: true }]}
+                    >
+                        <Select
+                            placeholder="Select a option and change input text above"
+                            allowClear
+                        >
+                            <Option value="invalid">Invalid</Option>
+                            <Option value="valid">Valid</Option>
+                        </Select>
                     </Form.Item>
                     <Form.Item label="Estimated dispute Fee">
                         <Form.Item name="daFee">
