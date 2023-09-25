@@ -139,10 +139,14 @@ export default () => {
     }
 
     const onFinish = (values: any) => {
-        axios.patch(`http://localhost:3001/datasetInfo/${id}`, {
-            rootHash: values.rootHash,
-            completed: values.completed,
-        })
+        axios
+            .patch(`http://localhost:3001/datasetInfo/${id}`, {
+                rootHash: values.rootHash,
+                completed: values.completed,
+            })
+            .then(() => {
+                router.push(`http://localhost:3000/dataset/detail/${id}`)
+            })
     }
 
     const onReset = () => {

@@ -108,6 +108,9 @@ export default () => {
                     )
                 setDispute(addDispute)
             })
+            .then(() => {
+                router.push(`http://localhost:3000/dataset/detail/${id}`)
+            })
     }
 
     const onReset = () => {

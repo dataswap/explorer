@@ -76,6 +76,11 @@ export default () => {
         id &&
             axios(`http://localhost:3001/matchingsInfo/${id}`).then((res) => {
                 setOverview(res.data)
+                res.data.bids
+                    ? setList(
+                          getMatchingBidsTabel(Object.values(res.data.bids))
+                      )
+                    : setList([])
             })
     }, [bid])
 

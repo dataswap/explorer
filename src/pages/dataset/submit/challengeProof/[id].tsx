@@ -111,6 +111,7 @@ export default () => {
                             )
                         })
                 }
+                router.push(`http://localhost:3000/dataset/detail/${id}`)
             })
     }
 

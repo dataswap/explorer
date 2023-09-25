@@ -147,7 +147,15 @@ export function getMatchingDetailDescriptionItems(
         {
             key: "17",
             label: "Operate",
-            children: overview.operate,
+            children: (
+                <>
+                    <Link
+                        href={`/matching/submit/${overview.operate}/${overview.id}`}
+                    >
+                        {overview.operate}
+                    </Link>
+                </>
+            ),
         },
     ]
 }
