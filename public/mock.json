@@ -682,6 +682,56 @@
         }
       },
       "proofChallengeCompleted": true
+    },
+    {
+      "name": "11",
+      "description": "description_example",
+      "size": "22",
+      "industry": "description_example",
+      "source": "source_example",
+      "accessMethod": "accessMethod_example",
+      "version": "version_example",
+      "ownername": "ownername_example",
+      "ownercountry": "country1",
+      "ownerwebsite": "ownerwebsite_example",
+      "replicasCountries": [
+        "country1",
+        "country2"
+      ],
+      "isPublic": true,
+      "createdTime": "2023-10-09 00:32:33",
+      "replicasState": "",
+      "replicasOperate": "",
+      "createdHeight": "9999",
+      "submitter": "0x00000000000000000000",
+      "state": "DatasetProofSubmitted",
+      "operate": "challengeProof",
+      "replicasDetail": {
+        "1": {
+          "id": "1",
+          "country": "country1",
+          "dp": "MockDP",
+          "state": "",
+          "operate": ""
+        },
+        "2": {
+          "id": "2",
+          "country": "country2",
+          "dp": "MockDP",
+          "state": "",
+          "operate": ""
+        }
+      },
+      "id": 11,
+      "rootHash": "111",
+      "completed": "yes",
+      "proofChallenge": {
+        "11": {
+          "da": "11",
+          "challenge": "11",
+          "operate": "dispute"
+        }
+      }
     }
   ],
   "matchingsInfo": [

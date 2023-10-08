@@ -1,10 +1,10 @@
-import { DatasetDisputeType } from "@/types/dataset"
-import { IDatasetDisputeTabel } from "@/components/dataset/dispute/tabel"
+import { DatasetDisputeType } from "@dataswapjs/dataswap-sdk"
+import { DatasetDisputeTabelItem } from "@/types/components/tabel/dataset"
 
 export function getDatasetDisputeChallengeTabel(
     datasetProofs: DatasetDisputeType[]
-): IDatasetDisputeTabel[] {
-    const result: IDatasetDisputeTabel[] = []
+): DatasetDisputeTabelItem[] {
+    const result: DatasetDisputeTabelItem[] = []
 
     datasetProofs &&
         datasetProofs.forEach((datasetProof, index) => {

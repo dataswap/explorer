@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react"
-import type { DescriptionsProps } from "antd"
-import { Descriptions, Button, Form, Input, Select, InputNumber } from "antd"
+import { Descriptions } from "antd"
 import { useRouter } from "next/router"
 import axios from "axios"
-import { DatasetOverviewType, DatasetChallengeProofType } from "@/types/dataset"
-import DatasetChallengeTabel, {
-    IDatasetChallengeProofTabel,
-} from "@/components/dataset/challenge/tabel"
-import { getDatasetProofChallengeTabel } from "@/components/dataset/challenge/tabel/utils"
+import {
+    DatasetOverviewType,
+    DatasetChallengeProofType,
+} from "@dataswapjs/dataswap-sdk"
+import DatasetChallengeTabel from "@/components/dataset/challenge/tabel"
 import { getDatasetChallengeDescriptionItems } from "@/components/dataset/utils"
 
 interface IProps {
@@ -15,7 +14,7 @@ interface IProps {
 }
 export default ({ id }: IProps) => {
     const [challengeList, setChallengeList] =
-        useState<IDatasetChallengeProofTabel[]>()
+        useState<DatasetChallengeProofType[]>()
 
     const [datasetOverview, setDatasetOverview] =
         useState<DatasetOverviewType>()
@@ -34,13 +33,7 @@ export default ({ id }: IProps) => {
                     ) as DatasetChallengeProofType[])
 
                 newChallengesArray
-                    ? setChallengeList(
-                          getDatasetProofChallengeTabel(
-                              newChallengesArray,
-                              res.data,
-                              Number(id)
-                          )
-                      )
+                    ? setChallengeList(newChallengesArray)
                     : setChallengeList([])
             })
     }, [])
@@ -56,8 +49,12 @@ export default ({ id }: IProps) => {
                         )}
                     />
                 )}
-                {challengeList && (
-                    <DatasetChallengeTabel data={challengeList} />
+                {challengeList && datasetOverview && (
+                    <DatasetChallengeTabel
+                        data={challengeList}
+                        overview={datasetOverview}
+                        id={Number(id)}
+                    />
                 )}
             </>
         )

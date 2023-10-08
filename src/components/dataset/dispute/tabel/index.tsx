@@ -1,31 +1,18 @@
 import React from "react"
-import TableComponent, { generateColumns } from "@/components/tabel"
-
-export interface IDatasetDisputeTabel {
-    key: React.ReactNode
-    submitter: string
-    da: string
-    challenge: string
-    disputeProof: string
-    result: string
-}
+import { Tabel, generateTabelColumns } from "@dataswapjs/webutils"
+import { DatasetDisputeTabelItem } from "@/types/components/tabel/dataset"
 
 interface IProps {
-    data: IDatasetDisputeTabel[]
+    data: DatasetDisputeTabelItem[]
 }
 
 export default ({ data }: IProps) => {
-    const challengeProofColumns = generateColumns<IDatasetDisputeTabel>({
+    const columns = generateTabelColumns<DatasetDisputeTabelItem>({
         submitter: "20%",
         da: "20%",
         challenge: "20%",
         disputeProof: "20%",
         result: "20%",
     })
-    return (
-        <TableComponent<IDatasetDisputeTabel>
-            columns={challengeProofColumns}
-            data={data}
-        />
-    )
+    return <Tabel<DatasetDisputeTabelItem> columns={columns} data={data} />
 }
