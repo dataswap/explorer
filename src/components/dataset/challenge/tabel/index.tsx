@@ -1,20 +1,22 @@
 import React from "react"
-import { Tabel, generateTabelColumns } from "@dataswapjs/webutils"
-import { DatasetChallengeTabelItem } from "@/types/components/tabel/dataset"
+import {
+    Tabel,
+    generateTabelColumns,
+    convertDataToTableItems,
+} from "@dataswapjs/webutils"
 import {
     DatasetOverviewType,
     DatasetChallengeProofType,
 } from "@dataswapjs/dataswap-sdk"
 import Link from "next/link"
-import { convertDataToTableItems } from "@dataswapjs/webutils"
+import { DatasetChallengeTabelItem } from "@/types/components/tabel/dataset"
 
 interface IProps {
     data: DatasetChallengeProofType[]
     overview: DatasetOverviewType
-    id: number
 }
 
-export default ({ data, overview, id }: IProps) => {
+export default ({ data, overview }: IProps) => {
     const columns = generateTabelColumns<DatasetChallengeTabelItem>({
         da: "33.33%",
         challenge: "33.33%",
@@ -30,7 +32,7 @@ export default ({ data, overview, id }: IProps) => {
         operate: overview.state !== "Approved" &&
             overview.state !== "Reject" && (
                 <Link
-                    href={`/dataset/submit/${item.operate}/${id}?da=${item.da}`}
+                    href={`/dataset/submit/${item.operate}/${overview.id}?da=${item.da}`}
                 >
                     submit {item.operate}
                 </Link>

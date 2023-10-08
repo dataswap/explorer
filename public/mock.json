@@ -731,6 +731,15 @@
           "challenge": "11",
           "operate": "dispute"
         }
+      },
+      "disputes": {
+        "11": {
+          "submitter": "11",
+          "da": "11",
+          "challenge": "11",
+          "disputeProof": "111",
+          "result": "invalid"
+        }
       }
     }
   ],

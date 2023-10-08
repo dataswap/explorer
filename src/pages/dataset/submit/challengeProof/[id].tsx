@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react"
 import type { DescriptionsProps } from "antd"
-import { Descriptions, Button, Form, Input, Select, InputNumber } from "antd"
+import { Descriptions, Button, Form, Input } from "antd"
 import { useRouter } from "next/router"
 import axios from "axios"
-import { DatasetOverviewType, DatasetChallengeProofType } from "@/types/dataset"
-import DatasetChallengeTabel, {
-    IDatasetChallengeProofTabel,
-} from "@/components/dataset/challenge/tabel"
-import { getDatasetProofChallengeTabel } from "@/components/dataset/challenge/tabel/utils"
+import {
+    DatasetOverviewType,
+    DatasetChallengeProofType,
+} from "@dataswapjs/dataswap-sdk"
+import DatasetChallengeTabel from "@/components/dataset/challenge/tabel"
 import Link from "next/link"
 
 const { TextArea } = Input
@@ -53,7 +53,7 @@ function getDescriptionItems(
 
 export default () => {
     const [challengeList, setChallengeList] =
-        useState<IDatasetChallengeProofTabel[]>()
+        useState<DatasetChallengeProofType[]>()
     const [challenge, setChallenge] = useState<DatasetChallengeProofType>()
 
     const [datasetOverview, setDatasetOverview] =
@@ -87,14 +87,7 @@ export default () => {
                         newChallenges
                     ) as DatasetChallengeProofType[]
 
-                    id &&
-                        setChallengeList(
-                            getDatasetProofChallengeTabel(
-                                newChallengesArray,
-                                res.data,
-                                Number(id)
-                            )
-                        )
+                    id && setChallengeList(newChallengesArray)
                     setChallenge(addChallenge)
 
                     if (newChallengesArray.length >= 3) {
@@ -133,14 +126,7 @@ export default () => {
                         res.data.proofChallenge
                     ) as DatasetChallengeProofType[])
 
-                id &&
-                    setChallengeList(
-                        getDatasetProofChallengeTabel(
-                            newChallengesArray,
-                            res.data,
-                            Number(id)
-                        )
-                    )
+                id && setChallengeList(newChallengesArray)
             })
     }, [challenge])
 
@@ -220,8 +206,11 @@ export default () => {
                     </Form.Item>
                 </Form>
 
-                {challengeList && (
-                    <DatasetChallengeTabel data={challengeList} />
+                {challengeList && datasetOverview && (
+                    <DatasetChallengeTabel
+                        data={challengeList}
+                        overview={datasetOverview}
+                    />
                 )}
             </>
         )

@@ -53,7 +53,6 @@ export default ({ id }: IProps) => {
                     <DatasetChallengeTabel
                         data={challengeList}
                         overview={datasetOverview}
-                        id={Number(id)}
                     />
                 )}
             </>
