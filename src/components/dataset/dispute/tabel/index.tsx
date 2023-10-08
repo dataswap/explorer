@@ -1,9 +1,17 @@
 import React from "react"
 import { Tabel, generateTabelColumns } from "@dataswapjs/webutils"
-import { DatasetDisputeTabelItem } from "@/types/components/tabel/dataset"
 
 interface IProps {
     data: DatasetDisputeTabelItem[]
+}
+
+interface DatasetDisputeTabelItem {
+    key: React.ReactNode
+    submitter: string
+    da: string
+    challenge: string
+    disputeProof: string
+    result: string
 }
 
 export default ({ data }: IProps) => {

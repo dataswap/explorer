@@ -9,11 +9,17 @@ import {
     DatasetChallengeProofType,
 } from "@dataswapjs/dataswap-sdk"
 import Link from "next/link"
-import { DatasetChallengeTabelItem } from "@/types/components/tabel/dataset"
 
 interface IProps {
     data: DatasetChallengeProofType[]
     overview: DatasetOverviewType
+}
+
+interface DatasetChallengeTabelItem {
+    key: React.ReactNode
+    da: string
+    challenge: string
+    operate: React.ReactNode
 }
 
 export default ({ data, overview }: IProps) => {
