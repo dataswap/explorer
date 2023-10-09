@@ -1,9 +1,6 @@
 import React from "react"
 import { DatasetOverviewType } from "@dataswapjs/dataswap-sdk"
-import {
-    convertDataToDescriptionItems,
-    Descriptions,
-} from "@dataswapjs/webutils"
+import { convertDataToItems, Descriptions } from "@dataswapjs/webutils"
 
 interface IProps {
     data: DatasetOverviewType
@@ -14,7 +11,7 @@ interface ISingleProps extends IProps {
 }
 
 export function DatasetReplicasDescription({ data }: IProps) {
-    const descriptionItems = convertDataToDescriptionItems(
+    const descriptionItems = convertDataToItems(
         data,
         {},
         {
@@ -30,7 +27,7 @@ export function DatasetReplicasDescription({ data }: IProps) {
 }
 
 export function DatasetReplicaDescription({ data, id }: ISingleProps) {
-    const descriptionItems = convertDataToDescriptionItems(
+    const descriptionItems = convertDataToItems(
         data,
         {},
         {

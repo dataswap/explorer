@@ -1,10 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import { MatchingOverviewType } from "@dataswapjs/dataswap-sdk"
-import {
-    convertDataToDescriptionItems,
-    Descriptions,
-} from "@dataswapjs/webutils"
+import { convertDataToItems, Descriptions } from "@dataswapjs/webutils"
 
 interface IProps {
     data: MatchingOverviewType
@@ -30,31 +27,24 @@ function getMapper(data: MatchingOverviewType) {
 }
 
 export function MatchingDetailDescription({ data }: IProps) {
-    const descriptionItems = convertDataToDescriptionItems(
-        data,
-        getMapper(data)
-    )
+    const descriptionItems = convertDataToItems(data, getMapper(data))
     return (
         <Descriptions title="Matching Detail Info" items={descriptionItems} />
     )
 }
 
 export function MatchingOverviewDescription({ data }: IProps) {
-    const descriptionItems = convertDataToDescriptionItems(
-        data,
-        getMapper(data),
-        {
-            keyWhitelist: [
-                "id",
-                "datasetId",
-                "replicaId",
-                "createdTime",
-                "submitter",
-                "size",
-                "initialPrice",
-            ],
-        }
-    )
+    const descriptionItems = convertDataToItems(data, getMapper(data), {
+        keyWhitelist: [
+            "id",
+            "datasetId",
+            "replicaId",
+            "createdTime",
+            "submitter",
+            "size",
+            "initialPrice",
+        ],
+    })
     return (
         <Descriptions title="Matching Overview Info" items={descriptionItems} />
     )

@@ -1,10 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import { DatasetOverviewType } from "@dataswapjs/dataswap-sdk"
-import {
-    convertDataToDescriptionItems,
-    Descriptions,
-} from "@dataswapjs/webutils"
+import { convertDataToItems, Descriptions } from "@dataswapjs/webutils"
 
 interface IProps {
     data: DatasetOverviewType
@@ -24,28 +21,20 @@ function getMapper(data: DatasetOverviewType) {
 }
 
 export function DatasetDetailDescription({ data }: IProps) {
-    const descriptionItems = convertDataToDescriptionItems(
-        data,
-        getMapper(data),
-        {
-            keyBlacklist: [],
-            // keyWhitelist:[],
-            extra: {
-                replicasRequiredNumber: data.replicasCountries?.length,
-            },
-        }
-    )
+    const descriptionItems = convertDataToItems(data, getMapper(data), {
+        keyBlacklist: [],
+        // keyWhitelist:[],
+        extra: {
+            replicasRequiredNumber: data.replicasCountries?.length,
+        },
+    })
     return <Descriptions title="Dataset Info" items={descriptionItems} />
 }
 
 export function DatasetOverviewDescription({ data }: IProps) {
-    const descriptionItems = convertDataToDescriptionItems(
-        data,
-        getMapper(data),
-        {
-            keyWhitelist: ["id", "name", "size", "submitter"],
-        }
-    )
+    const descriptionItems = convertDataToItems(data, getMapper(data), {
+        keyWhitelist: ["id", "name", "size", "submitter"],
+    })
     return (
         <Descriptions title="Dataset Overview Info" items={descriptionItems} />
     )

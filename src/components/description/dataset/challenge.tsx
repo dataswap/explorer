@@ -1,15 +1,12 @@
 import React from "react"
 import { DatasetOverviewType } from "@dataswapjs/dataswap-sdk"
-import {
-    convertDataToDescriptionItems,
-    Descriptions,
-} from "@dataswapjs/webutils"
+import { convertDataToItems, Descriptions } from "@dataswapjs/webutils"
 
 interface IProps {
     data: DatasetOverviewType
 }
 export function DatasetChallengeDescription({ data }: IProps) {
-    const descriptionItems = convertDataToDescriptionItems(
+    const descriptionItems = convertDataToItems(
         data,
         {},
         {

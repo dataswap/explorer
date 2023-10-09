@@ -1,5 +1,4 @@
 "use client"
-import type { ReactElement, ReactNode } from "react"
 import { Layout, theme, Image } from "antd"
 import Menu from "@/components/menu"
 import { UserOutlined, GithubOutlined } from "@ant-design/icons"

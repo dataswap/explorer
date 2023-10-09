@@ -1,51 +1,31 @@
+import { useEffect, useState } from "react"
+import axios from "axios"
 import { Tabs } from "antd"
-import type { TabsProps } from "antd"
-import { Descriptions, Button, Form, Input, Select, InputNumber } from "antd"
 import ChallengeDetail from "@/pages/dataset/detail/challengeProof"
 import ProofDetail from "@/pages/dataset/detail/proof"
 import DisputeDetail from "@/pages/dataset/detail/dispute"
 import ReplicasDetail from "@/pages/dataset/detail/replicas"
 import { useRouter } from "next/router"
-// import { getDatasetDetailDescriptionItems } from "@/components/dataset/utils"
 import { DatasetDetailDescription } from "@/components/description/dataset"
-
 import { DatasetOverviewType } from "@dataswapjs/dataswap-sdk"
-import { useEffect, useState } from "react"
-import axios from "axios"
+import { convertDataToItems } from "@dataswapjs/webutils"
 
 const onChange = (key: string) => {
     console.log(key)
 }
 
-function getItems(id: number): TabsProps["items"] {
-    return [
-        {
-            key: "Proof",
-            label: "Proof",
-            children: <ProofDetail id={id} />,
-        },
-        {
-            key: "Challenge",
-            label: "Challenge",
-            children: <ChallengeDetail id={id} />,
-        },
-        {
-            key: "Dispute",
-            label: "Dispute",
-            children: <DisputeDetail id={id} />,
-        },
-        {
-            key: "Replicas",
-            label: "Replicas",
-            children: <ReplicasDetail id={id} />,
-        },
-    ]
-}
 export default () => {
     const router = useRouter()
     const { id } = router.query
     const [datasetOverview, setDatasetOverview] =
         useState<DatasetOverviewType>()
+
+    const tabItems = convertDataToItems({
+        proof: <ProofDetail id={Number(id)} />,
+        challenge: <ChallengeDetail id={Number(id)} />,
+        dispute: <DisputeDetail id={Number(id)} />,
+        replicas: <ReplicasDetail id={Number(id)} />,
+    })
 
     useEffect(() => {
         id &&
@@ -57,15 +37,11 @@ export default () => {
     return (
         <>
             {datasetOverview && (
-                // <Descriptions
-                //     title="Dataset Info"
-                //     items={getDatasetDetailDescriptionItems(datasetOverview)}
-                // />
                 <DatasetDetailDescription data={datasetOverview} />
             )}
             <Tabs
                 defaultActiveKey="Proof"
-                items={getItems(Number(id))}
+                items={tabItems}
                 onChange={onChange}
             />
         </>
