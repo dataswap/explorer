@@ -3,7 +3,7 @@ import { Descriptions } from "antd"
 import axios from "axios"
 import MatchingBidsTabel from "@/components/tabel/matching/bid"
 import { MatchingOverviewType, MatchingBidType } from "@dataswapjs/dataswap-sdk"
-import { getMatchingBidsDescriptionItems } from "@/components/matching/utils"
+import { MatchingBidsDescription } from "@/components/description/matching/bid"
 
 interface IProps {
     id: number
@@ -25,12 +25,7 @@ export default ({ id }: IProps) => {
     if (id != 0) {
         return (
             <>
-                {overview && (
-                    <Descriptions
-                        title=""
-                        items={getMatchingBidsDescriptionItems(overview)}
-                    />
-                )}
+                {overview && <MatchingBidsDescription data={overview} />}
                 {list && <MatchingBidsTabel data={list} />}
             </>
         )

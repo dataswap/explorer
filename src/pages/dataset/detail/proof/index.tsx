@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
-import { Descriptions } from "antd"
 import axios from "axios"
 import DatasetProofTabel from "@/components/tabel/dataset/proof"
 import { DatasetOverviewType, DatasetProofType } from "@dataswapjs/dataswap-sdk"
-import { getDatasetProofDescriptionItems } from "@/components/dataset/utils"
+import { DatasetProofDescription } from "@/components/description/dataset/proof"
 
 interface IProps {
     id: number
@@ -35,10 +34,7 @@ export default ({ id }: IProps) => {
         return (
             <>
                 {datasetOverview && (
-                    <Descriptions
-                        title=""
-                        items={getDatasetProofDescriptionItems(datasetOverview)}
-                    />
+                    <DatasetProofDescription data={datasetOverview} />
                 )}
                 {proofList && <DatasetProofTabel data={proofList} />}
             </>

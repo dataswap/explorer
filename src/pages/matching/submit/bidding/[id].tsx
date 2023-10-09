@@ -6,7 +6,7 @@ import axios from "axios"
 import { MatchingOverviewType, MatchingBidType } from "@dataswapjs/dataswap-sdk"
 
 import MatchingBidsTabel from "@/components/tabel/matching/bid"
-import { getMatchingOverviewDescriptionItems } from "@/components/matching/utils"
+import { MatchingOverviewDescription } from "@/components/description/matching/index"
 
 const { TextArea } = Input
 const layout = {
@@ -82,12 +82,7 @@ export default () => {
         return (
             <>
                 <h2>Bidding</h2>
-                {overview && (
-                    <Descriptions
-                        title="Matching Info"
-                        items={getMatchingOverviewDescriptionItems(overview)}
-                    />
-                )}
+                {overview && <MatchingOverviewDescription data={overview} />}
                 <Form
                     {...layout}
                     form={form}

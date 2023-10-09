@@ -7,7 +7,7 @@ import {
     DatasetReplicasType,
 } from "@dataswapjs/dataswap-sdk"
 import DatasetReplicasTabel from "@/components//tabel/dataset/replica"
-import { getDatasetReplicasDescriptionItems } from "@/components/dataset/utils"
+import { DatasetReplicasDescription } from "@/components/description/dataset/replica"
 
 interface IProps {
     id: number
@@ -53,12 +53,7 @@ export default ({ id }: IProps) => {
         return (
             <>
                 {datasetOverview && (
-                    <Descriptions
-                        title=""
-                        items={getDatasetReplicasDescriptionItems(
-                            datasetOverview
-                        )}
-                    />
+                    <DatasetReplicasDescription data={datasetOverview} />
                 )}
                 {replicasList && (
                     <DatasetReplicasTabel data={replicasList} datasetId={id} />

@@ -3,10 +3,8 @@ import type { TabsProps } from "antd"
 import { Descriptions, Button, Form, Input, Select, InputNumber } from "antd"
 import BidDetail from "@/pages/matching/detail/bid"
 import { useRouter } from "next/router"
-import {
-    getMatchingDetailDescriptionItems,
-    getWinnerDesc,
-} from "@/components/matching/utils"
+import { MatchingDetailDescription } from "@/components/description/matching"
+import { MatchingWinnerDescription } from "@/components/description/matching/winner"
 import { MatchingOverviewType } from "@dataswapjs/dataswap-sdk"
 import { useEffect, useState } from "react"
 import axios from "axios"
@@ -40,14 +38,8 @@ export default () => {
         <>
             {overview && (
                 <>
-                    <Descriptions
-                        title="Matching Info"
-                        items={getMatchingDetailDescriptionItems(overview)}
-                    />
-                    <Descriptions
-                        title="Winner Info"
-                        items={getWinnerDesc(overview)}
-                    />
+                    <MatchingDetailDescription data={overview} />
+                    <MatchingWinnerDescription data={overview} />
                 </>
             )}
             <Tabs

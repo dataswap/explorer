@@ -7,7 +7,7 @@ import {
     DatasetDisputeType,
 } from "@dataswapjs/dataswap-sdk"
 import DatasetDisputeTabel from "@/components/tabel/dataset/dispute"
-import { getDatasetDisputeDescriptionItems } from "@/components/dataset/utils"
+import { DatasetDisputeDescription } from "@/components/description/dataset/dispute"
 
 interface IProps {
     id: number
@@ -38,12 +38,7 @@ export default ({ id }: IProps) => {
         return (
             <>
                 {datasetOverview && (
-                    <Descriptions
-                        title=""
-                        items={getDatasetDisputeDescriptionItems(
-                            datasetOverview
-                        )}
-                    />
+                    <DatasetDisputeDescription data={datasetOverview} />
                 )}
                 {disputeList && <DatasetDisputeTabel data={disputeList} />}
             </>

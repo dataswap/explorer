@@ -2,7 +2,7 @@ import {
     DatasetOverviewType,
     DatasetDisputeType,
 } from "@dataswapjs/dataswap-sdk"
-import { getReplicasDescriptionItems } from "@/components/dataset/utils"
+import { DatasetReplicaDescription } from "@/components/description/dataset/replica"
 import { DatasetOverviewDescription } from "@/components/description/dataset"
 import {
     Descriptions,
@@ -88,12 +88,9 @@ export default () => {
                 <DatasetOverviewDescription data={datasetOverview} />
             )}
             {datasetOverview && (
-                <Descriptions
-                    title="Replica Info"
-                    items={getReplicasDescriptionItems(
-                        datasetOverview,
-                        Number(replicaId)
-                    )}
+                <DatasetReplicaDescription
+                    id={Number(replicaId)}
+                    data={datasetOverview}
                 />
             )}
             <Form
