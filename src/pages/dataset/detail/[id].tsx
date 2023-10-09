@@ -6,7 +6,9 @@ import ProofDetail from "@/pages/dataset/detail/proof"
 import DisputeDetail from "@/pages/dataset/detail/dispute"
 import ReplicasDetail from "@/pages/dataset/detail/replicas"
 import { useRouter } from "next/router"
-import { getDatasetDetailDescriptionItems } from "@/components/dataset/utils"
+// import { getDatasetDetailDescriptionItems } from "@/components/dataset/utils"
+import DatasetOverviewDescription from "@/components/description/dataset/overview"
+
 import { DatasetOverviewType } from "@dataswapjs/dataswap-sdk"
 import { useEffect, useState } from "react"
 import axios from "axios"
@@ -55,10 +57,11 @@ export default () => {
     return (
         <>
             {datasetOverview && (
-                <Descriptions
-                    title="Dataset Info"
-                    items={getDatasetDetailDescriptionItems(datasetOverview)}
-                />
+                // <Descriptions
+                //     title="Dataset Info"
+                //     items={getDatasetDetailDescriptionItems(datasetOverview)}
+                // />
+                <DatasetOverviewDescription data={datasetOverview} />
             )}
             <Tabs
                 defaultActiveKey="Proof"
