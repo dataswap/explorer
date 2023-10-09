@@ -9,21 +9,31 @@ import {
 interface IProps {
     data: MatchingOverviewType
 }
-export function MatchingDetailDescription({ data }: IProps) {
-    const descriptionItems = convertDataToDescriptionItems(data, {
-        id: (value) => <Link href={`/matching/detail/${value}`}>{value}</Link>,
-        datasetId: (value) => (
+
+function getMapper(data: MatchingOverviewType) {
+    return {
+        id: (value: any) => (
+            <Link href={`/matching/detail/${value}`}>{value}</Link>
+        ),
+        datasetId: (value: any) => (
             <Link href={`/dataset/detail/${value}`}>{value}</Link>
         ),
-        auctionPeriod: (value) => value?.join("-"),
-        operate: (value) => (
+        auctionPeriod: (value: any) => value?.join("-"),
+        operate: (value: any) => (
             <>
                 <Link href={`/matching/submit/${value}/${data.id}`}>
                     {value}
                 </Link>
             </>
         ),
-    })
+    }
+}
+
+export function MatchingDetailDescription({ data }: IProps) {
+    const descriptionItems = convertDataToDescriptionItems(
+        data,
+        getMapper(data)
+    )
     return (
         <Descriptions title="Matching Detail Info" items={descriptionItems} />
     )
@@ -32,14 +42,7 @@ export function MatchingDetailDescription({ data }: IProps) {
 export function MatchingOverviewDescription({ data }: IProps) {
     const descriptionItems = convertDataToDescriptionItems(
         data,
-        {
-            id: (value) => (
-                <Link href={`/matching/detail/${value}`}>{value}</Link>
-            ),
-            datasetId: (value) => (
-                <Link href={`/dataset/detail/${value}`}>{value}</Link>
-            ),
-        },
+        getMapper(data),
         {
             keyWhitelist: [
                 "id",

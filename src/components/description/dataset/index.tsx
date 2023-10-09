@@ -9,21 +9,24 @@ import {
 interface IProps {
     data: DatasetOverviewType
 }
+
+function getMapper(data: DatasetOverviewType) {
+    return {
+        id: (value: any) => (
+            <Link href={`/dataset/detail/${value}`}>{value}</Link>
+        ),
+        replicasCountries: (value: any) => value?.join(","),
+        isPublic: (value: any) => (value ? "Yes" : "No"),
+        operate: (value: any) => (
+            <Link href={`/dataset/submit/${value}/${data.id}`}>{value}</Link>
+        ),
+    }
+}
+
 export function DatasetDetailDescription({ data }: IProps) {
     const descriptionItems = convertDataToDescriptionItems(
         data,
-        {
-            id: (value) => (
-                <Link href={`/dataset/detail/${value}`}>{value}</Link>
-            ),
-            replicasCountries: (value) => value?.join(","),
-            isPublic: (value) => (value ? "Yes" : "No"),
-            operate: (value) => (
-                <Link href={`/dataset/submit/${value}/${data.id}`}>
-                    {value}
-                </Link>
-            ),
-        },
+        getMapper(data),
         {
             keyBlacklist: [],
             // keyWhitelist:[],
@@ -38,11 +41,7 @@ export function DatasetDetailDescription({ data }: IProps) {
 export function DatasetOverviewDescription({ data }: IProps) {
     const descriptionItems = convertDataToDescriptionItems(
         data,
-        {
-            id: (value) => (
-                <Link href={`/dataset/detail/${value}`}>{value}</Link>
-            ),
-        },
+        getMapper(data),
         {
             keyWhitelist: ["id", "name", "size", "submitter"],
         }
