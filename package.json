@@ -13,7 +13,7 @@
     "@ant-design/icons": "^5.2.6",
     "@babel/preset-react": "^7.22.15",
     "@dataswapjs/dataswap-sdk": "^0.1.0",
-    "@dataswapjs/webutils": "^0.1.2",
+    "@dataswapjs/webutils": "^0.1.4",
     "@types/node": "20.6.2",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",

@@ -1,5 +1,5 @@
 import type { DescriptionsProps } from "antd"
-import { MatchingOverviewType } from "@/types/matching"
+import { MatchingOverviewType } from "@dataswapjs/dataswap-sdk"
 import Link from "next/link"
 
 export function getMatchingOverviewDescriptionItems(

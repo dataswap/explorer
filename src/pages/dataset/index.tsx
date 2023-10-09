@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { InferGetServerSidePropsType, NextPageContext } from "next"
-import { Button, Form, InputNumber, Input, Select, Space, Switch } from "antd"
+import { Button } from "antd"
 import axios from "axios"
-import DatasetOverviewTabel, {
-    IDatasetOverviewTabel,
-} from "@/components/dataset/overview/tabel"
-import { getDatasetOverviewTabel } from "@/components/dataset/overview/tabel/utils"
-import { DatasetOverviewType } from "@/types/dataset"
 import { PlusOutlined } from "@ant-design/icons"
 import { useRouter } from "next/router"
+import { DatasetOverviewType } from "@dataswapjs/dataswap-sdk"
+import DatasetOverviewTabel from "@/components/tabel/dataset/overview"
 
 export async function getServerSideProps(context: NextPageContext) {
     return {
@@ -19,7 +16,7 @@ export async function getServerSideProps(context: NextPageContext) {
 export default function IndexPage({}: InferGetServerSidePropsType<
     typeof getServerSideProps
 >) {
-    const [datasetList, setDatasetList] = useState<IDatasetOverviewTabel[]>()
+    const [datasetList, setDatasetList] = useState<DatasetOverviewType[]>()
     const [closeAction, setCloseAction] = useState<boolean>()
     const router = useRouter()
 
@@ -56,7 +53,7 @@ export default function IndexPage({}: InferGetServerSidePropsType<
     useEffect(() => {
         axios("http://localhost:3001/datasetInfo").then((res) => {
             const datasetOveriew: DatasetOverviewType[] = res.data
-            setDatasetList(getDatasetOverviewTabel(datasetOveriew, handleClose))
+            setDatasetList(datasetOveriew)
         })
     }, [closeAction])
 
@@ -81,7 +78,12 @@ export default function IndexPage({}: InferGetServerSidePropsType<
                 </div>
             </div>
 
-            {datasetList && <DatasetOverviewTabel data={datasetList} />}
+            {datasetList && (
+                <DatasetOverviewTabel
+                    data={datasetList}
+                    handleClose={handleClose}
+                />
+            )}
         </>
     )
 }

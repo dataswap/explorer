@@ -739,8 +739,58 @@
           "challenge": "11",
           "disputeProof": "111",
           "result": "invalid"
+        },
+        "1111": {
+          "submitter": "1111",
+          "da": "11",
+          "challenge": "11",
+          "disputeProof": "222",
+          "result": "invalid"
         }
       }
+    },
+    {
+      "name": "111",
+      "description": "description_example",
+      "size": "222",
+      "industry": "description_example",
+      "source": "source_example",
+      "accessMethod": "accessMethod_example",
+      "version": "version_example",
+      "ownername": "ownername_example",
+      "ownercountry": "country1",
+      "ownerwebsite": "ownerwebsite_example",
+      "replicasCountries": [
+        "country1",
+        "country2"
+      ],
+      "isPublic": true,
+      "createdTime": "2023-10-09 16:09:23",
+      "replicasState": "",
+      "replicasOperate": "",
+      "createdHeight": "9999",
+      "submitter": "0x00000000000000000000",
+      "state": "DatasetProofSubmitted",
+      "operate": "challengeProof",
+      "replicasDetail": {
+        "1": {
+          "id": "1",
+          "country": "country1",
+          "dp": "MockDP",
+          "state": "",
+          "operate": ""
+        },
+        "2": {
+          "id": "2",
+          "country": "country2",
+          "dp": "MockDP",
+          "state": "",
+          "operate": ""
+        }
+      },
+      "id": 12,
+      "rootHash": "111",
+      "completed": "yes"
     }
   ],
   "matchingsInfo": [
@@ -919,6 +969,11 @@
           "bidder": "111",
           "bid": "222",
           "bidTime": "2023-09-25 17:09:40"
+        },
+        "1113334": {
+          "bidder": "1113334",
+          "bid": "4",
+          "bidTime": "2023-10-09 16:17:59"
         }
       }
     }

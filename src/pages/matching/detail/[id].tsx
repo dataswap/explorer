@@ -7,7 +7,7 @@ import {
     getMatchingDetailDescriptionItems,
     getWinnerDesc,
 } from "@/components/matching/utils"
-import { MatchingOverviewType } from "@/types/matching"
+import { MatchingOverviewType } from "@dataswapjs/dataswap-sdk"
 import { useEffect, useState } from "react"
 import axios from "axios"
 

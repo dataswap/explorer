@@ -1,5 +1,5 @@
 import type { DescriptionsProps } from "antd"
-import { DatasetOverviewType, DatasetChallengeProofType } from "@/types/dataset"
+import { DatasetOverviewType } from "@dataswapjs/dataswap-sdk"
 import Link from "next/link"
 
 export function getDatasetDetailDescriptionItems(

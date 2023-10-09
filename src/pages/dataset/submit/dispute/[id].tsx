@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react"
 import type { DescriptionsProps } from "antd"
-import { Descriptions, Button, Form, Input, Select, InputNumber } from "antd"
+import { Descriptions, Button, Form, Input, Select } from "antd"
 import { useRouter } from "next/router"
 import axios from "axios"
-import { DatasetOverviewType, DatasetDisputeType } from "@/types/dataset"
-import DatasetDisputeTabel, {
-    IDatasetDisputeTabel,
-} from "@/components/dataset/dispute/tabel"
-import { getDatasetDisputeChallengeTabel } from "@/components/dataset/dispute/tabel/utils"
+import {
+    DatasetOverviewType,
+    DatasetDisputeType,
+} from "@dataswapjs/dataswap-sdk"
+import DatasetDisputeTabel from "@/components/tabel/dataset/dispute"
 import Link from "next/link"
 
 const { Option } = Select
@@ -70,7 +70,7 @@ function getDescriptionItems(
 }
 
 export default () => {
-    const [disputeList, setDisputeList] = useState<IDatasetDisputeTabel[]>()
+    const [disputeList, setDisputeList] = useState<DatasetDisputeType[]>()
     const [datasetOverview, setDatasetOverview] =
         useState<DatasetOverviewType>()
     const router = useRouter()
@@ -103,10 +103,7 @@ export default () => {
                     newDisputes
                 ) as DatasetDisputeType[]
 
-                id &&
-                    setDisputeList(
-                        getDatasetDisputeChallengeTabel(newChallengesArray)
-                    )
+                id && setDisputeList(newChallengesArray)
                 setDispute(addDispute)
             })
             .then(() => {
@@ -126,10 +123,7 @@ export default () => {
                 const newDisputesArray =
                     res.data.disputes &&
                     (Object.values(res.data.disputes) as DatasetDisputeType[])
-                newDisputesArray &&
-                    setDisputeList(
-                        getDatasetDisputeChallengeTabel(newDisputesArray)
-                    )
+                newDisputesArray && setDisputeList(newDisputesArray)
             })
     }, [dispute])
 

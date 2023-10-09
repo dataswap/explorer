@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react"
-import type { DescriptionsProps } from "antd"
-import { Descriptions, Button, Form, Input, Select, InputNumber } from "antd"
+import { Descriptions } from "antd"
 import { useRouter } from "next/router"
 import axios from "axios"
-import { DatasetOverviewType, DatasetDisputeType } from "@/types/dataset"
-import DatasetDisputeTabel from "@/components/dataset/dispute/tabel"
-import { getDatasetDisputeChallengeTabel } from "@/components/dataset/dispute/tabel/utils"
+import {
+    DatasetOverviewType,
+    DatasetDisputeType,
+} from "@dataswapjs/dataswap-sdk"
+import DatasetDisputeTabel from "@/components/tabel/dataset/dispute"
 import { getDatasetDisputeDescriptionItems } from "@/components/dataset/utils"
-import { DatasetDisputeTabelItem } from "@/types/components/tabel/dataset"
 
 interface IProps {
     id: number
 }
 export default ({ id }: IProps) => {
-    const [disputeList, setDisputeList] = useState<DatasetDisputeTabelItem[]>()
+    const [disputeList, setDisputeList] = useState<DatasetDisputeType[]>()
     const [datasetOverview, setDatasetOverview] =
         useState<DatasetOverviewType>()
     const router = useRouter()
@@ -29,9 +29,7 @@ export default ({ id }: IProps) => {
                     res.data.disputes &&
                     (Object.values(res.data.disputes) as DatasetDisputeType[])
                 newDisputesArray
-                    ? setDisputeList(
-                          getDatasetDisputeChallengeTabel(newDisputesArray)
-                      )
+                    ? setDisputeList(newDisputesArray)
                     : setDisputeList([])
             })
     }, [dispute])

@@ -6,11 +6,8 @@ import ProofDetail from "@/pages/dataset/detail/proof"
 import DisputeDetail from "@/pages/dataset/detail/dispute"
 import ReplicasDetail from "@/pages/dataset/detail/replicas"
 import { useRouter } from "next/router"
-import {
-    getDatasetDetailDescriptionItems,
-    getDatasetProofDescriptionItems,
-} from "@/components/dataset/utils"
-import { DatasetOverviewType, DatasetChallengeProofType } from "@/types/dataset"
+import { getDatasetDetailDescriptionItems } from "@/components/dataset/utils"
+import { DatasetOverviewType } from "@dataswapjs/dataswap-sdk"
 import { useEffect, useState } from "react"
 import axios from "axios"
 

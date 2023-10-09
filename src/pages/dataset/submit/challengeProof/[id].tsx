@@ -7,7 +7,7 @@ import {
     DatasetOverviewType,
     DatasetChallengeProofType,
 } from "@dataswapjs/dataswap-sdk"
-import DatasetChallengeTabel from "@/components/dataset/challenge/tabel"
+import DatasetChallengeTabel from "@/components/tabel/dataset/challenge"
 import Link from "next/link"
 
 const { TextArea } = Input

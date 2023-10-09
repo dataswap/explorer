@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { DashOutlined, InboxOutlined } from "@ant-design/icons"
+import { InboxOutlined } from "@ant-design/icons"
 import type { UploadProps, DescriptionsProps } from "antd"
 import {
     message,
@@ -12,10 +12,8 @@ import {
 } from "antd"
 import { useRouter } from "next/router"
 import axios from "axios"
-import DatasetProofTabel, {
-    IDatasetProofTabel,
-} from "@/components/dataset/proof/tabel"
-import { DatasetOverviewType } from "@/types/dataset"
+import DatasetProofTabel from "@/components/tabel/dataset/proof"
+import { DatasetOverviewType, DatasetProofType } from "@dataswapjs/dataswap-sdk"
 import Link from "next/link"
 
 const { Dragger } = Upload
@@ -115,7 +113,7 @@ function getProps(id: string, setProofList: any): UploadProps {
 }
 
 export default () => {
-    const [proofList, setProofList] = useState<IDatasetProofTabel[]>()
+    const [proofList, setProofList] = useState<DatasetProofType[]>()
     const [datasetOverview, setDatasetOverview] =
         useState<DatasetOverviewType>()
     const router = useRouter()
