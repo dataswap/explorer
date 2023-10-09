@@ -9,7 +9,7 @@ import {
 interface IProps {
     data: DatasetOverviewType
 }
-export default ({ data }: IProps) => {
+export function DatasetDetailDescription({ data }: IProps) {
     const descriptionItems = convertDataToDescriptionItems(
         data,
         {
@@ -33,4 +33,21 @@ export default ({ data }: IProps) => {
         }
     )
     return <Descriptions title="Dataset Info" items={descriptionItems} />
+}
+
+export function DatasetOverviewDescription({ data }: IProps) {
+    const descriptionItems = convertDataToDescriptionItems(
+        data,
+        {
+            id: (value) => (
+                <Link href={`/dataset/detail/${value}`}>{value}</Link>
+            ),
+        },
+        {
+            keyWhitelist: ["id", "name", "size", "submitter"],
+        }
+    )
+    return (
+        <Descriptions title="Dataset Overview Info" items={descriptionItems} />
+    )
 }

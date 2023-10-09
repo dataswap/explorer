@@ -2,10 +2,8 @@ import {
     DatasetOverviewType,
     DatasetDisputeType,
 } from "@dataswapjs/dataswap-sdk"
-import {
-    getDatasetDescriptionItems,
-    getReplicasDescriptionItems,
-} from "@/components/dataset/utils"
+import { getReplicasDescriptionItems } from "@/components/dataset/utils"
+import { DatasetOverviewDescription } from "@/components/description/dataset"
 import {
     Descriptions,
     Button,
@@ -87,10 +85,7 @@ export default () => {
         <>
             <h2>Create matching</h2>
             {datasetOverview && (
-                <Descriptions
-                    title="Dataset Info"
-                    items={getDatasetDescriptionItems(datasetOverview)}
-                />
+                <DatasetOverviewDescription data={datasetOverview} />
             )}
             {datasetOverview && (
                 <Descriptions

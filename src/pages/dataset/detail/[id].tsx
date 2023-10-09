@@ -7,7 +7,7 @@ import DisputeDetail from "@/pages/dataset/detail/dispute"
 import ReplicasDetail from "@/pages/dataset/detail/replicas"
 import { useRouter } from "next/router"
 // import { getDatasetDetailDescriptionItems } from "@/components/dataset/utils"
-import DatasetOverviewDescription from "@/components/description/dataset/overview"
+import { DatasetDetailDescription } from "@/components/description/dataset"
 
 import { DatasetOverviewType } from "@dataswapjs/dataswap-sdk"
 import { useEffect, useState } from "react"
@@ -61,7 +61,7 @@ export default () => {
                 //     title="Dataset Info"
                 //     items={getDatasetDetailDescriptionItems(datasetOverview)}
                 // />
-                <DatasetOverviewDescription data={datasetOverview} />
+                <DatasetDetailDescription data={datasetOverview} />
             )}
             <Tabs
                 defaultActiveKey="Proof"
