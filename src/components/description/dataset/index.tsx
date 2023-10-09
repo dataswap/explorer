@@ -23,7 +23,6 @@ function getMapper(data: DatasetOverviewType) {
 export function DatasetDetailDescription({ data }: IProps) {
     const descriptionItems = convertDataToItems(data, getMapper(data), {
         keyBlacklist: [],
-        // keyWhitelist:[],
         extra: {
             replicasRequiredNumber: data.replicasCountries?.length,
         },
