@@ -7,7 +7,7 @@ import {
     DatasetChallengeProofType,
 } from "@dataswapjs/dataswap-sdk"
 import DatasetChallengeTabel from "@/components/tabel/dataset/challenge"
-import { DatasetChallengeDescription } from "@/components/description/dataset/challenge"
+import { DatasetChallengeOverviewDescription } from "@/components/description/dataset/challenge"
 
 interface IProps {
     id: number
@@ -42,7 +42,9 @@ export default ({ id }: IProps) => {
         return (
             <>
                 {datasetOverview && (
-                    <DatasetChallengeDescription data={datasetOverview} />
+                    <DatasetChallengeOverviewDescription
+                        data={datasetOverview}
+                    />
                 )}
                 {challengeList && datasetOverview && (
                     <DatasetChallengeTabel

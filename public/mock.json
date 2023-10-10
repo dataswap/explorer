@@ -790,7 +790,14 @@
       },
       "id": 12,
       "rootHash": "111",
-      "completed": "yes"
+      "completed": "yes",
+      "proofChallenge": {
+        "111": {
+          "da": "111",
+          "challenge": "222",
+          "operate": "dispute"
+        }
+      }
     },
     {
       "name": "111",

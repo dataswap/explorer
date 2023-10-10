@@ -1,20 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { InboxOutlined } from "@ant-design/icons"
-import type { UploadProps, DescriptionsProps } from "antd"
-import {
-    message,
-    Upload,
-    Descriptions,
-    Button,
-    Form,
-    Input,
-    Select,
-} from "antd"
+import type { UploadProps } from "antd"
+import { message, Upload, Button, Form, Input, Select } from "antd"
 import { useRouter } from "next/router"
 import axios from "axios"
 import DatasetProofTabel from "@/components/tabel/dataset/proof"
 import { DatasetOverviewType, DatasetProofType } from "@dataswapjs/dataswap-sdk"
-import Link from "next/link"
+import { DatasetOverviewDescription } from "@/components/description/dataset"
 
 const { Dragger } = Upload
 const { Option } = Select
@@ -27,36 +19,6 @@ const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
 }
 
-function getDescriptionItems(
-    datasetOverview: DatasetOverviewType
-): DescriptionsProps["items"] {
-    return [
-        {
-            key: "1",
-            label: "Id",
-            children: (
-                <Link href={`/dataset/detail/${datasetOverview.id}`}>
-                    {datasetOverview.id}
-                </Link>
-            ),
-        },
-        {
-            key: "2",
-            label: "Name",
-            children: datasetOverview.name,
-        },
-        {
-            key: "3",
-            label: "Size",
-            children: datasetOverview.size,
-        },
-        {
-            key: "4",
-            label: "Client",
-            children: datasetOverview.submitter,
-        },
-    ]
-}
 function getProps(id: string, setProofList: any): UploadProps {
     return {
         name: "file",
@@ -179,10 +141,7 @@ export default () => {
             <>
                 <h2>Submit Dataset Proof</h2>
                 {datasetOverview && (
-                    <Descriptions
-                        title="Dataset Info"
-                        items={getDescriptionItems(datasetOverview)}
-                    />
+                    <DatasetOverviewDescription data={datasetOverview} />
                 )}
                 <Form
                     {...layout}

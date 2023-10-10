@@ -8,7 +8,7 @@ import {
     DatasetChallengeProofType,
 } from "@dataswapjs/dataswap-sdk"
 import DatasetChallengeTabel from "@/components/tabel/dataset/challenge"
-import Link from "next/link"
+import { DatasetOverviewDescription } from "@/components/description/dataset"
 
 const { TextArea } = Input
 const layout = {
@@ -18,37 +18,6 @@ const layout = {
 
 const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
-}
-
-function getDescriptionItems(
-    datasetOverview: DatasetOverviewType
-): DescriptionsProps["items"] {
-    return [
-        {
-            key: "1",
-            label: "Id",
-            children: (
-                <Link href={`/dataset/detail/${datasetOverview.id}`}>
-                    {datasetOverview.id}
-                </Link>
-            ),
-        },
-        {
-            key: "2",
-            label: "Name",
-            children: datasetOverview.name,
-        },
-        {
-            key: "3",
-            label: "Size",
-            children: datasetOverview.size,
-        },
-        {
-            key: "4",
-            label: "Client",
-            children: datasetOverview.submitter,
-        },
-    ]
 }
 
 export default () => {
@@ -135,10 +104,7 @@ export default () => {
             <>
                 <h2>Submit Dataset Challenge Proof</h2>
                 {datasetOverview && (
-                    <Descriptions
-                        title="Dataset Info"
-                        items={getDescriptionItems(datasetOverview)}
-                    />
+                    <DatasetOverviewDescription data={datasetOverview} />
                 )}
                 <Form
                     {...layout}

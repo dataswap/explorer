@@ -5,7 +5,10 @@ import { convertDataToItems, Descriptions } from "@dataswapjs/webutils"
 interface IProps {
     data: DatasetOverviewType
 }
-export function DatasetChallengeDescription({ data }: IProps) {
+interface ISingleProps extends IProps {
+    da: string
+}
+export function DatasetChallengeOverviewDescription({ data }: IProps) {
     const descriptionItems = convertDataToItems(
         data,
         {},
@@ -19,4 +22,21 @@ export function DatasetChallengeDescription({ data }: IProps) {
         }
     )
     return <Descriptions title="Challenge Info" items={descriptionItems} />
+}
+
+export function DatasetChallengeDescription({ data, da }: ISingleProps) {
+    const descriptionItems = convertDataToItems(
+        data,
+        {},
+        {
+            keyWhitelist: [],
+            extra: {
+                da: data?.proofChallenge[da]?.da,
+                challenge: data?.proofChallenge[da]?.challenge,
+            },
+        }
+    )
+    return (
+        <Descriptions title="Challenge Proof Info" items={descriptionItems} />
+    )
 }
