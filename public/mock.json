@@ -797,6 +797,15 @@
           "challenge": "222",
           "operate": "dispute"
         }
+      },
+      "disputes": {
+        "111": {
+          "submitter": "111",
+          "da": "111",
+          "challenge": "222",
+          "disputeProof": "22",
+          "result": "invalid"
+        }
       }
     },
     {
