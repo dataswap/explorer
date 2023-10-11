@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 /public/proof.json
+/public/mockdb.json
 
 # testing
 /coverage

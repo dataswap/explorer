@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"next dev\" \"json-server -p 3001 public/mock.json\" \"node server/fileserver.js/\"",
+    "dev": "concurrently \"next dev\" \" if [ ! -f \"public/mockdb.json\" ]; then cp \"public/mockdb.template.json\" \"public/mockdb.json\"; fi && json-server -p 3001 public/mockdb.json  \" \"node server/fileserver.js/\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
