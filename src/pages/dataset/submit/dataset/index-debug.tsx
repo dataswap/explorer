@@ -9,13 +9,12 @@ const initialValues: DatasetCreateInfo = {
     source: "source",
     accessMethod: "accessMethod",
     version: "version",
-    ownername: "ownername",
-    ownercountry: "ownercountry",
-    ownerwebsite: "ownerwebsite",
+    ownerName: "ownername",
+    ownerCountry: "ownercountry",
+    ownerWebsite: "ownerwebsite",
     isPublic: true,
-    replicasRequiredNumber: "100",
     dpFee: 10,
-    replicasCountries: [],
+    requiredReplicasCountries: [],
 }
 
 const onFinish = (values: any) => {

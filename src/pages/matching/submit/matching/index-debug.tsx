@@ -5,7 +5,7 @@ import dayjs from "dayjs"
 const initialValues: MatchingCreateInfo = {
     mockSubmitter: "",
     auctionPeriod: [dayjs("2023/10/01"), dayjs("2023/10/10")],
-    initialPrice: 0,
+    biddingThreshold: 0,
     storageCompletePeriod: 0,
     storageLifecycle: 0,
     dataTransferType: "online",

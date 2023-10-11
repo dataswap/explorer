@@ -4,7 +4,7 @@ import { DatasetProofCreateInfo } from "@dataswapjs/dataswap-sdk"
 const initialValues: DatasetProofCreateInfo = {
     rootHash: "",
     leafHashesCount: 0,
-    completed: false,
+    allProofsSubmitted: false,
 }
 
 const onFinish = (values: any) => {

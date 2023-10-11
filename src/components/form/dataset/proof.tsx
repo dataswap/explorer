@@ -9,7 +9,7 @@ const overwriteFieldRules = {
     leafHashesCount: {
         customComponent: <InputNumber />,
     },
-    completed: {
+    allProofsSubmitted: {
         customComponent: (
             <Select placeholder="Select a option " allowClear>
                 <Option value={false}>No</Option>

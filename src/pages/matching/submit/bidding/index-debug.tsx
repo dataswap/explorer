@@ -2,7 +2,7 @@ import CreateMatchingBidForm from "@/components/form/matching/bid"
 import { MatchingBidCreateInfo } from "@dataswapjs/dataswap-sdk"
 
 const initialValues: MatchingBidCreateInfo = {
-    bidder: "",
+    mockBidder: "",
     bid: 0,
 }
 

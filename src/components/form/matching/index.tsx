@@ -10,7 +10,7 @@ const overwriteFieldRules = {
     auctionPeriod: {
         customComponent: <RangePicker format="YYYY/MM/DD" />,
     },
-    initialPrice: {
+    biddingThreshold: {
         customComponent: <InputNumber addonAfter="FIL" />,
     },
     storageCompletePeriod: {

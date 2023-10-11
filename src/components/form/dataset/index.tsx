@@ -7,7 +7,7 @@ const { TextArea } = Input
 const { Option } = Select
 
 const overwriteFieldRules = {
-    ownercountry: {
+    ownerCountry: {
         customComponent: (
             <Select placeholder="Please select dataset owner country">
                 <Option value="country1">country1</Option>
@@ -15,9 +15,13 @@ const overwriteFieldRules = {
             </Select>
         ),
     },
-    replicasCountries: {
+    requiredReplicasCountries: {
         customComponent: (
-            <FormList name="replicasCountries" minLength={1} maxLength={10} />
+            <FormList
+                name="requiredReplicasCountries"
+                minLength={1}
+                maxLength={10}
+            />
         ),
     },
     dpFee: {
@@ -35,7 +39,7 @@ export default ({ data, onFinish }: IProps) => {
         data,
         overwriteFieldRules,
         {
-            blacklist: ["replicasRequiredNumber", "isPublic", "description"],
+            blacklist: ["isPublic", "description"],
             extra: [
                 <AntForm.Item label="Is Public" key="isPublic_label">
                     <AntForm.Item
