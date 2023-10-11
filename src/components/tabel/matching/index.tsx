@@ -16,7 +16,7 @@ interface MatchingOverviewTabelItem {
     createdTime: string
     submitter: string
     size: string
-    initialPrice: string
+    initialPrice: number
     state: string
     operate: React.ReactNode
 }

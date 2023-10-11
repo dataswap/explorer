@@ -172,7 +172,7 @@ export default () => {
                             placeholder="Select a option and change input text above"
                             onChange={onCompletedChange}
                             allowClear
-                            disabled={datasetOverview?.completed == "yes"}
+                            disabled={datasetOverview?.completed == true}
                         >
                             <Option value="no">No</Option>
                             <Option value="yes">Yes</Option>
@@ -200,14 +200,14 @@ export default () => {
                         <Button
                             type="primary"
                             htmlType="submit"
-                            disabled={datasetOverview?.completed == "yes"}
+                            disabled={datasetOverview?.completed == true}
                         >
                             Submit
                         </Button>
                         <Button
                             htmlType="button"
                             onClick={onReset}
-                            disabled={datasetOverview?.completed == "yes"}
+                            disabled={datasetOverview?.completed == true}
                         >
                             Reset
                         </Button>
@@ -216,7 +216,7 @@ export default () => {
 
                 <Dragger
                     {...getProps(id, setProofList)}
-                    disabled={datasetOverview?.completed == "yes"}
+                    disabled={datasetOverview?.completed == true}
                 >
                     <p className="ant-upload-drag-icon">
                         <InboxOutlined />

@@ -9,7 +9,7 @@ import { MatchingBidType } from "@dataswapjs/dataswap-sdk"
 interface MatchingBidsTabelItem {
     key: React.ReactNode
     bidder: string
-    bid: string
+    bid: number
     bidTime: string
 }
 
