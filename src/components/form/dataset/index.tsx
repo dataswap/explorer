@@ -1,82 +1,78 @@
 import React from "react"
-import { Input } from "antd"
+import { Form as AntForm, Input, InputNumber, Select, Switch } from "antd"
 import { Form, FormList, convertDataToFormFields } from "@dataswapjs/webutils"
 import { DatasetCreateInfo } from "@dataswapjs/dataswap-sdk"
 
-const initialValues: DatasetCreateInfo = {
-    name: "name",
-    description: "description",
-    size: "size",
-    industry: "industry",
-    source: "source",
-    accessMethod: "accessMethod",
-    version: "version",
-    ownername: "ownername",
-    ownercountry: "ownercountry",
-    ownerwebsite: "ownerwebsite",
-    isPublic: "Yes",
-    replicasRequiredNumber: "100",
-    replicasCountries: [],
-}
+const { TextArea } = Input
+const { Option } = Select
 
-const customFieldRules = {
+const overwriteFieldRules = {
+    ownercountry: {
+        customComponent: (
+            <Select placeholder="Please select dataset owner country">
+                <Option value="country1">country1</Option>
+                <Option value="country2">country2</Option>
+            </Select>
+        ),
+    },
     replicasCountries: {
         customComponent: (
-            <FormList
-                name="replicasCountries"
-                renderField={(field) => (
-                    <Input
-                        placeholder="country name"
-                        style={{ width: "60%" }}
-                    />
-                )}
-                minLength={1}
-                maxLength={10}
-            />
+            <FormList name="replicasCountries" minLength={1} maxLength={10} />
         ),
+    },
+    dpFee: {
+        customComponent: <InputNumber addonAfter="FIL" />,
     },
 }
 
-const fields = convertDataToFormFields<DatasetCreateInfo>(
-    initialValues,
-    customFieldRules
-    // {
-    //     blacklist: ["replicasCountries"],
-    //     extra: [
-    //         {
-    //             name: "replicasCountries",
-    //             label: "test222",
-    //             customComponent: (
-    //                 <FormList
-    //                     name="replicasCountries"
-    //                     renderField={(field) => {
-    //                         return (
-    //                             <Input
-    //                                 placeholder="country name"
-    //                                 style={{ width: "60%" }}
-    //                             />
-    //                         )
-    //                     }}
-    //                     minLength={1}
-    //                     maxLength={10}
-    //                 />
-    //             ),
-    //         },
-    //     ],
-    // }
-)
+interface IProps {
+    data: DatasetCreateInfo
+    onFinish: (values: any) => void
+}
 
-export default () => {
-    const onFinish = (values: any) => {
-        console.log("Form values:", values)
-    }
+export default ({ data, onFinish }: IProps) => {
+    const fields = convertDataToFormFields<DatasetCreateInfo>(
+        data,
+        overwriteFieldRules,
+        {
+            blacklist: ["replicasRequiredNumber", "isPublic", "description"],
+            extra: [
+                <AntForm.Item label="Is Public" key="isPublic_label">
+                    <AntForm.Item
+                        name="isPublic"
+                        key="isPublic"
+                        valuePropName="checked"
+                    >
+                        <Switch />
+                    </AntForm.Item>
+                </AntForm.Item>,
+                <AntForm.Item
+                    name="description"
+                    key="description"
+                    label="Description"
+                    hasFeedback
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please input dataset Description!",
+                        },
+                    ]}
+                >
+                    <TextArea
+                        rows={4}
+                        placeholder="Please input dataset Description"
+                    />
+                </AntForm.Item>,
+            ],
+        }
+    )
 
     return (
         <Form
             name="Create Dataset"
             fields={fields}
             onFinish={onFinish}
-            initialValues={initialValues}
+            initialValues={data}
         />
     )
 }
