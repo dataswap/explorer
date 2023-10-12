@@ -4,7 +4,7 @@ import {
     Tabel,
     generateTabelColumns,
     convertDataToTableItems,
-} from "@dataswapjs/webutils"
+} from "@unipackage/webkit"
 import { DatasetOverviewType } from "@dataswapjs/dataswapjs"
 import Link from "next/link"
 

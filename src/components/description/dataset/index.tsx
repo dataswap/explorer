@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import { DatasetOverviewType } from "@dataswapjs/dataswapjs"
-import { convertDataToItems, Descriptions } from "@dataswapjs/webutils"
+import { convertDataToItems, Descriptions } from "@unipackage/webkit"
 
 interface IProps {
     data: DatasetOverviewType

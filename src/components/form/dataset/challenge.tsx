@@ -1,6 +1,6 @@
 import React from "react"
 import { InputNumber } from "antd"
-import { Form, convertDataToFormFields } from "@dataswapjs/webutils"
+import { Form, convertDataToFormFields } from "@unipackage/webkit"
 import { DatasetChallengeCreateInfo } from "@dataswapjs/dataswapjs"
 
 const overwriteFieldRules = {

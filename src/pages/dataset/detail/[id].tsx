@@ -8,7 +8,7 @@ import ReplicasDetail from "@/pages/dataset/detail/replicas"
 import { useRouter } from "next/router"
 import { DatasetDetailDescription } from "@/components/description/dataset"
 import { DatasetOverviewType } from "@dataswapjs/dataswapjs"
-import { convertDataToItems } from "@dataswapjs/webutils"
+import { convertDataToItems } from "@unipackage/webkit"
 
 const onChange = (key: string) => {
     console.log(key)

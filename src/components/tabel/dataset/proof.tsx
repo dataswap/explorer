@@ -3,7 +3,7 @@ import {
     Tabel,
     generateTabelColumns,
     convertDataToTableItems,
-} from "@dataswapjs/webutils"
+} from "@unipackage/webkit"
 import { DatasetProofType } from "@dataswapjs/dataswapjs"
 
 interface DatasetProofTabelItem {

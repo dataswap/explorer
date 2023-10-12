@@ -3,7 +3,7 @@ import {
     Tabel,
     generateTabelColumns,
     convertDataToTableItems,
-} from "@dataswapjs/webutils"
+} from "@unipackage/webkit"
 import { DatasetReplicasType } from "@dataswapjs/dataswapjs"
 import Link from "next/link"
 
