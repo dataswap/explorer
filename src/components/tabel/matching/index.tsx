@@ -5,7 +5,7 @@ import {
     generateTabelColumns,
     convertDataToTableItems,
 } from "@dataswapjs/webutils"
-import { MatchingOverviewType } from "@dataswapjs/dataswap-sdk"
+import { MatchingOverviewType } from "@dataswapjs/dataswapjs"
 import Link from "next/link"
 
 interface MatchingOverviewTabelItem {

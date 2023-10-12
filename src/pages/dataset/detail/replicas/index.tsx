@@ -5,7 +5,7 @@ import axios from "axios"
 import {
     DatasetOverviewType,
     DatasetReplicasType,
-} from "@dataswapjs/dataswap-sdk"
+} from "@dataswapjs/dataswapjs"
 import DatasetReplicasTabel from "@/components//tabel/dataset/replica"
 import { DatasetReplicasDescription } from "@/components/description/dataset/replica"
 

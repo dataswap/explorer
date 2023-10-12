@@ -1,7 +1,7 @@
 import React from "react"
 import { InputNumber } from "antd"
 import { Form, convertDataToFormFields } from "@dataswapjs/webutils"
-import { DatasetChallengeCreateInfo } from "@dataswapjs/dataswap-sdk"
+import { DatasetChallengeCreateInfo } from "@dataswapjs/dataswapjs"
 
 const overwriteFieldRules = {
     estimatedDaFee: {

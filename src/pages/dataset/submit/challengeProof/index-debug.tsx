@@ -1,5 +1,5 @@
 import CreateDatasetChallengeForm from "@/components/form/dataset/challenge"
-import { DatasetChallengeCreateInfo } from "@dataswapjs/dataswap-sdk"
+import { DatasetChallengeCreateInfo } from "@dataswapjs/dataswapjs"
 
 const initialValues: DatasetChallengeCreateInfo = {
     mockDa: "",

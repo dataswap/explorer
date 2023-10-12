@@ -1,7 +1,7 @@
 import React from "react"
 import { InputNumber, Select, DatePicker } from "antd"
 import { Form, convertDataToFormFields } from "@dataswapjs/webutils"
-import { MatchingCreateInfo } from "@dataswapjs/dataswap-sdk"
+import { MatchingCreateInfo } from "@dataswapjs/dataswapjs"
 
 const { Option } = Select
 const { RangePicker } = DatePicker

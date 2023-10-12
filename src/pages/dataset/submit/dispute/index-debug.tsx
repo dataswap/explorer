@@ -1,5 +1,5 @@
 import CreateDatasetDisputeForm from "@/components/form/dataset/dispute"
-import { DatasetDisputeCreateInfo } from "@dataswapjs/dataswap-sdk"
+import { DatasetDisputeCreateInfo } from "@dataswapjs/dataswapjs"
 
 const initialValues: DatasetDisputeCreateInfo = {
     mockSubmitter: "",

@@ -5,7 +5,7 @@ import { message, Upload, Button, Form, Input, Select } from "antd"
 import { useRouter } from "next/router"
 import axios from "axios"
 import DatasetProofTabel from "@/components/tabel/dataset/proof"
-import { DatasetOverviewType, DatasetProofType } from "@dataswapjs/dataswap-sdk"
+import { DatasetOverviewType, DatasetProofType } from "@dataswapjs/dataswapjs"
 import { DatasetOverviewDescription } from "@/components/description/dataset"
 
 const { Dragger } = Upload

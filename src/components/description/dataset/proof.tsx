@@ -1,5 +1,5 @@
 import React from "react"
-import { DatasetOverviewType } from "@dataswapjs/dataswap-sdk"
+import { DatasetOverviewType } from "@dataswapjs/dataswapjs"
 import { convertDataToItems, Descriptions } from "@dataswapjs/webutils"
 
 interface IProps {

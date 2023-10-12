@@ -7,7 +7,7 @@ import DisputeDetail from "@/pages/dataset/detail/dispute"
 import ReplicasDetail from "@/pages/dataset/detail/replicas"
 import { useRouter } from "next/router"
 import { DatasetDetailDescription } from "@/components/description/dataset"
-import { DatasetOverviewType } from "@dataswapjs/dataswap-sdk"
+import { DatasetOverviewType } from "@dataswapjs/dataswapjs"
 import { convertDataToItems } from "@dataswapjs/webutils"
 
 const onChange = (key: string) => {

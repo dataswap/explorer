@@ -1,7 +1,7 @@
 import React from "react"
 import { InputNumber, Select } from "antd"
 import { Form, convertDataToFormFields } from "@dataswapjs/webutils"
-import { DatasetProofCreateInfo } from "@dataswapjs/dataswap-sdk"
+import { DatasetProofCreateInfo } from "@dataswapjs/dataswapjs"
 
 const { Option } = Select
 

@@ -4,7 +4,7 @@ import {
     generateTabelColumns,
     convertDataToTableItems,
 } from "@dataswapjs/webutils"
-import { DatasetProofType } from "@dataswapjs/dataswap-sdk"
+import { DatasetProofType } from "@dataswapjs/dataswapjs"
 
 interface DatasetProofTabelItem {
     key: React.ReactNode

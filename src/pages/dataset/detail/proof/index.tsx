@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import axios from "axios"
 import DatasetProofTabel from "@/components/tabel/dataset/proof"
-import { DatasetOverviewType, DatasetProofType } from "@dataswapjs/dataswap-sdk"
+import { DatasetOverviewType, DatasetProofType } from "@dataswapjs/dataswapjs"
 import { DatasetProofDescription } from "@/components/description/dataset/proof"
 
 interface IProps {

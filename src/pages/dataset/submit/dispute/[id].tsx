@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Button, Form, Input, Select } from "antd"
 import { useRouter } from "next/router"
 import axios from "axios"
-import {
-    DatasetOverviewType,
-    DatasetDisputeType,
-} from "@dataswapjs/dataswap-sdk"
+import { DatasetOverviewType, DatasetDisputeType } from "@dataswapjs/dataswapjs"
 import DatasetDisputeTabel from "@/components/tabel/dataset/dispute"
 import { DatasetOverviewDescription } from "@/components/description/dataset"
 import { DatasetChallengeDescription } from "@/components/description/dataset/challenge"

@@ -1,5 +1,5 @@
 import CreateDatasetForm from "@/components/form/dataset"
-import { DatasetCreateInfo } from "@dataswapjs/dataswap-sdk"
+import { DatasetCreateInfo } from "@dataswapjs/dataswapjs"
 
 const initialValues: DatasetCreateInfo = {
     name: "name",

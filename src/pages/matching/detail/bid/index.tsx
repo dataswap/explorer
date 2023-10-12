@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Descriptions } from "antd"
 import axios from "axios"
 import MatchingBidsTabel from "@/components/tabel/matching/bid"
-import { MatchingOverviewType, MatchingBidType } from "@dataswapjs/dataswap-sdk"
+import { MatchingOverviewType, MatchingBidType } from "@dataswapjs/dataswapjs"
 import { MatchingBidsDescription } from "@/components/description/matching/bid"
 
 interface IProps {

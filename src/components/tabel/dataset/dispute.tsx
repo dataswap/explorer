@@ -4,7 +4,7 @@ import {
     generateTabelColumns,
     convertDataToTableItems,
 } from "@dataswapjs/webutils"
-import { DatasetDisputeType } from "@dataswapjs/dataswap-sdk"
+import { DatasetDisputeType } from "@dataswapjs/dataswapjs"
 
 interface DatasetDisputeTabelItem {
     key: React.ReactNode

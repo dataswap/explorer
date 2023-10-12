@@ -4,7 +4,7 @@ import { Button } from "antd"
 import axios from "axios"
 import { PlusOutlined } from "@ant-design/icons"
 import { useRouter } from "next/router"
-import { DatasetOverviewType } from "@dataswapjs/dataswap-sdk"
+import { DatasetOverviewType } from "@dataswapjs/dataswapjs"
 import DatasetOverviewTabel from "@/components/tabel/dataset"
 
 export async function getServerSideProps(context: NextPageContext) {

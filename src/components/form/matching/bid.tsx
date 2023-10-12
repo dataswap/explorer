@@ -1,7 +1,7 @@
 import React from "react"
 import { InputNumber } from "antd"
 import { Form, convertDataToFormFields } from "@dataswapjs/webutils"
-import { MatchingBidCreateInfo } from "@dataswapjs/dataswap-sdk"
+import { MatchingBidCreateInfo } from "@dataswapjs/dataswapjs"
 
 const overwriteFieldRules = {
     bid: {

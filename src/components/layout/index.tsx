@@ -1,5 +1,5 @@
 "use client"
-import { Layout, theme, Image } from "antd"
+import { Layout, theme } from "antd"
 import Menu from "@/components/menu"
 import { UserOutlined, GithubOutlined } from "@ant-design/icons"
 

@@ -4,7 +4,7 @@ import {
     generateTabelColumns,
     convertDataToTableItems,
 } from "@dataswapjs/webutils"
-import { DatasetReplicasType } from "@dataswapjs/dataswap-sdk"
+import { DatasetReplicasType } from "@dataswapjs/dataswapjs"
 import Link from "next/link"
 
 interface DatasetReplicasTabelItem {

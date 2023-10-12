@@ -5,7 +5,7 @@ import {
     generateTabelColumns,
     convertDataToTableItems,
 } from "@dataswapjs/webutils"
-import { DatasetOverviewType } from "@dataswapjs/dataswap-sdk"
+import { DatasetOverviewType } from "@dataswapjs/dataswapjs"
 import Link from "next/link"
 
 interface DatasetOverviewTabelItem {

@@ -4,7 +4,7 @@ import {
     generateTabelColumns,
     convertDataToTableItems,
 } from "@dataswapjs/webutils"
-import { MatchingBidType } from "@dataswapjs/dataswap-sdk"
+import { MatchingBidType } from "@dataswapjs/dataswapjs"
 
 interface MatchingBidsTabelItem {
     key: React.ReactNode

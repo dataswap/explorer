@@ -1,7 +1,7 @@
 import React from "react"
 import { Select } from "antd"
 import { Form, convertDataToFormFields } from "@dataswapjs/webutils"
-import { DatasetDisputeCreateInfo } from "@dataswapjs/dataswap-sdk"
+import { DatasetDisputeCreateInfo } from "@dataswapjs/dataswapjs"
 
 const { Option } = Select
 const overwriteFieldRules = {

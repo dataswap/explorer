@@ -1,5 +1,5 @@
 import CreateMatchingForm from "@/components/form/matching"
-import { MatchingCreateInfo } from "@dataswapjs/dataswap-sdk"
+import { MatchingCreateInfo } from "@dataswapjs/dataswapjs"
 import dayjs from "dayjs"
 
 const initialValues: MatchingCreateInfo = {

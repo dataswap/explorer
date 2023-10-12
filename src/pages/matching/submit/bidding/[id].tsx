@@ -3,7 +3,7 @@ import type { DescriptionsProps } from "antd"
 import { Descriptions, Button, Form, Input, Select, InputNumber } from "antd"
 import { useRouter } from "next/router"
 import axios from "axios"
-import { MatchingOverviewType, MatchingBidType } from "@dataswapjs/dataswap-sdk"
+import { MatchingOverviewType, MatchingBidType } from "@dataswapjs/dataswapjs"
 
 import MatchingBidsTabel from "@/components/tabel/matching/bid"
 import { MatchingOverviewDescription } from "@/components/description/matching/index"

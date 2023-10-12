@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { InferGetServerSidePropsType, NextPageContext } from "next"
 import axios from "axios"
 import MatchingOverviewTabel from "@/components/tabel/matching"
-import { MatchingOverviewType } from "@dataswapjs/dataswap-sdk"
+import { MatchingOverviewType } from "@dataswapjs/dataswapjs"
 import { useRouter } from "next/router"
 
 export async function getServerSideProps(context: NextPageContext) {

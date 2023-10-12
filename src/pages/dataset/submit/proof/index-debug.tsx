@@ -1,5 +1,5 @@
 import CreateDatasetProofForm from "@/components/form/dataset/proof"
-import { DatasetProofCreateInfo } from "@dataswapjs/dataswap-sdk"
+import { DatasetProofCreateInfo } from "@dataswapjs/dataswapjs"
 
 const initialValues: DatasetProofCreateInfo = {
     rootHash: "",

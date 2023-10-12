@@ -1,7 +1,4 @@
-import {
-    DatasetOverviewType,
-    DatasetDisputeType,
-} from "@dataswapjs/dataswap-sdk"
+import { DatasetOverviewType, DatasetDisputeType } from "@dataswapjs/dataswapjs"
 import { DatasetReplicaDescription } from "@/components/description/dataset/replica"
 import { DatasetOverviewDescription } from "@/components/description/dataset"
 import {

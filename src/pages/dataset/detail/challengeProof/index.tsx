@@ -5,7 +5,7 @@ import axios from "axios"
 import {
     DatasetOverviewType,
     DatasetChallengeProofType,
-} from "@dataswapjs/dataswap-sdk"
+} from "@dataswapjs/dataswapjs"
 import DatasetChallengeTabel from "@/components/tabel/dataset/challenge"
 import { DatasetChallengeOverviewDescription } from "@/components/description/dataset/challenge"
 

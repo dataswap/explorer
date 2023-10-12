@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Descriptions } from "antd"
 import { useRouter } from "next/router"
 import axios from "axios"
-import {
-    DatasetOverviewType,
-    DatasetDisputeType,
-} from "@dataswapjs/dataswap-sdk"
+import { DatasetOverviewType, DatasetDisputeType } from "@dataswapjs/dataswapjs"
 import DatasetDisputeTabel from "@/components/tabel/dataset/dispute"
 import { DatasetDisputeDescription } from "@/components/description/dataset/dispute"
 

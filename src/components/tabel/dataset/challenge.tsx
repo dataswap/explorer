@@ -7,7 +7,7 @@ import {
 import {
     DatasetOverviewType,
     DatasetChallengeProofType,
-} from "@dataswapjs/dataswap-sdk"
+} from "@dataswapjs/dataswapjs"
 import Link from "next/link"
 
 interface DatasetChallengeTabelItem {
