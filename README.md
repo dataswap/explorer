@@ -1,3 +1,16 @@
+<h1 align="center">Welcome to @dataswap/trustless-notary-web 👋</h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
+  <a href="https://github.com/dataswap/trustless-notary-web#readme" target="_blank">
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
+  </a>
+  <a href="https://github.com/dataswap/trustless-notary-web/blob/main/LICENSE" target="_blank">
+    <img alt="License: MIT and APACHE" src="https://img.shields.io/badge/License-MIT and APACHE-yellow.svg" />
+  </a>
+</p>
+
+### 🏠 [Homepage](https://github.com/dataswap/trustless-notary-web)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -32,3 +45,23 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+## Author
+
+👤 **dataswap**
+
+* GitHub: [@dataswap](https://github.com/dataswap)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/dataswap/trustless-notary-web/issues). You can also take a look at the [contributing guide](https://github.com/dataswap/trustless-notary-web/blob/main/CONTRIBUTING.md).
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+## 📝 License
+
+Copyright © 2023 [dataswap](https://github.com/dataswap).<br />
+This project is [MIT and APACHE](https://github.com/dataswap/trustless-notary-web/blob/main/LICENSE) licensed.
