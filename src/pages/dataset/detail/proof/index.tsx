@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
-import { Descriptions, Button, Form, Input, Select, InputNumber } from "antd"
 import axios from "axios"
-import DatasetProofTabel, {
-    IDatasetProofTabel,
-} from "@/components/dataset/proof/tabel"
-import { DatasetOverviewType } from "@/types/dataset"
-import {
-    getDatasetDetailDescriptionItems,
-    getDatasetProofDescriptionItems,
-} from "@/components/dataset/utils"
+import DatasetProofTabel from "@/components/tabel/dataset/proof"
+import { DatasetOverviewType, DatasetProofType } from "@dataswapjs/dataswapjs"
+import { DatasetProofDescription } from "@/components/description/dataset/proof"
 
 interface IProps {
     id: number
 }
 export default ({ id }: IProps) => {
-    const [proofList, setProofList] = useState<IDatasetProofTabel[]>()
+    const [proofList, setProofList] = useState<DatasetProofType[]>()
     const [datasetOverview, setDatasetOverview] =
         useState<DatasetOverviewType>()
     const router = useRouter()
@@ -40,10 +34,7 @@ export default ({ id }: IProps) => {
         return (
             <>
                 {datasetOverview && (
-                    <Descriptions
-                        title=""
-                        items={getDatasetProofDescriptionItems(datasetOverview)}
-                    />
+                    <DatasetProofDescription data={datasetOverview} />
                 )}
                 {proofList && <DatasetProofTabel data={proofList} />}
             </>

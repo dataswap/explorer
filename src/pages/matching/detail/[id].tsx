@@ -1,33 +1,25 @@
 import { Tabs } from "antd"
-import type { TabsProps } from "antd"
-import { Descriptions, Button, Form, Input, Select, InputNumber } from "antd"
 import BidDetail from "@/pages/matching/detail/bid"
 import { useRouter } from "next/router"
-import {
-    getMatchingDetailDescriptionItems,
-    getWinnerDesc,
-} from "@/components/matching/utils"
-import { MatchingOverviewType } from "@/types/matching"
+import { MatchingDetailDescription } from "@/components/description/matching"
+import { MatchingWinnerDescription } from "@/components/description/matching/winner"
+import { MatchingOverviewType } from "@dataswapjs/dataswapjs"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import { convertDataToItems } from "@unipackage/webkit"
 
 const onChange = (key: string) => {
     console.log(key)
 }
 
-function getItems(id: number): TabsProps["items"] {
-    return [
-        {
-            key: "Bids",
-            label: "Bids",
-            children: <BidDetail id={id} />,
-        },
-    ]
-}
 export default () => {
     const router = useRouter()
     const { id } = router.query
     const [overview, setOverview] = useState<MatchingOverviewType>()
+
+    const tabItems = convertDataToItems({
+        bids: <BidDetail id={Number(id)} />,
+    })
 
     useEffect(() => {
         id &&
@@ -40,19 +32,13 @@ export default () => {
         <>
             {overview && (
                 <>
-                    <Descriptions
-                        title="Matching Info"
-                        items={getMatchingDetailDescriptionItems(overview)}
-                    />
-                    <Descriptions
-                        title="Winner Info"
-                        items={getWinnerDesc(overview)}
-                    />
+                    <MatchingDetailDescription data={overview} />
+                    <MatchingWinnerDescription data={overview} />
                 </>
             )}
             <Tabs
                 defaultActiveKey="Bids"
-                items={getItems(Number(id))}
+                items={tabItems}
                 onChange={onChange}
             />
         </>

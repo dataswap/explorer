@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react"
-import type { DescriptionsProps } from "antd"
-import { Descriptions, Button, Form, Input, Select, InputNumber } from "antd"
+import { Button, Form, Input, Select } from "antd"
 import { useRouter } from "next/router"
 import axios from "axios"
-import { DatasetOverviewType, DatasetDisputeType } from "@/types/dataset"
-import DatasetDisputeTabel, {
-    IDatasetDisputeTabel,
-} from "@/components/dataset/dispute/tabel"
-import { getDatasetDisputeChallengeTabel } from "@/components/dataset/dispute/tabel/utils"
-import Link from "next/link"
+import { DatasetOverviewType, DatasetDisputeType } from "@dataswapjs/dataswapjs"
+import DatasetDisputeTabel from "@/components/tabel/dataset/dispute"
+import { DatasetOverviewDescription } from "@/components/description/dataset"
+import { DatasetChallengeDescription } from "@/components/description/dataset/challenge"
 
 const { Option } = Select
 const { TextArea } = Input
@@ -21,56 +18,8 @@ const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
 }
 
-function getChallengeDescriptionItems(
-    datasetOverview: DatasetOverviewType,
-    da: string
-): DescriptionsProps["items"] {
-    return [
-        {
-            key: "1",
-            label: "Da",
-            children: datasetOverview?.proofChallenge[da].da,
-        },
-        {
-            key: "2",
-            label: "ChallengeProof",
-            children: datasetOverview?.proofChallenge[da].challenge,
-        },
-    ]
-}
-function getDescriptionItems(
-    datasetOverview: DatasetOverviewType
-): DescriptionsProps["items"] {
-    return [
-        {
-            key: "1",
-            label: "Id",
-            children: (
-                <Link href={`/dataset/detail/${datasetOverview.id}`}>
-                    {datasetOverview.id}
-                </Link>
-            ),
-        },
-        {
-            key: "2",
-            label: "Name",
-            children: datasetOverview.name,
-        },
-        {
-            key: "3",
-            label: "Size",
-            children: datasetOverview.size,
-        },
-        {
-            key: "4",
-            label: "Client",
-            children: datasetOverview.submitter,
-        },
-    ]
-}
-
 export default () => {
-    const [disputeList, setDisputeList] = useState<IDatasetDisputeTabel[]>()
+    const [disputeList, setDisputeList] = useState<DatasetDisputeType[]>()
     const [datasetOverview, setDatasetOverview] =
         useState<DatasetOverviewType>()
     const router = useRouter()
@@ -103,10 +52,7 @@ export default () => {
                     newDisputes
                 ) as DatasetDisputeType[]
 
-                id &&
-                    setDisputeList(
-                        getDatasetDisputeChallengeTabel(newChallengesArray)
-                    )
+                id && setDisputeList(newChallengesArray)
                 setDispute(addDispute)
             })
             .then(() => {
@@ -126,10 +72,7 @@ export default () => {
                 const newDisputesArray =
                     res.data.disputes &&
                     (Object.values(res.data.disputes) as DatasetDisputeType[])
-                newDisputesArray &&
-                    setDisputeList(
-                        getDatasetDisputeChallengeTabel(newDisputesArray)
-                    )
+                newDisputesArray && setDisputeList(newDisputesArray)
             })
     }, [dispute])
 
@@ -139,16 +82,10 @@ export default () => {
                 <h2>Submit Dataset Dispute</h2>
                 {datasetOverview && (
                     <>
-                        <Descriptions
-                            title="Dataset Info"
-                            items={getDescriptionItems(datasetOverview)}
-                        />
-                        <Descriptions
-                            title="Dataset Challenge Proof Info"
-                            items={getChallengeDescriptionItems(
-                                datasetOverview,
-                                da
-                            )}
+                        <DatasetOverviewDescription data={datasetOverview} />
+                        <DatasetChallengeDescription
+                            data={datasetOverview}
+                            da={da}
                         />
                     </>
                 )}

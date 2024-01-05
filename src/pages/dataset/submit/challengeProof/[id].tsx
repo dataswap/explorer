@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react"
 import type { DescriptionsProps } from "antd"
-import { Descriptions, Button, Form, Input, Select, InputNumber } from "antd"
+import { Descriptions, Button, Form, Input } from "antd"
 import { useRouter } from "next/router"
 import axios from "axios"
-import { DatasetOverviewType, DatasetChallengeProofType } from "@/types/dataset"
-import DatasetChallengeTabel, {
-    IDatasetChallengeProofTabel,
-} from "@/components/dataset/challenge/tabel"
-import { getDatasetProofChallengeTabel } from "@/components/dataset/challenge/tabel/utils"
-import Link from "next/link"
+import {
+    DatasetOverviewType,
+    DatasetChallengeProofType,
+} from "@dataswapjs/dataswapjs"
+import DatasetChallengeTabel from "@/components/tabel/dataset/challenge"
+import { DatasetOverviewDescription } from "@/components/description/dataset"
 
 const { TextArea } = Input
 const layout = {
@@ -20,40 +20,9 @@ const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
 }
 
-function getDescriptionItems(
-    datasetOverview: DatasetOverviewType
-): DescriptionsProps["items"] {
-    return [
-        {
-            key: "1",
-            label: "Id",
-            children: (
-                <Link href={`/dataset/detail/${datasetOverview.id}`}>
-                    {datasetOverview.id}
-                </Link>
-            ),
-        },
-        {
-            key: "2",
-            label: "Name",
-            children: datasetOverview.name,
-        },
-        {
-            key: "3",
-            label: "Size",
-            children: datasetOverview.size,
-        },
-        {
-            key: "4",
-            label: "Client",
-            children: datasetOverview.submitter,
-        },
-    ]
-}
-
 export default () => {
     const [challengeList, setChallengeList] =
-        useState<IDatasetChallengeProofTabel[]>()
+        useState<DatasetChallengeProofType[]>()
     const [challenge, setChallenge] = useState<DatasetChallengeProofType>()
 
     const [datasetOverview, setDatasetOverview] =
@@ -87,14 +56,7 @@ export default () => {
                         newChallenges
                     ) as DatasetChallengeProofType[]
 
-                    id &&
-                        setChallengeList(
-                            getDatasetProofChallengeTabel(
-                                newChallengesArray,
-                                res.data,
-                                Number(id)
-                            )
-                        )
+                    id && setChallengeList(newChallengesArray)
                     setChallenge(addChallenge)
 
                     if (newChallengesArray.length >= 3) {
@@ -133,14 +95,7 @@ export default () => {
                         res.data.proofChallenge
                     ) as DatasetChallengeProofType[])
 
-                id &&
-                    setChallengeList(
-                        getDatasetProofChallengeTabel(
-                            newChallengesArray,
-                            res.data,
-                            Number(id)
-                        )
-                    )
+                id && setChallengeList(newChallengesArray)
             })
     }, [challenge])
 
@@ -149,10 +104,7 @@ export default () => {
             <>
                 <h2>Submit Dataset Challenge Proof</h2>
                 {datasetOverview && (
-                    <Descriptions
-                        title="Dataset Info"
-                        items={getDescriptionItems(datasetOverview)}
-                    />
+                    <DatasetOverviewDescription data={datasetOverview} />
                 )}
                 <Form
                     {...layout}
@@ -220,8 +172,11 @@ export default () => {
                     </Form.Item>
                 </Form>
 
-                {challengeList && (
-                    <DatasetChallengeTabel data={challengeList} />
+                {challengeList && datasetOverview && (
+                    <DatasetChallengeTabel
+                        data={challengeList}
+                        overview={datasetOverview}
+                    />
                 )}
             </>
         )

@@ -3,14 +3,10 @@ import type { DescriptionsProps } from "antd"
 import { Descriptions, Button, Form, Input, Select, InputNumber } from "antd"
 import { useRouter } from "next/router"
 import axios from "axios"
-import { MatchingOverviewType, MatchingBidType } from "@/types/matching"
+import { MatchingOverviewType, MatchingBidType } from "@dataswapjs/dataswapjs"
 
-import MatchingBidsTabel, {
-    IMatchingBidsTabel,
-} from "@/components/matching/bid/tabel"
-import { getMatchingBidsTabel } from "@/components/matching/bid/tabel/utils"
-
-import { getMatchingOverviewDescriptionItems } from "@/components/matching/utils"
+import MatchingBidsTabel from "@/components/tabel/matching/bid"
+import { MatchingOverviewDescription } from "@/components/description/matching/index"
 
 const { TextArea } = Input
 const layout = {
@@ -35,7 +31,7 @@ function formatCurrentDateTime(): string {
 }
 
 export default () => {
-    const [list, setList] = useState<IMatchingBidsTabel[]>()
+    const [list, setList] = useState<MatchingBidType[]>()
 
     const [overview, setOverview] = useState<MatchingOverviewType>()
     const [bid, setBid] = useState<MatchingBidType>()
@@ -63,7 +59,7 @@ export default () => {
             })
             .then(() => {
                 const newBidsArray = Object.values(newBids) as MatchingBidType[]
-                id && setList(getMatchingBidsTabel(newBidsArray))
+                id && setList(newBidsArray)
                 setBid(addBid)
             })
     }
@@ -77,9 +73,7 @@ export default () => {
             axios(`http://localhost:3001/matchingsInfo/${id}`).then((res) => {
                 setOverview(res.data)
                 res.data.bids
-                    ? setList(
-                          getMatchingBidsTabel(Object.values(res.data.bids))
-                      )
+                    ? setList(Object.values(res.data.bids))
                     : setList([])
             })
     }, [bid])
@@ -88,12 +82,7 @@ export default () => {
         return (
             <>
                 <h2>Bidding</h2>
-                {overview && (
-                    <Descriptions
-                        title="Matching Info"
-                        items={getMatchingOverviewDescriptionItems(overview)}
-                    />
-                )}
+                {overview && <MatchingOverviewDescription data={overview} />}
                 <Form
                     {...layout}
                     form={form}

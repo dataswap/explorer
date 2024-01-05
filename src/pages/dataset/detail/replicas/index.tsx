@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react"
-import type { DescriptionsProps } from "antd"
-import { Descriptions, Button, Form, Input, Select, InputNumber } from "antd"
+import { Descriptions } from "antd"
 import { useRouter } from "next/router"
 import axios from "axios"
-import { DatasetOverviewType, DatasetReplicasType } from "@/types/dataset"
-import DatasetReplicasTabel, {
-    IDatasetReplicasTabel,
-} from "@/components/dataset/replicas/tabel"
-import { getDatasetReplicasTabel } from "@/components/dataset/replicas/tabel/utils"
-import { getDatasetReplicasDescriptionItems } from "@/components/dataset/utils"
+import {
+    DatasetOverviewType,
+    DatasetReplicasType,
+} from "@dataswapjs/dataswapjs"
+import DatasetReplicasTabel from "@/components//tabel/dataset/replica"
+import { DatasetReplicasDescription } from "@/components/description/dataset/replica"
 
 interface IProps {
     id: number
 }
 export default ({ id }: IProps) => {
-    const [replicasList, setReplicasList] = useState<IDatasetReplicasTabel[]>()
+    const [replicasList, setReplicasList] = useState<DatasetReplicasType[]>()
     const [datasetOverview, setDatasetOverview] =
         useState<DatasetOverviewType>()
     const router = useRouter()
@@ -45,9 +44,7 @@ export default ({ id }: IProps) => {
                     }
                 )
                 res.data.replicasCountries
-                    ? setReplicasList(
-                          getDatasetReplicasTabel(newReplicasArray, id)
-                      )
+                    ? setReplicasList(newReplicasArray)
                     : setReplicasList([])
             })
     }, [])
@@ -56,14 +53,11 @@ export default ({ id }: IProps) => {
         return (
             <>
                 {datasetOverview && (
-                    <Descriptions
-                        title=""
-                        items={getDatasetReplicasDescriptionItems(
-                            datasetOverview
-                        )}
-                    />
+                    <DatasetReplicasDescription data={datasetOverview} />
                 )}
-                {replicasList && <DatasetReplicasTabel data={replicasList} />}
+                {replicasList && (
+                    <DatasetReplicasTabel data={replicasList} datasetId={id} />
+                )}
             </>
         )
     } else {
