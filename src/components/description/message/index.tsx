@@ -1,18 +1,16 @@
 import React from "react"
 import Link from "next/link"
-import { MatchingTarget } from "@dataswapjs/dataswapjs"
+import { DataswapMessage } from "@dataswapjs/dataswapjs"
 import { convertDataToItems, Descriptions } from "@unipackage/webkit"
-import { ValueFields } from "@unipackage/utils"
 import {
     config_datasetDetailPageRoot,
     config_matchingDetailPageRoot,
 } from "../../../config/links"
 
 interface IProps {
-    data: ValueFields<MatchingTarget>
+    data: DataswapMessage
 }
-
-function getMapper(data: ValueFields<MatchingTarget>) {
+function getMapper(data: DataswapMessage) {
     return {
         matchingId: (value: any) =>
             value ? (
@@ -27,16 +25,14 @@ function getMapper(data: ValueFields<MatchingTarget>) {
                 {value}
             </Link>
         ),
-        cars: (value: any) => value?.join(","),
-        dataType: (value: any) => (value ? "MappingFiles" : "Source"),
+        cid: () => data.cid["/"],
+        params: (value: Object) => JSON.stringify(value),
     }
 }
 
-export function MatchingTargetDescription({ data }: IProps) {
+export function MessageDescription({ data }: IProps) {
     const descriptionItems = convertDataToItems(data, getMapper(data), {
         keyBlacklist: ["id"],
     })
-    return (
-        <Descriptions title="Matching Target Info" items={descriptionItems} />
-    )
+    return <Descriptions title="Message Info" items={descriptionItems} />
 }

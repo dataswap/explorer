@@ -14,11 +14,14 @@ interface IProps {
 
 function getMapper(data: ValueFields<MatchingMetadata>) {
     return {
-        matchingId: (value: any) => (
-            <Link href={`${config_matchingDetailPageRoot}/${value}`}>
-                {value}
-            </Link>
-        ),
+        matchingId: (value: any) =>
+            value ? (
+                <Link href={`${config_matchingDetailPageRoot}/${value}`}>
+                    {value}
+                </Link>
+            ) : (
+                ""
+            ),
         datasetId: (value: any) => (
             <Link href={`${config_datasetDetailPageRoot}/${value}`}>
                 {value}
