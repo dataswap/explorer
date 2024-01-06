@@ -1,12 +1,15 @@
 import { Tabs } from "antd"
-import BidDetail from "@/pages/matching/detail/bid"
 import { useRouter } from "next/router"
-import { MatchingDetailDescription } from "@/components/description/matching"
+import { MatchingMetadataDescription } from "@/components/description/matching"
+import { MatchingTargetDescription } from "@/components/description/matching/target"
 import { MatchingWinnerDescription } from "@/components/description/matching/winner"
-import { MatchingOverviewType } from "@dataswapjs/dataswapjs"
+import { MatchingMetadata, MatchingTarget } from "@dataswapjs/dataswapjs"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { convertDataToItems } from "@unipackage/webkit"
+import { MatchingBid } from "@/shared/types"
+import CarReplicaPage from "../../carReplica"
+import MessagePage from "../../message"
 
 const onChange = (key: string) => {
     console.log(key)
@@ -15,10 +18,11 @@ const onChange = (key: string) => {
 export default () => {
     const router = useRouter()
     const { id } = router.query
-    const [overview, setOverview] = useState<MatchingOverviewType>()
+    const [overview, setOverview] = useState<MatchingMetadata>()
 
     const tabItems = convertDataToItems({
-        bids: <BidDetail id={Number(id)} />,
+        messasge: <MessagePage />,
+        car: <CarReplicaPage />,
     })
 
     useEffect(() => {
@@ -32,8 +36,9 @@ export default () => {
         <>
             {overview && (
                 <>
-                    <MatchingDetailDescription data={overview} />
-                    <MatchingWinnerDescription data={overview} />
+                    <MatchingMetadataDescription data={overview} />
+                    <MatchingTargetDescription data={{} as MatchingTarget} />
+                    <MatchingWinnerDescription data={{} as MatchingBid} />
                 </>
             )}
             <Tabs

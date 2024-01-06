@@ -1,20 +1,17 @@
 import CreateDatasetForm from "@/components/form/dataset"
-import { DatasetCreateInfo } from "@dataswapjs/dataswapjs"
+import { DatasetMetadata } from "@dataswapjs/dataswapjs"
+import { ValueFields } from "@unipackage/utils"
 
-const initialValues: DatasetCreateInfo = {
+const initialValues: ValueFields<DatasetMetadata> = {
     name: "name",
     description: "description",
-    size: "size",
+    sizeInBytes: BigInt(0),
     industry: "industry",
     source: "source",
     accessMethod: "accessMethod",
-    version: "version",
-    ownerName: "ownername",
-    ownerCountry: "ownercountry",
-    ownerWebsite: "ownerwebsite",
     isPublic: true,
-    dpFee: 10,
-    requiredReplicasCountries: [],
+    title: "title",
+    version: BigInt(1),
 }
 
 const onFinish = (values: any) => {

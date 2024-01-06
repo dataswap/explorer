@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { Tabs } from "antd"
-import ProofDetail from "@/pages/dataset/detail/proof"
-import ReplicasDetail from "@/pages/dataset/detail/replicas"
 import { useRouter } from "next/router"
-import { DatasetDetailDescription } from "@/components/description/dataset"
-import { DatasetOverviewType } from "@dataswapjs/dataswapjs"
+import { DatasetMetadataDescription } from "@/components/description/dataset"
+import { DatasetRequirementDescription } from "@/components/description/dataset/requirement"
+import { DatasetProofDescription } from "@/components/description/dataset/proofMetadata"
+import DatasetRequirementTable from "@/components/table/dataset/requirement"
+import CarPage from "../../car"
+import MessagePage from "../../message"
+import {
+    DatasetMetadata,
+    DatasetRequirement,
+    DatasetProofMetadata,
+} from "@dataswapjs/dataswapjs"
 import { convertDataToItems } from "@unipackage/webkit"
 
 const onChange = (key: string) => {
@@ -15,12 +22,12 @@ const onChange = (key: string) => {
 export default () => {
     const router = useRouter()
     const { id } = router.query
-    const [datasetOverview, setDatasetOverview] =
-        useState<DatasetOverviewType>()
+    const [datasetOverview, setDatasetOverview] = useState<DatasetMetadata>()
 
     const tabItems = convertDataToItems({
-        proof: <ProofDetail id={Number(id)} />,
-        replicas: <ReplicasDetail id={Number(id)} />,
+        messasge: <MessagePage />,
+        car: <CarPage />,
+        requirement: <DatasetRequirementTable data={[]} />,
     })
 
     useEffect(() => {
@@ -33,7 +40,7 @@ export default () => {
     return (
         <>
             {datasetOverview && (
-                <DatasetDetailDescription data={datasetOverview} />
+                <DatasetMetadataDescription data={datasetOverview} />
             )}
             <Tabs
                 defaultActiveKey="Proof"

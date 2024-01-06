@@ -1,19 +1,7 @@
 import CreateMatchingForm from "@/components/form/matching"
-import { MatchingCreateInfo } from "@dataswapjs/dataswapjs"
-import dayjs from "dayjs"
+import { MatchingMetadata } from "@dataswapjs/dataswapjs"
 
-const initialValues: MatchingCreateInfo = {
-    mockSubmitter: "",
-    auctionPeriod: [dayjs("2023/10/01"), dayjs("2023/10/10")],
-    biddingThreshold: 0,
-    storageCompletePeriod: 0,
-    storageLifecycle: 0,
-    dataTransferType: "online",
-    datalocation: "",
-    dpBandwidthSpeed: "",
-    spLocation: "",
-    spBandwidthSpeed: "",
-}
+const initialValues: MatchingMetadata = {} as MatchingMetadata
 
 const onFinish = (values: any) => {
     console.log("Form111 values:", values)
