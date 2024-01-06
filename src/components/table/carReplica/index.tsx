@@ -17,7 +17,7 @@ interface CarReplicaTabelItem
 }
 
 interface IProps {
-    data: CarReplica[]
+    data: ValueFields<CarReplica>[]
 }
 
 export default ({ data }: IProps) => {
@@ -29,7 +29,7 @@ export default ({ data }: IProps) => {
     })
 
     const tabelItems: CarReplicaTabelItem[] = convertDataToTableItems<
-        CarReplica,
+        ValueFields<CarReplica>,
         CarReplicaTabelItem
     >(data, (item) => ({
         key: item.matchingId.toString(),

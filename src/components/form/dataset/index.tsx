@@ -1,12 +1,14 @@
 import React from "react"
 import { Form as AntForm, Input, InputNumber, Select, Switch } from "antd"
 import { Form, FormList, convertDataToFormFields } from "@unipackage/webkit"
-import { DatasetCreateInfo } from "@dataswapjs/dataswapjs"
+import { DatasetMetadata } from "@dataswapjs/dataswapjs"
+import { ValueFields } from "@unipackage/utils"
 
 const { TextArea } = Input
 const { Option } = Select
 
 const overwriteFieldRules = {
+    /*
     ownerCountry: {
         customComponent: (
             <Select placeholder="Please select dataset owner country">
@@ -24,22 +26,28 @@ const overwriteFieldRules = {
             />
         ),
     },
-    dpFee: {
-        customComponent: <InputNumber addonAfter="FIL" />,
-    },
+    */
 }
 
 interface IProps {
-    data: DatasetCreateInfo
+    data: ValueFields<DatasetMetadata>
     onFinish: (values: any) => void
 }
 
 export default ({ data, onFinish }: IProps) => {
-    const fields = convertDataToFormFields<DatasetCreateInfo>(
+    const fields = convertDataToFormFields<ValueFields<DatasetMetadata>>(
         data,
         overwriteFieldRules,
         {
-            blacklist: ["isPublic", "description"],
+            blacklist: [
+                "isPublic",
+                "description",
+                "submitter",
+                "createdBlockNumber",
+                "datasetId",
+                "status",
+                "id",
+            ],
             extra: [
                 <AntForm.Item label="Is Public" key="isPublic_label">
                     <AntForm.Item

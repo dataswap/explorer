@@ -47,7 +47,7 @@ interface MatchingTabelItem
 }
 
 interface IProps {
-    data: MatchingMetadata[]
+    data: ValueFields<MatchingMetadata>[]
 }
 
 export default ({ data }: IProps) => {
@@ -63,7 +63,7 @@ export default ({ data }: IProps) => {
     })
 
     const tabelItems: MatchingTabelItem[] = convertDataToTableItems<
-        MatchingMetadata,
+        ValueFields<MatchingMetadata>,
         MatchingTabelItem
     >(data, (item) => ({
         key: item.matchingId,

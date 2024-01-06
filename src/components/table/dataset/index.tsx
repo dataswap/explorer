@@ -23,7 +23,7 @@ interface DatasetTabelItem
 }
 
 interface IProps {
-    data: DatasetMetadata[]
+    data: ValueFields<DatasetMetadata>[]
 }
 
 export default ({ data }: IProps) => {
@@ -39,7 +39,7 @@ export default ({ data }: IProps) => {
     })
 
     const tabelItems: DatasetTabelItem[] = convertDataToTableItems<
-        DatasetMetadata,
+        ValueFields<DatasetMetadata>,
         DatasetTabelItem
     >(data, (item) => ({
         key: item.datasetId,
