@@ -1,19 +1,17 @@
 import React from "react"
-import { DatasetOverviewType } from "@dataswapjs/dataswapjs"
+import { DatasetProofMetadata } from "@dataswapjs/dataswapjs"
 import { convertDataToItems, Descriptions } from "@unipackage/webkit"
+import { ValueFields } from "@unipackage/utils"
 
 interface IProps {
-    data: DatasetOverviewType
+    data: ValueFields<DatasetProofMetadata>
 }
 export function DatasetProofDescription({ data }: IProps) {
     const descriptionItems = convertDataToItems(
         data,
-        {},
+        { dataType: (value: any) => (value ? "MappingFiles" : "Source") },
         {
-            keyWhitelist: ["rootHash", "completed"],
-            extra: {
-                leaveCount: data.proofs ? Object.values(data.proofs).length : 0,
-            },
+            keyBlacklist: ["id"],
         }
     )
     return <Descriptions title="Proof Info" items={descriptionItems} />
