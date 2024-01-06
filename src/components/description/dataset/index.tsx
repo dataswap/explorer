@@ -1,38 +1,41 @@
 import React from "react"
 import Link from "next/link"
-import { DatasetOverviewType } from "@dataswapjs/dataswapjs"
+import { DatasetMetadata } from "@dataswapjs/dataswapjs"
 import { convertDataToItems, Descriptions } from "@unipackage/webkit"
+import { ValueFields } from "@unipackage/utils"
+import { config_datasetDetailPageRoot } from "../../../config/links"
 
 interface IProps {
-    data: DatasetOverviewType
+    data: ValueFields<DatasetMetadata>
 }
 
-function getMapper(data: DatasetOverviewType) {
+function getMapper(data: ValueFields<DatasetMetadata>) {
     return {
-        id: (value: any) => (
-            <Link href={`/dataset/detail/${value}`}>{value}</Link>
+        datasetId: (value: any) => (
+            <Link href={`${config_datasetDetailPageRoot}/${value}`}>
+                {value}
+            </Link>
         ),
-        replicasCountries: (value: any) => value?.join(","),
+        // replicasCountries: (value: any) => value?.join(","),
         isPublic: (value: any) => (value ? "Yes" : "No"),
-        operate: (value: any) => (
-            <Link href={`/dataset/submit/${value}/${data.id}`}>{value}</Link>
-        ),
+        // operate: (value: any) => (
+        //     <Link href={`/dataset/submit/${value}/${data.id}`}>{value}</Link>
+        // ),
     }
 }
 
-export function DatasetDetailDescription({ data }: IProps) {
+export function DatasetMetadataDescription({ data }: IProps) {
     const descriptionItems = convertDataToItems(data, getMapper(data), {
         keyBlacklist: [],
-        extra: {
-            replicasRequiredNumber: data.replicasCountries?.length,
-        },
     })
-    return <Descriptions title="Dataset Info" items={descriptionItems} />
+    return (
+        <Descriptions title="Dataset Metadata Info" items={descriptionItems} />
+    )
 }
 
 export function DatasetOverviewDescription({ data }: IProps) {
     const descriptionItems = convertDataToItems(data, getMapper(data), {
-        keyWhitelist: ["id", "name", "size", "submitter"],
+        keyWhitelist: ["datasetId", "name", "sizeInBytes", "submitter"],
     })
     return (
         <Descriptions title="Dataset Overview Info" items={descriptionItems} />
