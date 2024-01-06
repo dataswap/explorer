@@ -18,10 +18,14 @@
  *  limitations under the respective licenses.
  ********************************************************************************/
 
+export const config_message = "message"
+export const config_dataset = "dataset"
+export const config_matching = "matching"
+export const config_home = "home"
+export const config_storage = "storage"
+export const config_members = "members"
+
 const config_detail = "detail"
-const config_message = "message"
-const config_dataset = "dataset"
-const config_matching = "matching"
 export const config_messageDetailPageRoot = `/${config_message}/${config_detail}`
 export const config_datasetDetailPageRoot = `/${config_dataset}/${config_detail}`
 export const config_matchingDetailPageRoot = `/${config_matching}/${config_detail}`
