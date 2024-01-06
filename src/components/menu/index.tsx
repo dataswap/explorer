@@ -8,7 +8,16 @@ import {
     AuditOutlined,
     SwapOutlined,
     GlobalOutlined,
+    MessageOutlined,
 } from "@ant-design/icons"
+import {
+    config_dataset,
+    config_home,
+    config_matching,
+    config_members,
+    config_message,
+    config_storage,
+} from "../../config/links"
 
 export type MenuItem = Required<MenuProps>["items"][number]
 
@@ -29,13 +38,12 @@ export function getItem(
 }
 
 const items: MenuItem[] = [
-    getItem("Home", "/home", <HomeOutlined />),
-    getItem("Dataset", "/dataset", <AuditOutlined />),
-
-    getItem("Matching", "/matching", <SwapOutlined />),
-
-    getItem("Storage", "/storage", <CloudServerOutlined />),
-    getItem("Community members", "/members", <GlobalOutlined />),
+    getItem("Home", `/${config_home}`, <HomeOutlined />),
+    getItem("Message", `/${config_message}`, <MessageOutlined />),
+    getItem("Dataset", `/${config_dataset}`, <AuditOutlined />),
+    getItem("Matching", `/${config_matching}`, <SwapOutlined />),
+    getItem("Storage", `/${config_storage}`, <CloudServerOutlined />),
+    getItem("Community members", `/${config_members}`, <GlobalOutlined />),
 ]
 
 // eslint-disable-next-line import/no-anonymous-default-export, react/display-name
@@ -51,16 +59,16 @@ export default () => {
     useEffect(() => {
         const handleRouteChange = (url: any) => {
             const currentPath = url
-            if (currentPath.startsWith("/matching")) {
-                setCurrent("/matching")
-            } else if (currentPath.startsWith("/dataset")) {
-                setCurrent("/dataset")
-            } else if (currentPath.startsWith("/home")) {
-                setCurrent("/home")
-            } else if (currentPath.startsWith("/storage")) {
-                setCurrent("/storage")
-            } else if (currentPath.startsWith("/members")) {
-                setCurrent("/members")
+            if (currentPath.startsWith(`/${config_matching}`)) {
+                setCurrent(`/${config_matching}`)
+            } else if (currentPath.startsWith(`/${config_dataset}`)) {
+                setCurrent(`/${config_dataset}`)
+            } else if (currentPath.startsWith(`/${config_home}`)) {
+                setCurrent(`/${config_home}`)
+            } else if (currentPath.startsWith(`/${config_storage}`)) {
+                setCurrent(`/${config_storage}`)
+            } else if (currentPath.startsWith(`/${config_members}`)) {
+                setCurrent(`/${config_members}`)
             } else {
                 setCurrent(currentPath)
             }
