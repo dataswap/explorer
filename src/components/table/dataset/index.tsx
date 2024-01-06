@@ -1,69 +1,65 @@
 import React from "react"
-import { Button } from "antd"
 import {
-    Tabel,
-    generateTabelColumns,
+    Table,
+    generateTableColumns,
     convertDataToTableItems,
 } from "@unipackage/webkit"
-import { DatasetOverviewType } from "@dataswapjs/dataswapjs"
+import { DatasetMetadata } from "@dataswapjs/dataswapjs"
+import { FromType, ValueFields } from "@unipackage/utils"
 import Link from "next/link"
+import { config_datasetDetailPageRoot } from "../../../config/links"
 
-interface DatasetOverviewTabelItem {
+interface DatasetTabelItem
+    extends FromType<
+        ValueFields<DatasetMetadata>,
+        "accessMethod" | "submitter" | "status"
+    > {
     key: React.ReactNode
     id: React.ReactNode
     name: React.ReactNode
-    createdHeight: string
+    createdHeight?: number
     createdTime: string
     size: string
-    submitter: string
-    state: string
-    operate: React.ReactNode
 }
 
 interface IProps {
-    data: DatasetOverviewType[]
-    handleClose: (id: number) => void
+    data: DatasetMetadata[]
 }
 
-export default ({ data, handleClose }: IProps) => {
-    const columns = generateTabelColumns<DatasetOverviewTabelItem>({
+export default ({ data }: IProps) => {
+    const columns = generateTableColumns<DatasetTabelItem>({
         id: "7%",
         name: "15%",
+        accessMethod: "15%",
         size: "8%",
         createdHeight: "15%",
         createdTime: "15%",
         submitter: "10%",
-        state: "15%",
-        operate: "15%",
+        status: "15%",
     })
 
-    const tabelItems: DatasetOverviewTabelItem[] = convertDataToTableItems<
-        DatasetOverviewType,
-        DatasetOverviewTabelItem
+    const tabelItems: DatasetTabelItem[] = convertDataToTableItems<
+        DatasetMetadata,
+        DatasetTabelItem
     >(data, (item) => ({
-        key: item.id,
-        ...item,
-        id: <Link href={`/dataset/detail/${item.id}`}>{item.id}</Link>,
-        name: <Link href={`/dataset/detail/${item.id}`}>{item.name}</Link>,
-        operate: (
-            <>
-                <Link href={`/dataset/submit/${item.operate}/${item.id}`}>
-                    {item.operate}
-                </Link>
-                {item.state === "DisputeInitiationPeriod" && (
-                    <Button
-                        type="text"
-                        htmlType="button"
-                        onClick={() => handleClose(item.id)}
-                    >
-                        {/* <CloseCircleOutlined style={{ color: "blue" }} /> */}
-                        <span style={{ color: "blue" }}>Close</span>
-                    </Button>
-                )}
-            </>
+        key: item.datasetId,
+        id: (
+            <Link href={`${config_datasetDetailPageRoot}/${item.datasetId}`}>
+                {item.datasetId}
+            </Link>
         ),
+        name: (
+            <Link href={`${config_datasetDetailPageRoot}/${item.datasetId}`}>
+                {item.name}
+            </Link>
+        ),
+        createdHeight: item.createdBlockNumber,
+        createdTime: "",
+        size: item.sizeInBytes.toString(),
+        status: item.status,
+        submitter: item.submitter,
+        accessMethod: item.accessMethod,
     }))
-    return (
-        <Tabel<DatasetOverviewTabelItem> columns={columns} data={tabelItems} />
-    )
+
+    return <Table<DatasetTabelItem> columns={columns} data={tabelItems} />
 }
