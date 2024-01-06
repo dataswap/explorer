@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from "react"
-import { Descriptions } from "antd"
 import { useRouter } from "next/router"
 import axios from "axios"
-import {
-    DatasetOverviewType,
-    DatasetReplicasType,
-} from "@dataswapjs/dataswapjs"
-import DatasetReplicasTabel from "@/components//tabel/dataset/replica"
-import { DatasetReplicasDescription } from "@/components/description/dataset/replica"
+import { DatasetRequirement } from "@dataswapjs/dataswapjs"
+import DatasetRequirementTabel from "@/components//table/dataset/requirement"
+// import { DatasetReplicasDescription } from "@/components/description/dataset/replica"
 
 interface IProps {
     id: number
 }
 export default ({ id }: IProps) => {
-    const [replicasList, setReplicasList] = useState<DatasetReplicasType[]>()
-    const [datasetOverview, setDatasetOverview] =
-        useState<DatasetOverviewType>()
+    const [replicasList, setReplicasList] = useState<DatasetRequirement[]>()
+    const [datasetOverview, setDatasetOverview] = useState<DatasetRequirement>()
     const router = useRouter()
     const { da } = router.query as { id: string; da: string }
 
@@ -25,7 +20,7 @@ export default ({ id }: IProps) => {
                 setDatasetOverview(res.data)
 
                 const dataArray = Object.values(res.data.replicasDetail)
-                const newReplicasArray: DatasetReplicasType[] = dataArray.map(
+                const newReplicasArray: DatasetRequirement[] = dataArray.map(
                     (item: any) => {
                         let state = ""
                         let operate = ""
@@ -52,11 +47,11 @@ export default ({ id }: IProps) => {
     if (id !== 0) {
         return (
             <>
-                {datasetOverview && (
+                {/* {datasetOverview && (
                     <DatasetReplicasDescription data={datasetOverview} />
-                )}
+                )} */}
                 {replicasList && (
-                    <DatasetReplicasTabel data={replicasList} datasetId={id} />
+                    <DatasetRequirementTabel data={replicasList} />
                 )}
             </>
         )

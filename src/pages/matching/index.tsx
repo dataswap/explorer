@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { InferGetServerSidePropsType, NextPageContext } from "next"
 import axios from "axios"
-import MatchingOverviewTabel from "@/components/tabel/matching"
-import { MatchingOverviewType } from "@dataswapjs/dataswapjs"
+import MatchingTabel from "@/components/table/matching"
+import { MatchingMetadata } from "@dataswapjs/dataswapjs"
 import { useRouter } from "next/router"
 
 export async function getServerSideProps(context: NextPageContext) {
@@ -14,7 +14,7 @@ export async function getServerSideProps(context: NextPageContext) {
 export default function IndexPage({}: InferGetServerSidePropsType<
     typeof getServerSideProps
 >) {
-    const [list, setList] = useState<MatchingOverviewType[]>()
+    const [list, setList] = useState<MatchingMetadata[]>()
     const [closeAction, setCloseAction] = useState<boolean>()
 
     const router = useRouter()
@@ -66,7 +66,7 @@ export default function IndexPage({}: InferGetServerSidePropsType<
 
     useEffect(() => {
         axios("http://localhost:3001/matchingsInfo").then((res) => {
-            const overiews: MatchingOverviewType[] = res.data
+            const overiews: MatchingMetadata[] = res.data
             setList(overiews)
         })
     }, [closeAction])
@@ -92,9 +92,8 @@ export default function IndexPage({}: InferGetServerSidePropsType<
                 </div> */}
             </div>
 
-            {list && (
-                <MatchingOverviewTabel data={list} handleClose={handleClose} />
-            )}
+            {/* {list && <MatchingTabel data={list} handleClose={handleClose} />} */}
+            {list && <MatchingTabel data={list} />}
         </>
     )
 }

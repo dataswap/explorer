@@ -4,8 +4,8 @@ import { Button } from "antd"
 import axios from "axios"
 import { PlusOutlined } from "@ant-design/icons"
 import { useRouter } from "next/router"
-import { DatasetOverviewType } from "@dataswapjs/dataswapjs"
-import DatasetOverviewTabel from "@/components/tabel/dataset"
+import { DatasetMetadata } from "@dataswapjs/dataswapjs"
+import DatasetTabel from "@/components/table/dataset"
 
 export async function getServerSideProps(context: NextPageContext) {
     return {
@@ -16,43 +16,13 @@ export async function getServerSideProps(context: NextPageContext) {
 export default function IndexPage({}: InferGetServerSidePropsType<
     typeof getServerSideProps
 >) {
-    const [datasetList, setDatasetList] = useState<DatasetOverviewType[]>()
+    const [datasetList, setDatasetList] = useState<DatasetMetadata[]>()
     const [closeAction, setCloseAction] = useState<boolean>()
     const router = useRouter()
 
-    const handleClose = (id: number) => {
-        axios(`http://localhost:3001/datasetInfo/${id}`).then((res) => {
-            const overview: any = res.data
-            const fail =
-                overview.disputes &&
-                Object.values(overview.disputes).some(
-                    (dispute: any) => dispute.result === "valid"
-                )
-            console.log(fail)
-            if (fail) {
-                axios
-                    .patch(`http://localhost:3001/datasetInfo/${id}`, {
-                        state: "Reject",
-                        operate: "",
-                    })
-                    .then((res) => {
-                        setCloseAction(!closeAction)
-                    })
-            } else {
-                axios
-                    .patch(`http://localhost:3001/datasetInfo/${id}`, {
-                        state: "Approved",
-                        operate: "",
-                    })
-                    .then((res) => {
-                        setCloseAction(!closeAction)
-                    })
-            }
-        })
-    }
     useEffect(() => {
         axios("http://localhost:3001/datasetInfo").then((res) => {
-            const datasetOveriew: DatasetOverviewType[] = res.data
+            const datasetOveriew: DatasetMetadata[] = res.data
             setDatasetList(datasetOveriew)
         })
     }, [closeAction])
@@ -60,6 +30,7 @@ export default function IndexPage({}: InferGetServerSidePropsType<
     const onClick = () => {
         router.push("/dataset/submit/dataset")
     }
+
     return (
         <>
             <div
@@ -78,12 +49,7 @@ export default function IndexPage({}: InferGetServerSidePropsType<
                 </div>
             </div>
 
-            {datasetList && (
-                <DatasetOverviewTabel
-                    data={datasetList}
-                    handleClose={handleClose}
-                />
-            )}
+            {datasetList && <DatasetTabel data={datasetList} />}
         </>
     )
 }
