@@ -1,6 +1,6 @@
 import React from "react"
 import Link from "next/link"
-import { MatchingMetadata } from "@dataswapjs/dataswapjs"
+import { MatchingTarget } from "@dataswapjs/dataswapjs"
 import { convertDataToItems, Descriptions } from "@unipackage/webkit"
 import { ValueFields } from "@unipackage/utils"
 import {
@@ -9,10 +9,10 @@ import {
 } from "../../../config/links"
 
 interface IProps {
-    data: ValueFields<MatchingMetadata>
+    data: ValueFields<MatchingTarget>
 }
 
-function getMapper(data: ValueFields<MatchingMetadata>) {
+function getMapper(data: ValueFields<MatchingTarget>) {
     return {
         matchingId: (value: any) => (
             <Link href={`${config_matchingDetailPageRoot}/${value}`}>
@@ -24,30 +24,16 @@ function getMapper(data: ValueFields<MatchingMetadata>) {
                 {value}
             </Link>
         ),
+        cars: (value: any) => value?.join(","),
+        dataType: (value: any) => (value ? "MappingFiles" : "Source"),
     }
 }
 
-export function MatchingMetadataDescription({ data }: IProps) {
+export function MatchingTargetDescription({ data }: IProps) {
     const descriptionItems = convertDataToItems(data, getMapper(data), {
         keyBlacklist: ["id"],
     })
     return (
-        <Descriptions title="Matching Metadata Info" items={descriptionItems} />
-    )
-}
-
-export function MatchingOverviewDescription({ data }: IProps) {
-    const descriptionItems = convertDataToItems(data, getMapper(data), {
-        keyWhitelist: [
-            "datasetId",
-            "replicaIndex",
-            "matchingId",
-            "initiator",
-            "createdBlockNumber",
-            "bidSelectionRule",
-        ],
-    })
-    return (
-        <Descriptions title="Matching Overview Info" items={descriptionItems} />
+        <Descriptions title="Matching Target Info" items={descriptionItems} />
     )
 }
