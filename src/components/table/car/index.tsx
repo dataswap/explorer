@@ -19,7 +19,7 @@ interface CarTabelItem
 }
 
 interface IProps {
-    data: Car[]
+    data: ValueFields<Car>[]
 }
 
 export default ({ data }: IProps) => {
@@ -33,7 +33,7 @@ export default ({ data }: IProps) => {
     })
 
     const tabelItems: CarTabelItem[] = convertDataToTableItems<
-        Car,
+        ValueFields<Car>,
         CarTabelItem
     >(data, (item) => ({
         key: item.carId.toString(),

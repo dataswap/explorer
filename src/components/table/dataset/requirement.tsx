@@ -44,7 +44,7 @@ interface DatasetRequirementTabelItem
 }
 
 interface IProps {
-    data: DatasetRequirement[]
+    data: ValueFields<DatasetRequirement>[]
 }
 
 export default ({ data }: IProps) => {
@@ -59,7 +59,7 @@ export default ({ data }: IProps) => {
     })
 
     const tabelItems: DatasetRequirementTabelItem[] = convertDataToTableItems<
-        DatasetRequirement,
+        ValueFields<DatasetRequirement>,
         DatasetRequirementTabelItem
     >(data, (item) => ({
         key: item.index?.toString(),
