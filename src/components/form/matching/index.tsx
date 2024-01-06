@@ -1,43 +1,56 @@
 import React from "react"
-import { InputNumber, Select, DatePicker } from "antd"
+import { InputNumber, Select } from "antd"
 import { Form, convertDataToFormFields } from "@unipackage/webkit"
-import { MatchingCreateInfo } from "@dataswapjs/dataswapjs"
+import { MatchingMetadata } from "@dataswapjs/dataswapjs"
+import { ValueFields } from "@unipackage/utils"
 
 const { Option } = Select
-const { RangePicker } = DatePicker
 
 const overwriteFieldRules = {
-    auctionPeriod: {
-        customComponent: <RangePicker format="YYYY/MM/DD" />,
-    },
     biddingThreshold: {
         customComponent: <InputNumber addonAfter="FIL" />,
     },
-    storageCompletePeriod: {
-        customComponent: <InputNumber addonAfter="Days" />,
+    biddingDelayBlockCount: {
+        customComponent: <InputNumber addonAfter="Blocks" />,
     },
-    storageLifecycle: {
-        customComponent: <InputNumber addonAfter="Days" />,
+    biddingPeriodBlockCount: {
+        customComponent: <InputNumber addonAfter="Blocks" />,
     },
-    dataTransferType: {
+    storageCompletionPeriodBlocks: {
+        customComponent: <InputNumber addonAfter="Blocks" />,
+    },
+    bidSelectionRule: {
         customComponent: (
             <Select placeholder="Select a option " allowClear>
-                <Option value="online">online</Option>
-                <Option value="offline">offline</Option>
+                <Option value="0">HighestBid</Option>
+                <Option value="1">LowestBid</Option>
+                <Option value="2">LowestBid</Option>
+                <Option value="3">LowestBid</Option>
             </Select>
         ),
     },
 }
 
 interface IProps {
-    data: MatchingCreateInfo
+    data: ValueFields<MatchingMetadata>
     onFinish: (values: any) => void
 }
 
 export default ({ data, onFinish }: IProps) => {
-    const fields = convertDataToFormFields<MatchingCreateInfo>(
+    const fields = convertDataToFormFields<ValueFields<MatchingMetadata>>(
         data,
-        overwriteFieldRules
+        overwriteFieldRules,
+        {
+            blacklist: [
+                "id",
+                "datasetId",
+                "createdBlockNumber",
+                "initiator",
+                "pausedBlockCount",
+                "matchingId",
+                "replicaIndex",
+            ],
+        }
     )
 
     return (
