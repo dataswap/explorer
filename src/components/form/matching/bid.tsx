@@ -1,21 +1,26 @@
 import React from "react"
 import { InputNumber } from "antd"
 import { Form, convertDataToFormFields } from "@unipackage/webkit"
-import { MatchingBidCreateInfo } from "@dataswapjs/dataswapjs"
+
+//TODO: create this type in dataswapjs
+export interface MatchingBid {
+    bidder: string
+    amount: bigint
+}
 
 const overwriteFieldRules = {
-    bid: {
+    amount: {
         customComponent: <InputNumber addonAfter="FIL" />,
     },
 }
 
 interface IProps {
-    data: MatchingBidCreateInfo
+    data: MatchingBid
     onFinish: (values: any) => void
 }
 
 export default ({ data, onFinish }: IProps) => {
-    const fields = convertDataToFormFields<MatchingBidCreateInfo>(
+    const fields = convertDataToFormFields<MatchingBid>(
         data,
         overwriteFieldRules
     )
