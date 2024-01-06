@@ -1,76 +1,89 @@
+/*******************************************************************************
+ *   (c) 2024 dataswap
+ *
+ *  Licensed under either the MIT License (the "MIT License") or the Apache License, Version 2.0
+ *  (the "Apache License"). You may not use this file except in compliance with one of these
+ *  licenses. You may obtain a copy of the MIT License at
+ *
+ *      https://opensource.org/licenses/MIT
+ *
+ *  Or the Apache License, Version 2.0 at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the MIT License or the Apache License for the specific language governing permissions and
+ *  limitations under the respective licenses.
+ ********************************************************************************/
+
 import React from "react"
-import { Button } from "antd"
 import {
-    Tabel,
-    generateTabelColumns,
+    Table,
+    generateTableColumns,
     convertDataToTableItems,
 } from "@unipackage/webkit"
-import { MatchingOverviewType } from "@dataswapjs/dataswapjs"
+import { MatchingMetadata } from "@dataswapjs/dataswapjs"
+import { FromType, ValueFields } from "@unipackage/utils"
 import Link from "next/link"
+import {
+    config_matchingDetailPageRoot,
+    config_datasetDetailPageRoot,
+} from "../../../config/links"
 
-interface MatchingOverviewTabelItem {
+interface MatchingTabelItem
+    extends FromType<
+        ValueFields<MatchingMetadata>,
+        "initiator" | "createdBlockNumber"
+    > {
     key: React.ReactNode
-    id: React.ReactNode
-    datasetId: React.ReactNode
-    replicaId: string
+    id: React.ReactNode //matchingId
+    datasetId: React.ReactNode //datasetID
+    replicaId?: string //replicaIndex
     createdTime: string
-    submitter: string
-    size: string
-    initialPrice: number
-    state: string
-    operate: React.ReactNode
+    initialPrice: string //biddingThreshold
+    status: string //TODO,add by metadata
 }
 
 interface IProps {
-    data: MatchingOverviewType[]
-    handleClose: (id: number) => void
+    data: MatchingMetadata[]
 }
 
-export default ({ data, handleClose }: IProps) => {
-    const columns = generateTabelColumns<MatchingOverviewTabelItem>({
+export default ({ data }: IProps) => {
+    const columns = generateTableColumns<MatchingTabelItem>({
         id: "7.5%",
         datasetId: "10%",
         replicaId: "7.5%",
+        createdBlockNumber: "7.5%",
         createdTime: "15%",
-        submitter: "15%",
-        size: "7.5%",
+        initiator: "15%",
         initialPrice: "7.5%",
-        state: "15%",
-        operate: "15%",
+        status: "15%",
     })
 
-    const tabelItems: MatchingOverviewTabelItem[] = convertDataToTableItems<
-        MatchingOverviewType,
-        MatchingOverviewTabelItem
+    const tabelItems: MatchingTabelItem[] = convertDataToTableItems<
+        MatchingMetadata,
+        MatchingTabelItem
     >(data, (item) => ({
-        key: item.id,
-        ...item,
-        id: <Link href={`/matching/detail/${item.id}`}>{item.id}</Link>,
+        key: item.matchingId,
+        id: (
+            <Link href={`/${config_matchingDetailPageRoot}/${item.matchingId}`}>
+                {item.matchingId}
+            </Link>
+        ),
         datasetId: (
-            <Link href={`/dataset/detail/${item.datasetId}`}>
+            <Link href={`/${config_datasetDetailPageRoot}/${item.datasetId}`}>
                 {item.datasetId}
             </Link>
         ),
-        operate: (
-            <>
-                <Link href={`/matching/submit/${item.operate}/${item.id}`}>
-                    {item.operate}
-                </Link>
-                {item.state !== "Complete" && item.state !== "Failed" && (
-                    <Button
-                        type="text"
-                        htmlType="button"
-                        onClick={() => handleClose(item.id)}
-                    >
-                        {/* <CloseCircleOutlined style={{ color: "blue" }} /> */}
-                        <span style={{ color: "blue" }}>Close</span>
-                    </Button>
-                )}
-            </>
-        ),
+        replicaId: item.replicaIndex?.toString(),
+        createdTime: "",
+        initialPrice: item.biddingThreshold.toString(),
+        status: "",
+        initiator: item.initiator,
+        createdBlockNumber: item.createdBlockNumber,
     }))
 
-    return (
-        <Tabel<MatchingOverviewTabelItem> columns={columns} data={tabelItems} />
-    )
+    return <Table<MatchingTabelItem> columns={columns} data={tabelItems} />
 }
