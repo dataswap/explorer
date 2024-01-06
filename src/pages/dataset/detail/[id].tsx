@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { Tabs } from "antd"
-import ChallengeDetail from "@/pages/dataset/detail/challengeProof"
 import ProofDetail from "@/pages/dataset/detail/proof"
-import DisputeDetail from "@/pages/dataset/detail/dispute"
 import ReplicasDetail from "@/pages/dataset/detail/replicas"
 import { useRouter } from "next/router"
 import { DatasetDetailDescription } from "@/components/description/dataset"
@@ -22,8 +20,6 @@ export default () => {
 
     const tabItems = convertDataToItems({
         proof: <ProofDetail id={Number(id)} />,
-        challenge: <ChallengeDetail id={Number(id)} />,
-        dispute: <DisputeDetail id={Number(id)} />,
         replicas: <ReplicasDetail id={Number(id)} />,
     })
 

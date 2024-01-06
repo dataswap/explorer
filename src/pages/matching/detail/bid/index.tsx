@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Descriptions } from "antd"
 import axios from "axios"
-import MatchingBidsTabel from "@/components/tabel/matching/bid"
 import { MatchingOverviewType, MatchingBidType } from "@dataswapjs/dataswapjs"
 import { MatchingBidsDescription } from "@/components/description/matching/bid"
 
@@ -23,12 +22,7 @@ export default ({ id }: IProps) => {
     }, [])
 
     if (id != 0) {
-        return (
-            <>
-                {overview && <MatchingBidsDescription data={overview} />}
-                {list && <MatchingBidsTabel data={list} />}
-            </>
-        )
+        return <>{overview && <MatchingBidsDescription data={overview} />}</>
     } else {
         return <p>Invalid ID</p>
     }

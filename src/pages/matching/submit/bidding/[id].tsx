@@ -5,7 +5,6 @@ import { useRouter } from "next/router"
 import axios from "axios"
 import { MatchingOverviewType, MatchingBidType } from "@dataswapjs/dataswapjs"
 
-import MatchingBidsTabel from "@/components/tabel/matching/bid"
 import { MatchingOverviewDescription } from "@/components/description/matching/index"
 
 const { TextArea } = Input
@@ -119,8 +118,6 @@ export default () => {
                         </Button>
                     </Form.Item>
                 </Form>
-
-                {list && <MatchingBidsTabel data={list} />}
             </>
         )
     } else {
