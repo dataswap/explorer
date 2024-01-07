@@ -30,16 +30,16 @@ interface IProps {
 
 export default ({ data }: IProps) => {
     const columns = generateTableColumns<MessageTableItem>({
-        cid: "7.5%",
-        datasetId: "7.5%",
-        matchingId: "7.5%",
+        cid: "10%",
+        datasetId: "10%",
+        matchingId: "10%",
         height: "10%",
-        timestamp: "7.5%",
-        from: "15%",
-        to: "15%",
-        method: "7.5%",
-        status: "7.5%",
-        return: "7.5%",
+        timestamp: "10%",
+        from: "7.5%",
+        to: "7.5%",
+        method: "15%",
+        status: "10%",
+        return: "10%",
     })
 
     const tabelItems: MessageTableItem[] = convertDataToTableItems<
