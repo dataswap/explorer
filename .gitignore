@@ -7,6 +7,7 @@
 /public/proof.json
 /public/mockdb.json
 .env
+.env.json
 
 # testing
 /coverage

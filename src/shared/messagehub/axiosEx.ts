@@ -1,9 +1,7 @@
 import axios from "axios"
-// import * as dotenv from "dotenv"
-// dotenv.config()
+import EnvJson from "../../../.env.json"
 
 export const axiosEx = axios.create({
-    // baseURL: process.env.MESSAGE_HUB_URL as string,
-    baseURL: "http://localhost:3000",
+    baseURL: EnvJson.messageHubUrl,
     timeout: 10000,
 })
