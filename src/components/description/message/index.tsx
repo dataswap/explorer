@@ -25,12 +25,16 @@ function getMapper(data: DataswapMessage) {
                 {value}
             </Link>
         ),
-        cid: () => data.cid["/"],
-        params: (value: Object) => JSON.stringify(value),
     }
 }
 
 export function MessageDescription({ data }: IProps) {
+    data = {
+        ...data,
+        //@ts-ignore
+        cid: data.cid["/"],
+        params: JSON.stringify(data.params),
+    }
     const descriptionItems = convertDataToItems(data, getMapper(data), {
         keyBlacklist: ["id"],
     })
