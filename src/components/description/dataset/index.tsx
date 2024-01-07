@@ -26,7 +26,8 @@ function getMapper(data: ValueFields<DatasetMetadata>) {
 
 export function DatasetMetadataDescription({ data }: IProps) {
     const descriptionItems = convertDataToItems(data, getMapper(data), {
-        keyBlacklist: [],
+        //@ts-ignore
+        keyBlacklist: ["_id", "__v"],
     })
     return (
         <Descriptions title="Dataset Metadata Info" items={descriptionItems} />

@@ -1,11 +1,12 @@
 import React from "react"
 import Link from "next/link"
 import { DataswapMessage } from "@dataswapjs/dataswapjs"
-import { convertDataToItems, Descriptions } from "@unipackage/webkit"
+import { convertDataToItems } from "@unipackage/webkit"
 import {
     config_datasetDetailPageRoot,
     config_matchingDetailPageRoot,
 } from "../../../config/links"
+import { Descriptions } from "antd"
 
 interface IProps {
     data: DataswapMessage
@@ -36,7 +37,14 @@ export function MessageDescription({ data }: IProps) {
         params: JSON.stringify(data.params),
     }
     const descriptionItems = convertDataToItems(data, getMapper(data), {
-        keyBlacklist: ["id"],
+        //@ts-ignore
+        keyBlacklist: ["id", "_id", "__v"],
     })
-    return <Descriptions title="Message Info" items={descriptionItems} />
+    return (
+        <Descriptions
+            title="Message Info"
+            items={descriptionItems}
+            column={1}
+        />
+    )
 }
