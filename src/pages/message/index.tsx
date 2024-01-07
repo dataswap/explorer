@@ -6,12 +6,8 @@ import {
     getSyncStatus,
     getDatasetMetadata,
 } from "../../shared/messagehub/get"
-import axios from "axios"
 
 export async function getServerSideProps(context: NextPageContext) {
-    // const result = await axios.get("http://localhost:3000/version")
-    // console.log(result)
-
     return {
         props: {},
     }
@@ -20,6 +16,12 @@ export async function getServerSideProps(context: NextPageContext) {
 export default function IndexPage({}: // result,
 InferGetServerSidePropsType<typeof getServerSideProps>) {
     getSyncStatus({ network: "calibration" }).then((res) => console.log(res))
-    // console.log(result)
+    getDatasetMetadata({ network: "calibration" }).then((res) =>
+        console.log(res)
+    )
+    getDataswapMessage({ network: "calibration" }).then((res) =>
+        console.log(res)
+    )
+    getVersion().then((res) => console.log(res))
     return <div>message</div>
 }
