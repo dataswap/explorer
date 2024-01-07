@@ -6,6 +6,7 @@
 .pnp.js
 /public/proof.json
 /public/mockdb.json
+.env
 
 # testing
 /coverage
