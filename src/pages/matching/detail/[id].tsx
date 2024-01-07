@@ -9,7 +9,7 @@ import axios from "axios"
 import { convertDataToItems } from "@unipackage/webkit"
 import { MatchingBid } from "@/shared/types"
 import CarReplicaPage from "../../carReplica"
-import MessagePage from "../../message"
+import MessageBasicPage from "../../messageBasic"
 
 const onChange = (key: string) => {
     console.log(key)
@@ -21,7 +21,14 @@ export default () => {
     const [overview, setOverview] = useState<MatchingMetadata>()
 
     const tabItems = convertDataToItems({
-        messasge: <MessagePage />,
+        messasge: (
+            <MessageBasicPage
+                data={{
+                    network: "calibration",
+                    queryFilter: { conditions: [{ matchingId: id }] },
+                }}
+            />
+        ),
         car: <CarReplicaPage />,
     })
 

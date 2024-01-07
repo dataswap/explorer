@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import axios from "axios"
 import { Tabs } from "antd"
 import { useRouter } from "next/router"
 import { DatasetMetadataDescription } from "@/components/description/dataset"
@@ -7,13 +6,15 @@ import { DatasetRequirementDescription } from "@/components/description/dataset/
 import { DatasetProofDescription } from "@/components/description/dataset/proofMetadata"
 import DatasetRequirementTable from "@/components/table/dataset/requirement"
 import CarPage from "../../car"
-import MessagePage from "../../message"
+import MessageBasicPage from "../../messageBasic"
 import {
     DatasetMetadata,
     DatasetRequirement,
     DatasetProofMetadata,
 } from "@dataswapjs/dataswapjs"
 import { convertDataToItems } from "@unipackage/webkit"
+import { getDatasetMetadata } from "../../../shared/messagehub/get"
+import { ValueFields } from "@unipackage/utils"
 
 const onChange = (key: string) => {
     console.log(key)
@@ -22,25 +23,37 @@ const onChange = (key: string) => {
 export default () => {
     const router = useRouter()
     const { id } = router.query
-    const [datasetOverview, setDatasetOverview] = useState<DatasetMetadata>()
+    const [datasetMetadata, setDatasetMetadata] =
+        useState<ValueFields<DatasetMetadata>>()
 
     const tabItems = convertDataToItems({
-        messasge: <MessagePage />,
+        messasge: (
+            <MessageBasicPage
+                data={{
+                    network: "calibration",
+                    queryFilter: { conditions: [{ datasetId: id }] },
+                }}
+            />
+        ),
         car: <CarPage />,
         requirement: <DatasetRequirementTable data={[]} />,
     })
 
     useEffect(() => {
-        id &&
-            axios(`http://localhost:3001/datasetInfo/${id}`).then((res) => {
-                setDatasetOverview(res.data)
-            })
+        getDatasetMetadata({
+            network: "calibration",
+            queryFilter: { conditions: [{ datasetId: id }] },
+        }).then((res) => {
+            const datasetMetadata = res.data
+            //TODO
+            setDatasetMetadata(datasetMetadata![0])
+        })
     }, [])
 
     return (
         <>
-            {datasetOverview && (
-                <DatasetMetadataDescription data={datasetOverview} />
+            {datasetMetadata && (
+                <DatasetMetadataDescription data={datasetMetadata} />
             )}
             <Tabs
                 defaultActiveKey="Proof"

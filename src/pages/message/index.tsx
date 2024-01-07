@@ -1,11 +1,6 @@
-import React, { useEffect, useState } from "react"
-import { InferGetServerSidePropsType, NextPageContext } from "next"
-import {
-    getDataswapMessage,
-    getVersion,
-    getSyncStatus,
-    getDatasetMetadata,
-} from "../../shared/messagehub/get"
+import React from "react"
+import { NextPageContext } from "next"
+import MessageBasicPage from "../messageBasic"
 
 export async function getServerSideProps(context: NextPageContext) {
     return {
@@ -13,19 +8,6 @@ export async function getServerSideProps(context: NextPageContext) {
     }
 }
 
-export default function IndexPage({}: // result,
-InferGetServerSidePropsType<typeof getServerSideProps>) {
-    useEffect(() => {
-        getSyncStatus({ network: "calibration" }).then((res) =>
-            console.log(res)
-        )
-        getDatasetMetadata({ network: "calibration" }).then((res) =>
-            console.log(res)
-        )
-        getDataswapMessage({ network: "calibration" }).then((res) =>
-            console.log(res)
-        )
-        getVersion().then((res) => console.log(res))
-    }, [])
-    return <div>message</div>
+export default () => {
+    return <>{<MessageBasicPage data={{ network: "calibration" }} />}</>
 }

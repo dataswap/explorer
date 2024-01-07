@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { InferGetServerSidePropsType, NextPageContext } from "next"
 import { Button } from "antd"
-import axios from "axios"
 import { PlusOutlined } from "@ant-design/icons"
 import { useRouter } from "next/router"
 import { DatasetMetadata } from "@dataswapjs/dataswapjs"
 import DatasetTabel from "@/components/table/dataset"
+import { getDatasetMetadata } from "../../shared/messagehub/get"
+import { ValueFields } from "@unipackage/utils"
 
 export async function getServerSideProps(context: NextPageContext) {
     return {
@@ -16,16 +17,16 @@ export async function getServerSideProps(context: NextPageContext) {
 export default function IndexPage({}: InferGetServerSidePropsType<
     typeof getServerSideProps
 >) {
-    const [datasetList, setDatasetList] = useState<DatasetMetadata[]>()
-    const [closeAction, setCloseAction] = useState<boolean>()
+    const [datasetMetaList, setDatasetMetaList] =
+        useState<ValueFields<DatasetMetadata>[]>()
     const router = useRouter()
 
     useEffect(() => {
-        axios("http://localhost:3001/datasetInfo").then((res) => {
-            const datasetOveriew: DatasetMetadata[] = res.data
-            setDatasetList(datasetOveriew)
+        getDatasetMetadata({ network: "calibration" }).then((res) => {
+            const datasetOveriew = res.data
+            setDatasetMetaList(datasetOveriew)
         })
-    }, [closeAction])
+    }, [])
 
     const onClick = () => {
         router.push("/dataset/submit/dataset")
@@ -49,7 +50,7 @@ export default function IndexPage({}: InferGetServerSidePropsType<
                 </div>
             </div>
 
-            {datasetList && <DatasetTabel data={datasetList} />}
+            {datasetMetaList && <DatasetTabel data={datasetMetaList} />}
         </>
     )
 }
