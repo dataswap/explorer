@@ -15,13 +15,17 @@ export async function getServerSideProps(context: NextPageContext) {
 
 export default function IndexPage({}: // result,
 InferGetServerSidePropsType<typeof getServerSideProps>) {
-    getSyncStatus({ network: "calibration" }).then((res) => console.log(res))
-    getDatasetMetadata({ network: "calibration" }).then((res) =>
-        console.log(res)
-    )
-    getDataswapMessage({ network: "calibration" }).then((res) =>
-        console.log(res)
-    )
-    getVersion().then((res) => console.log(res))
+    useEffect(() => {
+        getSyncStatus({ network: "calibration" }).then((res) =>
+            console.log(res)
+        )
+        getDatasetMetadata({ network: "calibration" }).then((res) =>
+            console.log(res)
+        )
+        getDataswapMessage({ network: "calibration" }).then((res) =>
+            console.log(res)
+        )
+        getVersion().then((res) => console.log(res))
+    }, [])
     return <div>message</div>
 }
