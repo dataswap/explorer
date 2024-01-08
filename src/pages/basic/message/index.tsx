@@ -8,6 +8,8 @@ import {
 import { ValueFields } from "@unipackage/utils"
 import { QueryParam } from "@/shared/messagehub/queryParams"
 import { TablePaginationConfig } from "antd"
+import { Input, Space } from "antd"
+const { Search } = Input
 
 interface IProps {
     queryParam: QueryParam<DataswapMessage>
@@ -20,6 +22,7 @@ export default ({ queryParam }: IProps) => {
         current: queryParam.queryFilter?.page,
         pageSize: queryParam.queryFilter?.limit,
     })
+    const [search, setSearch] = useState<string>("")
 
     // get count when refresh page,do one time
     useEffect(() => {
@@ -44,13 +47,19 @@ export default ({ queryParam }: IProps) => {
                     ...queryParam.queryFilter,
                     page: pagination.current,
                     limit: pagination.pageSize,
+                    or: [
+                        { conditions: [{ from: { $regex: search } }] },
+                        { conditions: [{ to: { $regex: search } }] },
+                        { conditions: [{ method: { $regex: search } }] },
+                        { conditions: [{ height: { $eq: parseInt(search) } }] },
+                    ],
                 },
             }).then((res) => {
                 setDataList(res.data)
                 setLoading(false)
             })
         }
-    }, [JSON.stringify(pagination)])
+    }, [JSON.stringify(pagination), search])
 
     const handleTableChange = (_pagination: TablePaginationConfig) => {
         console.log("user click page number", _pagination)
@@ -61,8 +70,24 @@ export default ({ queryParam }: IProps) => {
         }
     }
 
+    const onSearch = (_search: string) => {
+        setSearch(_search)
+        if (_search !== search) {
+            setDataList([])
+        }
+    }
+
     return (
         <>
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                <Space direction="vertical">
+                    <Search
+                        placeholder="search:Height/From/To/Method"
+                        onSearch={onSearch}
+                        style={{ width: 300 }}
+                    />
+                </Space>
+            </div>
             {dataList && (
                 <MessageTabel
                     data={dataList}
