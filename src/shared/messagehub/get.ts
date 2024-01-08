@@ -32,10 +32,22 @@ export async function getDataswapMessage(
     return await getDswap<DataswapMessage>("/dataswapmessage/query", queryParam)
 }
 
+export async function getDataswapMessageCount(
+    queryParam: QueryParam<DataswapMessage>
+): Promise<Result<number>> {
+    return await getDswap<DataswapMessage>("/dataswapmessage/total", queryParam)
+}
+
 export async function getDatasetMetadata(
     queryParam: QueryParam<DatasetMetadata>
 ): Promise<Result<ValueFields<DatasetMetadata>[]>> {
     return await getDswap<DatasetMetadata>("/datasetMetadata/query", queryParam)
+}
+
+export async function getDatasetMetadataCount(
+    queryParam: QueryParam<DatasetMetadata>
+): Promise<Result<number>> {
+    return await getDswap<DatasetMetadata>("/datasetMetadata/total", queryParam)
 }
 
 export interface SyncStatus {

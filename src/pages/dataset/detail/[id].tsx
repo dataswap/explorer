@@ -5,8 +5,8 @@ import { DatasetMetadataDescription } from "@/components/description/dataset"
 import { DatasetRequirementDescription } from "@/components/description/dataset/requirement"
 import { DatasetProofDescription } from "@/components/description/dataset/proofMetadata"
 import DatasetRequirementTable from "@/components/table/dataset/requirement"
-import CarPage from "../../car"
-import MessageBasicPage from "../../messageBasic"
+import CarPage from "../../basic/car"
+import MessageBasicPage from "../../basic/message"
 import {
     DatasetMetadata,
     DatasetRequirement,
@@ -15,6 +15,7 @@ import {
 import { convertDataToItems } from "@unipackage/webkit"
 import { getDatasetMetadata } from "../../../shared/messagehub/get"
 import { ValueFields } from "@unipackage/utils"
+import { defaultTableQueryParams } from "../../../config/params"
 
 const onChange = (key: string) => {
     console.log(key)
@@ -29,9 +30,12 @@ export default () => {
     const tabItems = convertDataToItems({
         messasge: (
             <MessageBasicPage
-                data={{
+                queryParam={{
                     network: "calibration",
-                    queryFilter: { conditions: [{ datasetId: id }] },
+                    queryFilter: {
+                        ...defaultTableQueryParams,
+                        conditions: [{ datasetId: id }],
+                    },
                 }}
             />
         ),

@@ -1,6 +1,7 @@
 import React from "react"
 import { NextPageContext } from "next"
-import MessageBasicPage from "../messageBasic"
+import MessageBasicPage from "../basic/message"
+import { defaultTableQueryParams } from "../../config/params"
 
 export async function getServerSideProps(context: NextPageContext) {
     return {
@@ -9,5 +10,16 @@ export async function getServerSideProps(context: NextPageContext) {
 }
 
 export default () => {
-    return <>{<MessageBasicPage data={{ network: "calibration" }} />}</>
+    return (
+        <>
+            {
+                <MessageBasicPage
+                    queryParam={{
+                        network: "calibration",
+                        queryFilter: { ...defaultTableQueryParams },
+                    }}
+                />
+            }
+        </>
+    )
 }

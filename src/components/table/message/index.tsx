@@ -1,12 +1,13 @@
 import React from "react"
 import {
-    Table,
     generateTableColumns,
     convertDataToTableItems,
 } from "@unipackage/webkit"
+import { Table } from "antd"
 import { DataswapMessage } from "@dataswapjs/dataswapjs"
 import { FromType } from "@unipackage/utils"
 import Link from "next/link"
+import type { TablePaginationConfig } from "antd/es/table"
 import {
     config_matchingDetailPageRoot,
     config_datasetDetailPageRoot,
@@ -26,9 +27,12 @@ interface MessageTableItem
 
 interface IProps {
     data: DataswapMessage[]
+    pagination: TablePaginationConfig
+    loading: boolean
+    onChange: (pagination: TablePaginationConfig) => void
 }
 
-export default ({ data }: IProps) => {
+export default ({ data, pagination, loading, onChange }: IProps) => {
     const columns = generateTableColumns<MessageTableItem>({
         cid: "10%",
         datasetId: "10%",
@@ -71,5 +75,13 @@ export default ({ data }: IProps) => {
         return: item.return,
     }))
 
-    return <Table<MessageTableItem> columns={columns} data={tabelItems} />
+    return (
+        <Table<MessageTableItem>
+            columns={columns}
+            dataSource={tabelItems}
+            pagination={pagination}
+            loading={loading}
+            onChange={onChange}
+        />
+    )
 }
