@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import { useRouter } from "next/router"
 import { DatasetMetadata } from "@dataswapjs/dataswapjs"
 import DatasetTabel from "@/components/table/dataset"
 import {
@@ -26,7 +25,6 @@ export default ({ queryParam }: IProps) => {
         pageSize: defaultTableQueryParams.limit,
     })
     const [search, setSearch] = useState<string>("")
-    const router = useRouter()
 
     const currentQueryParams: QueryParam<DatasetMetadata> = {
         network: queryParam?.network,

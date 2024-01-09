@@ -1,5 +1,14 @@
 import { axiosEx } from "./axiosEx"
-import { DatasetMetadata, DataswapMessage } from "@dataswapjs/dataswapjs"
+import {
+    Car,
+    CarReplica,
+    DatasetMetadata,
+    DatasetProofMetadata,
+    DatasetRequirement,
+    DataswapMessage,
+    MatchingMetadata,
+    MatchingTarget,
+} from "@dataswapjs/dataswapjs"
 import { QueryParam } from "./queryParams"
 import { ValueFields, Result } from "@unipackage/utils"
 
@@ -48,6 +57,90 @@ export async function getDatasetMetadataCount(
     queryParam: QueryParam<DatasetMetadata>
 ): Promise<Result<number>> {
     return await getDswap<DatasetMetadata>("/datasetMetadata/total", queryParam)
+}
+
+export async function getDatasetRequirement(
+    queryParam: QueryParam<DatasetRequirement>
+): Promise<Result<ValueFields<DatasetRequirement>[]>> {
+    return await getDswap<DatasetRequirement>(
+        "/datasetrequirement/query",
+        queryParam
+    )
+}
+
+export async function getDatasetRequirementCount(
+    queryParam: QueryParam<DatasetRequirement>
+): Promise<Result<number>> {
+    return await getDswap<DatasetRequirement>(
+        "/datasetrequirement/total",
+        queryParam
+    )
+}
+
+export async function getDatasetProofMetadata(
+    queryParam: QueryParam<DatasetProofMetadata>
+): Promise<Result<ValueFields<DatasetProofMetadata>[]>> {
+    return await getDswap<DatasetProofMetadata>(
+        "/datasetproofmetadata/query",
+        queryParam
+    )
+}
+
+export async function getDatasetProofMetadataCount(
+    queryParam: QueryParam<DatasetProofMetadata>
+): Promise<Result<number>> {
+    return await getDswap<DatasetProofMetadata>(
+        "/datasetproofmetadata/total",
+        queryParam
+    )
+}
+
+export async function getCar(
+    queryParam: QueryParam<Car>
+): Promise<Result<ValueFields<Car>[]>> {
+    return await getDswap<Car>("/car/query", queryParam)
+}
+
+export async function getCarCount(
+    queryParam: QueryParam<Car>
+): Promise<Result<number>> {
+    return await getDswap<Car>("/car/total", queryParam)
+}
+
+export async function getCarReplica(
+    queryParam: QueryParam<CarReplica>
+): Promise<Result<ValueFields<CarReplica>[]>> {
+    return await getDswap<CarReplica>("/car/query", queryParam)
+}
+
+export async function getCarReplicaCount(
+    queryParam: QueryParam<CarReplica>
+): Promise<Result<number>> {
+    return await getDswap<CarReplica>("/car/total", queryParam)
+}
+
+export async function getMatchingMetadata(
+    queryParam: QueryParam<MatchingMetadata>
+): Promise<Result<ValueFields<MatchingMetadata>[]>> {
+    return await getDswap<MatchingMetadata>("/car/query", queryParam)
+}
+
+export async function getMatchingMetadataCount(
+    queryParam: QueryParam<MatchingMetadata>
+): Promise<Result<number>> {
+    return await getDswap<MatchingMetadata>("/car/total", queryParam)
+}
+
+export async function getMatchingTarget(
+    queryParam: QueryParam<MatchingTarget>
+): Promise<Result<ValueFields<MatchingTarget>[]>> {
+    return await getDswap<MatchingTarget>("/car/query", queryParam)
+}
+
+export async function getMatchingTargetCount(
+    queryParam: QueryParam<MatchingTarget>
+): Promise<Result<number>> {
+    return await getDswap<MatchingTarget>("/car/total", queryParam)
 }
 
 export interface SyncStatus {

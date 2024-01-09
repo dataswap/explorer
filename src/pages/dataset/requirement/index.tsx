@@ -51,6 +51,7 @@ export default ({ id }: IProps) => {
                     <DatasetReplicasDescription data={datasetOverview} />
                 )} */}
                 {replicasList && (
+                    //@ts-ignore
                     <DatasetRequirementTabel data={replicasList} />
                 )}
             </>

@@ -91,9 +91,8 @@ export default function IndexPage({}: InferGetServerSidePropsType<
                     </Button>
                 </div> */}
             </div>
-
             {/* {list && <MatchingTabel data={list} handleClose={handleClose} />} */}
-            {list && <MatchingTabel data={list} />}
+            {/* {list && <MatchingTabel data={list} />} */}
         </>
     )
 }

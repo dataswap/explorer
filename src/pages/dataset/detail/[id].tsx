@@ -40,6 +40,7 @@ export default () => {
             />
         ),
         car: <CarPage />,
+        //@ts-ignore
         requirement: <DatasetRequirementTable data={[]} />,
     })
 

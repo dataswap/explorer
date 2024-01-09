@@ -8,8 +8,8 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { convertDataToItems } from "@unipackage/webkit"
 import { MatchingBid } from "@/shared/types"
-import CarReplicaPage from "../../basic/carReplica"
-import MessageBasicPage from "../../basic/message"
+import CarReplicaPage from "../../basic/tabel/carReplica"
+import MessageBasicPage from "../../basic/tabel/message"
 
 const onChange = (key: string) => {
     console.log(key)
