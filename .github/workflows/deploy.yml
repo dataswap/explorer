@@ -20,7 +20,7 @@ jobs:
 
    - name: Build Docker image
      run: |
-       latest_version=$(curl -sL https://api.github.com/repos/dataswap/messagehub/releases | jq -r ".[0].tag_name")
+       latest_version=$(curl -sL https://api.github.com/repos/dataswap/explorer/releases | jq -r ".[0].tag_name")
        mv ./.env.example.json ./.env.json
        sed -i 's/"messageHubUrl": "http:\/\/localhost:3000"/"messageHubUrl": "http:\/\/${{ secrets.MESSAGEHUB_SERVER }}"/' ./.env.json 
        sudo docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/explorer:${latest_version} .
@@ -37,7 +37,7 @@ jobs:
        script: |
          sudo apt-get update
          sudo apt-get install -y jq
-         latest_version=$(curl -sL https://api.github.com/repos/dataswap/messagehub/releases | jq -r ".[0].tag_name")
+         latest_version=$(curl -sL https://api.github.com/repos/dataswap/explorer/releases | jq -r ".[0].tag_name")
          echo ${latest_version}
      
          container_id=$(sudo docker ps -a | grep "${{ vars.PORT}}" | awk -F " " '{print $1}')
