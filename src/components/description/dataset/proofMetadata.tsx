@@ -11,7 +11,8 @@ export function DatasetProofDescription({ data }: IProps) {
         data,
         { dataType: (value: any) => (value ? "MappingFiles" : "Source") },
         {
-            keyBlacklist: ["id"],
+            //@ts-ignore
+            keyBlacklist: ["id", "_id", "__v"],
         }
     )
     return <Descriptions title="Proof Info" items={descriptionItems} />

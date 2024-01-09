@@ -13,7 +13,10 @@ import {
     DatasetProofMetadata,
 } from "@dataswapjs/dataswapjs"
 import { convertDataToItems } from "@unipackage/webkit"
-import { getDatasetMetadata } from "../../../shared/messagehub/get"
+import {
+    getDatasetMetadata,
+    getDatasetProofMetadata,
+} from "../../../shared/messagehub/get"
 import { ValueFields } from "@unipackage/utils"
 import { defaultTableQueryParams } from "../../../config/params"
 
@@ -26,6 +29,8 @@ export default () => {
     const { id } = router.query
     const [datasetMetadata, setDatasetMetadata] =
         useState<ValueFields<DatasetMetadata>>()
+    const [datasetProofMeta, setDatasetProofMeta] =
+        useState<ValueFields<DatasetProofMetadata>>()
 
     const tabItems = convertDataToItems({
         messasge: (
@@ -72,6 +77,14 @@ export default () => {
             //TODO
             setDatasetMetadata(datasetMetadata![0])
         })
+        getDatasetProofMetadata({
+            network: "calibration",
+            queryFilter: { conditions: [{ datasetId: id }] },
+        }).then((res) => {
+            const datasetMetadata = res.data
+            //TODO
+            setDatasetProofMeta(datasetMetadata![0])
+        })
     }, [])
 
     return (
@@ -79,6 +92,10 @@ export default () => {
             {datasetMetadata && (
                 <DatasetMetadataDescription data={datasetMetadata} />
             )}
+            {datasetProofMeta && (
+                <DatasetProofDescription data={datasetProofMeta} />
+            )}
+
             <Tabs
                 defaultActiveKey="Proof"
                 items={tabItems}

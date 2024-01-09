@@ -32,7 +32,8 @@ function getMapper(data: ValueFields<MatchingMetadata>) {
 
 export function MatchingMetadataDescription({ data }: IProps) {
     const descriptionItems = convertDataToItems(data, getMapper(data), {
-        keyBlacklist: ["id"],
+        //@ts-ignore
+        keyBlacklist: ["id", "_id", "__v"],
     })
     return (
         <Descriptions title="Matching Metadata Info" items={descriptionItems} />
