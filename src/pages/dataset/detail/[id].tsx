@@ -4,9 +4,9 @@ import { useRouter } from "next/router"
 import { DatasetMetadataDescription } from "@/components/description/dataset"
 import { DatasetRequirementDescription } from "@/components/description/dataset/requirement"
 import { DatasetProofDescription } from "@/components/description/dataset/proofMetadata"
-import DatasetRequirementTable from "@/components/table/dataset/requirement"
-import CarPage from "../../basic/tabel/car"
-import MessageBasicPage from "../../basic/tabel/message"
+import CarTable from "../../basic/tabel/car"
+import MessageTable from "../../basic/tabel/message"
+import DatasetRequirementBasicTable from "../../basic/tabel/datasetRequirement"
 import {
     DatasetMetadata,
     DatasetRequirement,
@@ -29,7 +29,7 @@ export default () => {
 
     const tabItems = convertDataToItems({
         messasge: (
-            <MessageBasicPage
+            <MessageTable
                 queryParam={{
                     network: "calibration",
                     queryFilter: {
@@ -39,9 +39,28 @@ export default () => {
                 }}
             />
         ),
-        car: <CarPage />,
-        //@ts-ignore
-        requirement: <DatasetRequirementTable data={[]} />,
+        car: (
+            <CarTable
+                queryParam={{
+                    network: "calibration",
+                    queryFilter: {
+                        ...defaultTableQueryParams,
+                        conditions: [{ datasetId: id }],
+                    },
+                }}
+            />
+        ),
+        // requirement: (
+        //     <DatasetRequirementBasicTable
+        //         queryParam={{
+        //             network: "calibration",
+        //             queryFilter: {
+        //                 ...defaultTableQueryParams,
+        //                 conditions: [{ datasetId: id }],
+        //             },
+        //         }}
+        //     />
+        // ),
     })
 
     useEffect(() => {

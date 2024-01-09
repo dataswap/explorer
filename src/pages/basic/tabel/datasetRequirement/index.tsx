@@ -1,31 +1,34 @@
 import React, { useEffect, useState } from "react"
-import { Car } from "@dataswapjs/dataswapjs"
-import CarTabel from "@/components/table/car"
-import { getCar, getCarCount } from "../../../../shared/messagehub/get"
+import { DatasetRequirement } from "@dataswapjs/dataswapjs"
+import DatasetRequirementTabel from "@/components/table/dataset/requirement"
+import {
+    getDatasetRequirement,
+    getDatasetRequirementCount,
+} from "../../../../shared/messagehub/get"
 import { ValueFields } from "@unipackage/utils"
-import { QueryParam } from "@/shared/messagehub/queryParams"
-import { TablePaginationConfig } from "antd"
+import { defaultTableQueryParams } from "../../../../config/params"
 import { Input, Space } from "antd"
+import { TablePaginationConfig } from "antd"
 import { onSearchBasic, handleTableChangeBasic } from "@/shared/table"
+import { QueryParam } from "@/shared/messagehub/queryParams"
 const { Search } = Input
 
 interface IProps {
-    queryParam: QueryParam<Car>
+    queryParam: QueryParam<DatasetRequirement>
 }
 
 export default ({ queryParam }: IProps) => {
-    const [dataList, setDataList] = useState<ValueFields<Car>[]>()
+    const [dataLis, setDataList] = useState<ValueFields<DatasetRequirement>[]>()
     const [loading, setLoading] = useState<boolean>(false)
     const [pagination, setPagination] = useState<TablePaginationConfig>({
-        current: queryParam?.queryFilter?.page,
-        pageSize: queryParam?.queryFilter?.limit,
+        current: defaultTableQueryParams.page,
+        pageSize: defaultTableQueryParams.limit,
     })
     const [search, setSearch] = useState<string>("")
 
-    const currentQueryParams: QueryParam<Car> = {
+    const currentQueryParams: QueryParam<DatasetRequirement> = {
         network: queryParam?.network,
-        queryFilter: queryParam?.queryFilter && {
-            ...queryParam.queryFilter,
+        queryFilter: {
             page: pagination.current,
             limit: pagination.pageSize,
         },
@@ -33,8 +36,8 @@ export default ({ queryParam }: IProps) => {
 
     // get count when refresh page,do one time
     useEffect(() => {
-        console.log("before getDataswapMessageCount", pagination)
-        getCarCount(currentQueryParams).then((res) => {
+        console.log("before getDatasetRequirementCount", pagination)
+        getDatasetRequirementCount(currentQueryParams).then((res) => {
             const totalRes = res.data
             setPagination({
                 ...pagination,
@@ -43,24 +46,22 @@ export default ({ queryParam }: IProps) => {
         })
     }, [search])
 
-    // get count when use click page number,do multi times
     useEffect(() => {
-        if (pagination.total) {
-            console.log("before getDataswapMessage", pagination)
-            setLoading(true)
-            getCar(currentQueryParams).then((res) => {
-                setDataList(res.data)
-                setLoading(false)
-            })
-        }
+        setLoading(true)
+        console.log("before getDatasetRequirement", currentQueryParams)
+        getDatasetRequirement(currentQueryParams).then((res) => {
+            const datasetOveriew = res.data
+            setDataList(datasetOveriew)
+            setLoading(false)
+        })
     }, [JSON.stringify(pagination), search])
 
     const handleTableChange = (_pagination: TablePaginationConfig) => {
         handleTableChangeBasic({
             newPagination: _pagination,
             oldPagination: pagination,
-            setDataList,
             setPagination,
+            setDataList,
         })
     }
 
@@ -78,15 +79,16 @@ export default ({ queryParam }: IProps) => {
             <div style={{ display: "flex", justifyContent: "flex-end" }}>
                 <Space direction="vertical">
                     <Search
-                        placeholder="search:Height/From/To/Method"
+                        placeholder="search:Height/Name/Submitter/accessMethod"
                         onSearch={onSearch}
                         style={{ width: 300 }}
                     />
                 </Space>
             </div>
-            {dataList && (
-                <CarTabel
-                    data={dataList}
+
+            {dataLis && (
+                <DatasetRequirementTabel
+                    data={dataLis}
                     pagination={pagination ? pagination : {}}
                     loading={loading}
                     onChange={handleTableChange}
