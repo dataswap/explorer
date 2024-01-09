@@ -9,6 +9,7 @@ import { ValueFields } from "@unipackage/utils"
 import { QueryParam } from "@/shared/messagehub/queryParams"
 import { TablePaginationConfig } from "antd"
 import { Input, Space } from "antd"
+import { onSearchBasic, handleTableChangeBasic } from "@/shared/table"
 const { Search } = Input
 
 interface IProps {
@@ -64,19 +65,21 @@ export default ({ queryParam }: IProps) => {
     }, [JSON.stringify(pagination), search])
 
     const handleTableChange = (_pagination: TablePaginationConfig) => {
-        console.log("user click page number", _pagination)
-        setPagination(_pagination)
-        // `dataSource` is useless since `pageSize` changed
-        if (_pagination.pageSize !== pagination?.pageSize) {
-            setDataList([])
-        }
+        handleTableChangeBasic({
+            newPagination: _pagination,
+            oldPagination: pagination,
+            setDataList,
+            setPagination,
+        })
     }
 
     const onSearch = (_search: string) => {
-        setSearch(_search)
-        if (_search !== search) {
-            setDataList([])
-        }
+        onSearchBasic({
+            newSearch: _search,
+            oldSearch: search,
+            setSearch,
+            setDataList,
+        })
     }
 
     return (

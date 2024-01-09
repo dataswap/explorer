@@ -20,13 +20,14 @@
 
 import React from "react"
 import {
-    Table,
     generateTableColumns,
     convertDataToTableItems,
 } from "@unipackage/webkit"
+import { Table } from "antd"
 import { DatasetRequirement } from "@dataswapjs/dataswapjs"
 import Link from "next/link"
 import { FromType, ValueFields } from "@unipackage/utils"
+import type { TablePaginationConfig } from "antd/es/table"
 import { config_datasetDetailPageRoot } from "../../../config/links"
 
 interface DatasetRequirementTabelItem
@@ -45,9 +46,12 @@ interface DatasetRequirementTabelItem
 
 interface IProps {
     data: ValueFields<DatasetRequirement>[]
+    pagination: TablePaginationConfig
+    loading: boolean
+    onChange: (pagination: TablePaginationConfig) => void
 }
 
-export default ({ data }: IProps) => {
+export default ({ data, pagination, loading, onChange }: IProps) => {
     const columns = generateTableColumns<DatasetRequirementTabelItem>({
         index: "10%",
         datasetId: "15%",
@@ -78,7 +82,10 @@ export default ({ data }: IProps) => {
     return (
         <Table<DatasetRequirementTabelItem>
             columns={columns}
-            data={tabelItems}
+            dataSource={tabelItems}
+            pagination={pagination}
+            loading={loading}
+            onChange={onChange}
         />
     )
 }

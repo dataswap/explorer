@@ -1,11 +1,12 @@
 import React from "react"
 import {
-    Table,
     generateTableColumns,
     convertDataToTableItems,
 } from "@unipackage/webkit"
+import { Table } from "antd"
 import { DatasetMetadata } from "@dataswapjs/dataswapjs"
 import { FromType, ValueFields } from "@unipackage/utils"
+import type { TablePaginationConfig } from "antd/es/table"
 import Link from "next/link"
 import { config_datasetDetailPageRoot } from "../../../config/links"
 
@@ -24,9 +25,12 @@ interface DatasetTabelItem
 
 interface IProps {
     data: ValueFields<DatasetMetadata>[]
+    pagination: TablePaginationConfig
+    loading: boolean
+    onChange: (pagination: TablePaginationConfig) => void
 }
 
-export default ({ data }: IProps) => {
+export default ({ data, pagination, loading, onChange }: IProps) => {
     const columns = generateTableColumns<DatasetTabelItem>({
         id: "7%",
         name: "15%",
@@ -61,5 +65,13 @@ export default ({ data }: IProps) => {
         accessMethod: item.accessMethod,
     }))
 
-    return <Table<DatasetTabelItem> columns={columns} data={tabelItems} />
+    return (
+        <Table<DatasetTabelItem>
+            columns={columns}
+            dataSource={tabelItems}
+            pagination={pagination}
+            loading={loading}
+            onChange={onChange}
+        />
+    )
 }

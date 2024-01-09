@@ -20,12 +20,13 @@
 
 import React from "react"
 import {
-    Table,
     generateTableColumns,
     convertDataToTableItems,
 } from "@unipackage/webkit"
+import { Table } from "antd"
 import { MatchingMetadata } from "@dataswapjs/dataswapjs"
 import { FromType, ValueFields } from "@unipackage/utils"
+import type { TablePaginationConfig } from "antd/es/table"
 import Link from "next/link"
 import {
     config_matchingDetailPageRoot,
@@ -48,9 +49,12 @@ interface MatchingTabelItem
 
 interface IProps {
     data: ValueFields<MatchingMetadata>[]
+    pagination: TablePaginationConfig
+    loading: boolean
+    onChange: (pagination: TablePaginationConfig) => void
 }
 
-export default ({ data }: IProps) => {
+export default ({ data, pagination, loading, onChange }: IProps) => {
     const columns = generateTableColumns<MatchingTabelItem>({
         id: "7.5%",
         datasetId: "10%",
@@ -85,5 +89,13 @@ export default ({ data }: IProps) => {
         createdBlockNumber: item.createdBlockNumber,
     }))
 
-    return <Table<MatchingTabelItem> columns={columns} data={tabelItems} />
+    return (
+        <Table<MatchingTabelItem>
+            columns={columns}
+            dataSource={tabelItems}
+            pagination={pagination}
+            loading={loading}
+            onChange={onChange}
+        />
+    )
 }

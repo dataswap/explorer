@@ -1,12 +1,13 @@
 import React from "react"
 import {
-    Table,
     generateTableColumns,
     convertDataToTableItems,
 } from "@unipackage/webkit"
+import { Table } from "antd"
 import { Car } from "@dataswapjs/dataswapjs"
 import { FromType, ValueFields } from "@unipackage/utils"
 import Link from "next/link"
+import type { TablePaginationConfig } from "antd/es/table"
 import { config_datasetDetailPageRoot } from "../../../config/links"
 
 interface CarTabelItem
@@ -20,9 +21,12 @@ interface CarTabelItem
 
 interface IProps {
     data: ValueFields<Car>[]
+    pagination: TablePaginationConfig
+    loading: boolean
+    onChange: (pagination: TablePaginationConfig) => void
 }
 
-export default ({ data }: IProps) => {
+export default ({ data, pagination, loading, onChange }: IProps) => {
     const columns = generateTableColumns<CarTabelItem>({
         carId: "10%",
         datasetId: "18%",
@@ -49,5 +53,13 @@ export default ({ data }: IProps) => {
         size: item.size,
     }))
 
-    return <Table<CarTabelItem> columns={columns} data={tabelItems} />
+    return (
+        <Table<CarTabelItem>
+            columns={columns}
+            dataSource={tabelItems}
+            pagination={pagination}
+            loading={loading}
+            onChange={onChange}
+        />
+    )
 }
