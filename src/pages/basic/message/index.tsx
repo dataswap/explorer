@@ -27,14 +27,27 @@ export default ({ queryParam }: IProps) => {
     // get count when refresh page,do one time
     useEffect(() => {
         console.log("before getDataswapMessageCount", pagination)
-        getDataswapMessageCount(queryParam).then((res) => {
+        getDataswapMessageCount({
+            network: queryParam.network,
+            queryFilter: {
+                ...queryParam.queryFilter,
+                page: pagination.current,
+                limit: pagination.pageSize,
+                or: [
+                    { conditions: [{ from: { $regex: search } }] },
+                    { conditions: [{ to: { $regex: search } }] },
+                    { conditions: [{ method: { $regex: search } }] },
+                    { conditions: [{ height: { $eq: parseInt(search) } }] },
+                ],
+            },
+        }).then((res) => {
             const totalRes = res.data
             setPagination({
                 ...pagination,
                 total: totalRes,
             })
         })
-    }, [])
+    }, [search])
 
     // get count when use click page number,do multi times
     useEffect(() => {
