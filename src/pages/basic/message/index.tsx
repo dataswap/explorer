@@ -19,28 +19,30 @@ export default ({ queryParam }: IProps) => {
     const [dataList, setDataList] = useState<ValueFields<DataswapMessage>[]>()
     const [loading, setLoading] = useState<boolean>(false)
     const [pagination, setPagination] = useState<TablePaginationConfig>({
-        current: queryParam.queryFilter?.page,
-        pageSize: queryParam.queryFilter?.limit,
+        current: queryParam?.queryFilter?.page,
+        pageSize: queryParam?.queryFilter?.limit,
     })
     const [search, setSearch] = useState<string>("")
+
+    const currentQueryParams = {
+        network: queryParam?.network,
+        queryFilter: queryParam?.queryFilter && {
+            ...queryParam.queryFilter,
+            page: pagination.current,
+            limit: pagination.pageSize,
+            or: [
+                { conditions: [{ from: { $regex: search } }] },
+                { conditions: [{ to: { $regex: search } }] },
+                { conditions: [{ method: { $regex: search } }] },
+                { conditions: [{ height: { $eq: parseInt(search) } }] },
+            ],
+        },
+    }
 
     // get count when refresh page,do one time
     useEffect(() => {
         console.log("before getDataswapMessageCount", pagination)
-        getDataswapMessageCount({
-            network: queryParam.network,
-            queryFilter: {
-                ...queryParam.queryFilter,
-                page: pagination.current,
-                limit: pagination.pageSize,
-                or: [
-                    { conditions: [{ from: { $regex: search } }] },
-                    { conditions: [{ to: { $regex: search } }] },
-                    { conditions: [{ method: { $regex: search } }] },
-                    { conditions: [{ height: { $eq: parseInt(search) } }] },
-                ],
-            },
-        }).then((res) => {
+        getDataswapMessageCount(currentQueryParams).then((res) => {
             const totalRes = res.data
             setPagination({
                 ...pagination,
@@ -54,20 +56,7 @@ export default ({ queryParam }: IProps) => {
         if (pagination.total) {
             console.log("before getDataswapMessage", pagination)
             setLoading(true)
-            getDataswapMessage({
-                network: queryParam.network,
-                queryFilter: {
-                    ...queryParam.queryFilter,
-                    page: pagination.current,
-                    limit: pagination.pageSize,
-                    or: [
-                        { conditions: [{ from: { $regex: search } }] },
-                        { conditions: [{ to: { $regex: search } }] },
-                        { conditions: [{ method: { $regex: search } }] },
-                        { conditions: [{ height: { $eq: parseInt(search) } }] },
-                    ],
-                },
-            }).then((res) => {
+            getDataswapMessage(currentQueryParams).then((res) => {
                 setDataList(res.data)
                 setLoading(false)
             })
