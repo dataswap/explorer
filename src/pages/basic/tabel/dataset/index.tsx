@@ -1,49 +1,55 @@
 import React, { useEffect, useState } from "react"
-import { DataswapMessage } from "@dataswapjs/dataswapjs"
-import MessageTabel from "@/components/table/message"
+import { useRouter } from "next/router"
+import { DatasetMetadata } from "@dataswapjs/dataswapjs"
+import DatasetTabel from "@/components/table/dataset"
 import {
-    getDataswapMessage,
-    getDataswapMessageCount,
-} from "../../../shared/messagehub/get"
+    getDatasetMetadata,
+    getDatasetMetadataCount,
+} from "../../../../shared/messagehub/get"
 import { ValueFields } from "@unipackage/utils"
-import { QueryParam } from "@/shared/messagehub/queryParams"
-import { TablePaginationConfig } from "antd"
+import { defaultTableQueryParams } from "../../../../config/params"
 import { Input, Space } from "antd"
+import { TablePaginationConfig } from "antd"
 import { onSearchBasic, handleTableChangeBasic } from "@/shared/table"
+import { QueryParam } from "@/shared/messagehub/queryParams"
 const { Search } = Input
 
 interface IProps {
-    queryParam: QueryParam<DataswapMessage>
+    queryParam: QueryParam<DatasetMetadata>
 }
 
 export default ({ queryParam }: IProps) => {
-    const [dataList, setDataList] = useState<ValueFields<DataswapMessage>[]>()
+    const [dataLis, setDataList] = useState<ValueFields<DatasetMetadata>[]>()
     const [loading, setLoading] = useState<boolean>(false)
     const [pagination, setPagination] = useState<TablePaginationConfig>({
-        current: queryParam?.queryFilter?.page,
-        pageSize: queryParam?.queryFilter?.limit,
+        current: defaultTableQueryParams.page,
+        pageSize: defaultTableQueryParams.limit,
     })
     const [search, setSearch] = useState<string>("")
+    const router = useRouter()
 
-    const currentQueryParams = {
+    const currentQueryParams: QueryParam<DatasetMetadata> = {
         network: queryParam?.network,
-        queryFilter: queryParam?.queryFilter && {
-            ...queryParam.queryFilter,
+        queryFilter: {
             page: pagination.current,
             limit: pagination.pageSize,
             or: [
-                { conditions: [{ from: { $regex: search } }] },
-                { conditions: [{ to: { $regex: search } }] },
-                { conditions: [{ method: { $regex: search } }] },
-                { conditions: [{ height: { $eq: parseInt(search) } }] },
+                { conditions: [{ accessMethod: { $regex: search } }] },
+                { conditions: [{ submitter: { $regex: search } }] },
+                { conditions: [{ name: { $regex: search } }] },
+                {
+                    conditions: [
+                        { createdBlockNumber: { $eq: parseInt(search) } },
+                    ],
+                },
             ],
         },
     }
 
     // get count when refresh page,do one time
     useEffect(() => {
-        console.log("before getDataswapMessageCount", pagination)
-        getDataswapMessageCount(currentQueryParams).then((res) => {
+        console.log("before getDatasetMetadataCount", pagination)
+        getDatasetMetadataCount(currentQueryParams).then((res) => {
             const totalRes = res.data
             setPagination({
                 ...pagination,
@@ -52,24 +58,21 @@ export default ({ queryParam }: IProps) => {
         })
     }, [search])
 
-    // get count when use click page number,do multi times
     useEffect(() => {
-        if (pagination.total) {
-            console.log("before getDataswapMessage", pagination)
-            setLoading(true)
-            getDataswapMessage(currentQueryParams).then((res) => {
-                setDataList(res.data)
-                setLoading(false)
-            })
-        }
+        setLoading(true)
+        getDatasetMetadata(currentQueryParams).then((res) => {
+            const datasetOveriew = res.data
+            setDataList(datasetOveriew)
+            setLoading(false)
+        })
     }, [JSON.stringify(pagination), search])
 
     const handleTableChange = (_pagination: TablePaginationConfig) => {
         handleTableChangeBasic({
             newPagination: _pagination,
             oldPagination: pagination,
-            setDataList,
             setPagination,
+            setDataList,
         })
     }
 
@@ -87,15 +90,16 @@ export default ({ queryParam }: IProps) => {
             <div style={{ display: "flex", justifyContent: "flex-end" }}>
                 <Space direction="vertical">
                     <Search
-                        placeholder="search:Height/From/To/Method"
+                        placeholder="search:Height/Name/Submitter/accessMethod"
                         onSearch={onSearch}
                         style={{ width: 300 }}
                     />
                 </Space>
             </div>
-            {dataList && (
-                <MessageTabel
-                    data={dataList}
+
+            {dataLis && (
+                <DatasetTabel
+                    data={dataLis}
                     pagination={pagination ? pagination : {}}
                     loading={loading}
                     onChange={handleTableChange}

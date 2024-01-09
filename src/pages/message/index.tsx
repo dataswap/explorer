@@ -1,6 +1,6 @@
 import React from "react"
 import { NextPageContext } from "next"
-import MessageBasicPage from "../basic/message"
+import MessageBasicPage from "../basic/tabel/message"
 import { defaultTableQueryParams } from "../../config/params"
 
 export async function getServerSideProps(context: NextPageContext) {

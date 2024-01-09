@@ -5,8 +5,8 @@ import { DatasetMetadataDescription } from "@/components/description/dataset"
 import { DatasetRequirementDescription } from "@/components/description/dataset/requirement"
 import { DatasetProofDescription } from "@/components/description/dataset/proofMetadata"
 import DatasetRequirementTable from "@/components/table/dataset/requirement"
-import CarPage from "../../basic/car"
-import MessageBasicPage from "../../basic/message"
+import CarPage from "../../basic/tabel/car"
+import MessageBasicPage from "../../basic/tabel/message"
 import {
     DatasetMetadata,
     DatasetRequirement,
