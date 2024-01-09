@@ -37,8 +37,7 @@ export default ({ data, pagination, loading, onChange }: IProps) => {
         CarReplicaTabelItem
     >(data, (item) => ({
         key: item.matchingId.toString(),
-        //TODO:add carId
-        carId: "",
+        carId: item.carId?.toString(),
         matchingId: item.matchingId,
         filecoinClaimId: item.filecoinClaimId,
         state: item.state,

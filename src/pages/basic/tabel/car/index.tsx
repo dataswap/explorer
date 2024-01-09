@@ -28,6 +28,7 @@ export default ({ queryParam }: IProps) => {
             ...queryParam.queryFilter,
             page: pagination.current,
             limit: pagination.pageSize,
+            or: [{ conditions: [{ hash: { $regex: search } }] }],
         },
     }
 
@@ -78,7 +79,7 @@ export default ({ queryParam }: IProps) => {
             <div style={{ display: "flex", justifyContent: "flex-end" }}>
                 <Space direction="vertical">
                     <Search
-                        placeholder="search:Height/From/To/Method"
+                        placeholder="search:Hash"
                         onSearch={onSearch}
                         style={{ width: 300 }}
                     />

@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { InferGetServerSidePropsType, NextPageContext } from "next"
-import axios from "axios"
-import MatchingTabel from "@/components/table/matching"
-import { MatchingMetadata } from "@dataswapjs/dataswapjs"
-import { useRouter } from "next/router"
+import MatchingBasicTable from "../basic/tabel/matchingMetadata"
+import { defaultTableQueryParams } from "../../config/params"
 
 export async function getServerSideProps(context: NextPageContext) {
     return {
@@ -14,66 +12,6 @@ export async function getServerSideProps(context: NextPageContext) {
 export default function IndexPage({}: InferGetServerSidePropsType<
     typeof getServerSideProps
 >) {
-    const [list, setList] = useState<MatchingMetadata[]>()
-    const [closeAction, setCloseAction] = useState<boolean>()
-
-    const router = useRouter()
-    const handleClose = (id: number) => {
-        axios(`http://localhost:3001/matchingsInfo/${id}`).then((res) => {
-            const overview: any = res.data
-            if (overview.bids) {
-                axios
-                    .patch(`http://localhost:3001/matchingsInfo/${id}`, {
-                        state: "Complete",
-                        operate: "",
-                    })
-                    .then((res) => {
-                        const maxBidObj =
-                            overview?.bids &&
-                            Object.values(overview.bids).reduce(
-                                (max: any, bidObj: any) => {
-                                    const bid = parseFloat(bidObj.bid)
-                                    if (bid > parseFloat(max.bid)) {
-                                        return bidObj
-                                    }
-                                    return max
-                                },
-                                Object.values(overview.bids)[0]
-                            )
-                        axios
-                            .patch(
-                                `http://localhost:3001/matchingsInfo/${id}`,
-                                {
-                                    winner: maxBidObj,
-                                }
-                            )
-                            .then(() => {
-                                setCloseAction(!closeAction)
-                            })
-                    })
-            } else {
-                axios
-                    .patch(`http://localhost:3001/matchingsInfo/${id}`, {
-                        state: "Failed",
-                        operate: "",
-                    })
-                    .then((res) => {
-                        setCloseAction(!closeAction)
-                    })
-            }
-        })
-    }
-
-    useEffect(() => {
-        axios("http://localhost:3001/matchingsInfo").then((res) => {
-            const overiews: MatchingMetadata[] = res.data
-            setList(overiews)
-        })
-    }, [closeAction])
-
-    // const onClick = () => {
-    //     router.push("/dataset/submit/dataset")
-    // }
     return (
         <>
             <div
@@ -84,15 +22,15 @@ export default function IndexPage({}: InferGetServerSidePropsType<
                 }}
             >
                 <h4>Matching List</h4>
-                {/* <div style={{ marginLeft: "auto" }}>
-                    <Button type="text" htmlType="button" onClick={onClick}>
-                        <PlusOutlined style={{ color: "black" }} />
-                        Create Dataset
-                    </Button>
-                </div> */}
             </div>
-            {/* {list && <MatchingTabel data={list} handleClose={handleClose} />} */}
-            {/* {list && <MatchingTabel data={list} />} */}
+            {
+                <MatchingBasicTable
+                    queryParam={{
+                        network: "calibration",
+                        queryFilter: { ...defaultTableQueryParams },
+                    }}
+                />
+            }
         </>
     )
 }

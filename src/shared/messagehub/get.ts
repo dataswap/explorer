@@ -110,37 +110,43 @@ export async function getCarCount(
 export async function getCarReplica(
     queryParam: QueryParam<CarReplica>
 ): Promise<Result<ValueFields<CarReplica>[]>> {
-    return await getDswap<CarReplica>("/car/query", queryParam)
+    return await getDswap<CarReplica>("/carreplica/query", queryParam)
 }
 
 export async function getCarReplicaCount(
     queryParam: QueryParam<CarReplica>
 ): Promise<Result<number>> {
-    return await getDswap<CarReplica>("/car/total", queryParam)
+    return await getDswap<CarReplica>("/carreplica/total", queryParam)
 }
 
 export async function getMatchingMetadata(
     queryParam: QueryParam<MatchingMetadata>
 ): Promise<Result<ValueFields<MatchingMetadata>[]>> {
-    return await getDswap<MatchingMetadata>("/car/query", queryParam)
+    return await getDswap<MatchingMetadata>(
+        "/matchingmetadata/query",
+        queryParam
+    )
 }
 
 export async function getMatchingMetadataCount(
     queryParam: QueryParam<MatchingMetadata>
 ): Promise<Result<number>> {
-    return await getDswap<MatchingMetadata>("/car/total", queryParam)
+    return await getDswap<MatchingMetadata>(
+        "/matchingmetadata/total",
+        queryParam
+    )
 }
 
 export async function getMatchingTarget(
     queryParam: QueryParam<MatchingTarget>
 ): Promise<Result<ValueFields<MatchingTarget>[]>> {
-    return await getDswap<MatchingTarget>("/car/query", queryParam)
+    return await getDswap<MatchingTarget>("/matchingtarget/query", queryParam)
 }
 
 export async function getMatchingTargetCount(
     queryParam: QueryParam<MatchingTarget>
 ): Promise<Result<number>> {
-    return await getDswap<MatchingTarget>("/car/total", queryParam)
+    return await getDswap<MatchingTarget>("/matchingtarget/total", queryParam)
 }
 
 export interface SyncStatus {

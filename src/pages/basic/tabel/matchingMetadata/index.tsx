@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
-import { CarReplica } from "@dataswapjs/dataswapjs"
-import CarReplicaTabel from "@/components/table/carReplica"
+import { MatchingMetadata } from "@dataswapjs/dataswapjs"
+import MatchingMetadataTabel from "@/components/table/matching"
 import {
-    getCarReplica,
-    getCarReplicaCount,
+    getMatchingMetadata,
+    getMatchingMetadataCount,
 } from "../../../../shared/messagehub/get"
 import { ValueFields } from "@unipackage/utils"
 import { QueryParam } from "@/shared/messagehub/queryParams"
@@ -13,11 +13,11 @@ import { onSearchBasic, handleTableChangeBasic } from "@/shared/table"
 const { Search } = Input
 
 interface IProps {
-    queryParam: QueryParam<CarReplica>
+    queryParam: QueryParam<MatchingMetadata>
 }
 
 export default ({ queryParam }: IProps) => {
-    const [dataList, setDataList] = useState<ValueFields<CarReplica>[]>()
+    const [dataList, setDataList] = useState<ValueFields<MatchingMetadata>[]>()
     const [loading, setLoading] = useState<boolean>(false)
     const [pagination, setPagination] = useState<TablePaginationConfig>({
         current: queryParam?.queryFilter?.page,
@@ -25,19 +25,20 @@ export default ({ queryParam }: IProps) => {
     })
     const [search, setSearch] = useState<string>("")
 
-    const currentQueryParams: QueryParam<CarReplica> = {
+    const currentQueryParams: QueryParam<MatchingMetadata> = {
         network: queryParam?.network,
         queryFilter: queryParam?.queryFilter && {
             ...queryParam.queryFilter,
             page: pagination.current,
             limit: pagination.pageSize,
+            or: [{ conditions: [{ initiator: { $regex: search } }] }],
         },
     }
 
     // get count when refresh page,do one time
     useEffect(() => {
         console.log("before getDataswapMessageCount", pagination)
-        getCarReplicaCount(currentQueryParams).then((res) => {
+        getMatchingMetadataCount(currentQueryParams).then((res) => {
             const totalRes = res.data
             setPagination({
                 ...pagination,
@@ -51,7 +52,7 @@ export default ({ queryParam }: IProps) => {
         if (pagination.total) {
             console.log("before getDataswapMessage", pagination)
             setLoading(true)
-            getCarReplica(currentQueryParams).then((res) => {
+            getMatchingMetadata(currentQueryParams).then((res) => {
                 setDataList(res.data)
                 setLoading(false)
             })
@@ -88,7 +89,7 @@ export default ({ queryParam }: IProps) => {
                 </Space>
             </div>
             {dataList && (
-                <CarReplicaTabel
+                <MatchingMetadataTabel
                     data={dataList}
                     pagination={pagination ? pagination : {}}
                     loading={loading}

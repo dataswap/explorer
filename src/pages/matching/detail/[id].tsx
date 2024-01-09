@@ -7,9 +7,11 @@ import { MatchingMetadata, MatchingTarget } from "@dataswapjs/dataswapjs"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { convertDataToItems } from "@unipackage/webkit"
+import { ValueFields } from "@unipackage/utils"
 import { MatchingBid } from "@/shared/types"
 import CarReplicaPage from "../../basic/tabel/carReplica"
 import MessageBasicPage from "../../basic/tabel/message"
+import { getMatchingMetadata } from "@/shared/messagehub/get"
 
 const onChange = (key: string) => {
     console.log(key)
@@ -18,7 +20,7 @@ const onChange = (key: string) => {
 export default () => {
     const router = useRouter()
     const { id } = router.query
-    const [overview, setOverview] = useState<MatchingMetadata>()
+    const [overview, setOverview] = useState<ValueFields<MatchingMetadata>>()
 
     const tabItems = convertDataToItems({
         messasge: (
@@ -29,14 +31,25 @@ export default () => {
                 }}
             />
         ),
-        car: <CarReplicaPage />,
+        carReplica: (
+            <CarReplicaPage
+                queryParam={{
+                    network: "calibration",
+                    queryFilter: { conditions: [{ matchingId: id }] },
+                }}
+            />
+        ),
     })
 
     useEffect(() => {
-        id &&
-            axios(`http://localhost:3001/matchingsInfo/${id}`).then((res) => {
-                setOverview(res.data)
-            })
+        getMatchingMetadata({
+            network: "calibration",
+            queryFilter: { conditions: [{ matchingId: id }] },
+        }).then((res) => {
+            const datasetMetadata = res.data
+            //TODO
+            setOverview(datasetMetadata![0])
+        })
     }, [])
 
     return (
