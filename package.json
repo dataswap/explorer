@@ -1,5 +1,5 @@
 {
-  "name": "@dataswapjs/messagehub",
+  "name": "@dataswapjs/explorer",
   "version": "0.1.0",
   "private": true,
   "scripts": {
