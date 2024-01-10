@@ -42,7 +42,9 @@ export default function IndexPage({}: InferGetServerSidePropsType<
                 <DatasetBasicTable
                     queryParam={{
                         network: "calibration",
-                        queryFilter: { ...defaultTableQueryParams },
+                        queryFilter: {
+                            ...defaultTableQueryParams,
+                        },
                     }}
                 />
             }

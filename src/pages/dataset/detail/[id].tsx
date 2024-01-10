@@ -60,6 +60,7 @@ export default () => {
                                 queryFilter: {
                                     ...defaultTableQueryParams,
                                     conditions: [{ datasetId: id }],
+                                    sort: [{ field: "height", order: "desc" }],
                                 },
                             }}
                         />
@@ -71,6 +72,7 @@ export default () => {
                                 queryFilter: {
                                     ...defaultTableQueryParams,
                                     conditions: [{ datasetId: id }],
+                                    sort: [{ field: "carId", order: "desc" }],
                                 },
                             }}
                         />

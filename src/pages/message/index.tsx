@@ -16,7 +16,10 @@ export default () => {
                 <MessageBasicPage
                     queryParam={{
                         network: "calibration",
-                        queryFilter: { ...defaultTableQueryParams },
+                        queryFilter: {
+                            ...defaultTableQueryParams,
+                            sort: [{ field: "height", order: "desc" }],
+                        },
                     }}
                 />
             }

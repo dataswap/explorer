@@ -27,7 +27,9 @@ export default function IndexPage({}: InferGetServerSidePropsType<
                 <MatchingBasicTable
                     queryParam={{
                         network: "calibration",
-                        queryFilter: { ...defaultTableQueryParams },
+                        queryFilter: {
+                            ...defaultTableQueryParams,
+                        },
                     }}
                 />
             }

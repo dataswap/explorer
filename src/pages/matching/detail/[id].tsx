@@ -33,6 +33,7 @@ export default () => {
                                 network: "calibration",
                                 queryFilter: {
                                     conditions: [{ matchingId: id }],
+                                    sort: [{ field: "height", order: "desc" }],
                                 },
                             }}
                         />
@@ -43,6 +44,7 @@ export default () => {
                                 network: "calibration",
                                 queryFilter: {
                                     conditions: [{ matchingId: id }],
+                                    sort: [{ field: "carId", order: "desc" }],
                                 },
                             }}
                         />
