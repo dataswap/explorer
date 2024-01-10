@@ -1,5 +1,13 @@
 
 
+## [0.2.2](https://github.com/dataswap/explorer/compare/0.2.1...0.2.2) (2024-01-10)
+
+
+### Bug Fixes
+
+* 🐛 desc order ([89fcba1](https://github.com/dataswap/explorer/commit/89fcba157bebde0e9406b88e4cf7ed417d74d9fa))
+* 🐛 fix: detail pages when refresh ([9d0aec0](https://github.com/dataswap/explorer/commit/9d0aec05fa0007b9fe3a543133634000dc34bb03))
+
 ## [0.2.1](https://github.com/dataswap/explorer/compare/0.2.0...0.2.1) (2024-01-10)
 
 
