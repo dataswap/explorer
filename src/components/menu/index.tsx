@@ -63,6 +63,8 @@ export default () => {
                 setCurrent(`/${config_matching}`)
             } else if (currentPath.startsWith(`/${config_dataset}`)) {
                 setCurrent(`/${config_dataset}`)
+            } else if (currentPath.startsWith(`/${config_message}`)) {
+                setCurrent(`/${config_message}`)
             } else if (currentPath.startsWith(`/${config_home}`)) {
                 setCurrent(`/${config_home}`)
             } else if (currentPath.startsWith(`/${config_storage}`)) {
@@ -73,6 +75,8 @@ export default () => {
                 setCurrent(currentPath)
             }
         }
+
+        handleRouteChange(window.location.pathname)
 
         router.events.on("routeChangeComplete", handleRouteChange)
 
