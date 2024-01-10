@@ -75,7 +75,6 @@ export default () => {
         }
 
         router.events.on("routeChangeComplete", handleRouteChange)
-        setCurrent(router.pathname)
 
         return () => {
             router.events.off("routeChangeComplete", handleRouteChange)
