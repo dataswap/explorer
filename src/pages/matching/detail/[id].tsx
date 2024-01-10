@@ -21,36 +21,45 @@ export default () => {
     const router = useRouter()
     const { id } = router.query
     const [overview, setOverview] = useState<ValueFields<MatchingMetadata>>()
-
-    const tabItems = convertDataToItems({
-        messasge: (
-            <MessageBasicPage
-                queryParam={{
-                    network: "calibration",
-                    queryFilter: { conditions: [{ matchingId: id }] },
-                }}
-            />
-        ),
-        carReplica: (
-            <CarReplicaPage
-                queryParam={{
-                    network: "calibration",
-                    queryFilter: { conditions: [{ matchingId: id }] },
-                }}
-            />
-        ),
-    })
+    const [tabItems, setTabItems] = useState<any>()
 
     useEffect(() => {
-        getMatchingMetadata({
-            network: "calibration",
-            queryFilter: { conditions: [{ matchingId: id }] },
-        }).then((res) => {
-            const datasetMetadata = res.data
-            //TODO
-            setOverview(datasetMetadata![0])
-        })
-    }, [])
+        if (id) {
+            setTabItems(
+                convertDataToItems({
+                    messasge: (
+                        <MessageBasicPage
+                            queryParam={{
+                                network: "calibration",
+                                queryFilter: {
+                                    conditions: [{ matchingId: id }],
+                                },
+                            }}
+                        />
+                    ),
+                    carReplica: (
+                        <CarReplicaPage
+                            queryParam={{
+                                network: "calibration",
+                                queryFilter: {
+                                    conditions: [{ matchingId: id }],
+                                },
+                            }}
+                        />
+                    ),
+                })
+            )
+
+            getMatchingMetadata({
+                network: "calibration",
+                queryFilter: { conditions: [{ matchingId: id }] },
+            }).then((res) => {
+                const datasetMetadata = res.data
+                //TODO
+                setOverview(datasetMetadata![0])
+            })
+        }
+    }, [id])
 
     return (
         <>

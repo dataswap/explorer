@@ -12,15 +12,17 @@ export default () => {
         useState<ValueFields<DataswapMessage>>()
 
     useEffect(() => {
-        getDataswapMessage({
-            network: "calibration",
-            queryFilter: { conditions: [{ cid: { "/": id } }] },
-        }).then((res) => {
-            const datasetMetadata = res.data
-            //TODO
-            setDatasetMetadata(datasetMetadata![0])
-        })
-    }, [])
+        if (id) {
+            getDataswapMessage({
+                network: "calibration",
+                queryFilter: { conditions: [{ cid: { "/": id } }] },
+            }).then((res) => {
+                const datasetMetadata = res.data
+                //TODO
+                setDatasetMetadata(datasetMetadata![0])
+            })
+        }
+    }, [id])
 
     return (
         <>{datasetMetadata && <MessageDescription data={datasetMetadata} />}</>

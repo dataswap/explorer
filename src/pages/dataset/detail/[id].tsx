@@ -31,61 +31,65 @@ export default () => {
         useState<ValueFields<DatasetMetadata>>()
     const [datasetProofMeta, setDatasetProofMeta] =
         useState<ValueFields<DatasetProofMetadata>>()
-
-    const tabItems = convertDataToItems({
-        messasge: (
-            <MessageTable
-                queryParam={{
-                    network: "calibration",
-                    queryFilter: {
-                        ...defaultTableQueryParams,
-                        conditions: [{ datasetId: id }],
-                    },
-                }}
-            />
-        ),
-        car: (
-            <CarTable
-                queryParam={{
-                    network: "calibration",
-                    queryFilter: {
-                        ...defaultTableQueryParams,
-                        conditions: [{ datasetId: id }],
-                    },
-                }}
-            />
-        ),
-        // requirement: (
-        //     <DatasetRequirementBasicTable
-        //         queryParam={{
-        //             network: "calibration",
-        //             queryFilter: {
-        //                 ...defaultTableQueryParams,
-        //                 conditions: [{ datasetId: id }],
-        //             },
-        //         }}
-        //     />
-        // ),
-    })
+    const [tabItems, setTabItems] = useState<any>()
 
     useEffect(() => {
-        getDatasetMetadata({
-            network: "calibration",
-            queryFilter: { conditions: [{ datasetId: id }] },
-        }).then((res) => {
-            const datasetMetadata = res.data
-            //TODO
-            setDatasetMetadata(datasetMetadata![0])
-        })
-        getDatasetProofMetadata({
-            network: "calibration",
-            queryFilter: { conditions: [{ datasetId: id }] },
-        }).then((res) => {
-            const datasetMetadata = res.data
-            //TODO
-            setDatasetProofMeta(datasetMetadata![0])
-        })
-    }, [])
+        if (id) {
+            getDatasetMetadata({
+                network: "calibration",
+                queryFilter: { conditions: [{ datasetId: id }] },
+            }).then((res) => {
+                const datasetMetadata = res.data
+                //TODO
+                setDatasetMetadata(datasetMetadata![0])
+            })
+            getDatasetProofMetadata({
+                network: "calibration",
+                queryFilter: { conditions: [{ datasetId: id }] },
+            }).then((res) => {
+                const datasetMetadata = res.data
+                //TODO
+                setDatasetProofMeta(datasetMetadata![0])
+            })
+            setTabItems(
+                convertDataToItems({
+                    messasge: (
+                        <MessageTable
+                            queryParam={{
+                                network: "calibration",
+                                queryFilter: {
+                                    ...defaultTableQueryParams,
+                                    conditions: [{ datasetId: id }],
+                                },
+                            }}
+                        />
+                    ),
+                    car: (
+                        <CarTable
+                            queryParam={{
+                                network: "calibration",
+                                queryFilter: {
+                                    ...defaultTableQueryParams,
+                                    conditions: [{ datasetId: id }],
+                                },
+                            }}
+                        />
+                    ),
+                    // requirement: (
+                    //     <DatasetRequirementBasicTable
+                    //         queryParam={{
+                    //             network: "calibration",
+                    //             queryFilter: {
+                    //                 ...defaultTableQueryParams,
+                    //                 conditions: [{ datasetId: id }],
+                    //             },
+                    //         }}
+                    //     />
+                    // ),
+                })
+            )
+        }
+    }, [id])
 
     return (
         <>
