@@ -11,6 +11,7 @@ import { ValueFields } from "@unipackage/utils"
 import { MatchingBid } from "@/shared/types"
 import CarReplicaPage from "../../basic/tabel/carReplica"
 import MessageBasicPage from "../../basic/tabel/message"
+import MatchingTargetBasicPage from "../../basic/tabel/matchingTarget"
 import { getMatchingMetadata } from "@/shared/messagehub/get"
 
 const onChange = (key: string) => {
@@ -45,6 +46,16 @@ export default () => {
                                 queryFilter: {
                                     conditions: [{ matchingId: id }],
                                     sort: [{ field: "carId", order: "desc" }],
+                                },
+                            }}
+                        />
+                    ),
+                    target: (
+                        <MatchingTargetBasicPage
+                            queryParam={{
+                                network: "calibration",
+                                queryFilter: {
+                                    conditions: [{ matchingId: id }],
                                 },
                             }}
                         />

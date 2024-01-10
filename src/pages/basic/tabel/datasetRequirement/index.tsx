@@ -28,7 +28,8 @@ export default ({ queryParam }: IProps) => {
 
     const currentQueryParams: QueryParam<DatasetRequirement> = {
         network: queryParam?.network,
-        queryFilter: {
+        queryFilter: queryParam?.queryFilter && {
+            ...queryParam.queryFilter,
             page: pagination.current,
             limit: pagination.pageSize,
         },

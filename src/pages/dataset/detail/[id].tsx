@@ -77,17 +77,17 @@ export default () => {
                             }}
                         />
                     ),
-                    // requirement: (
-                    //     <DatasetRequirementBasicTable
-                    //         queryParam={{
-                    //             network: "calibration",
-                    //             queryFilter: {
-                    //                 ...defaultTableQueryParams,
-                    //                 conditions: [{ datasetId: id }],
-                    //             },
-                    //         }}
-                    //     />
-                    // ),
+                    requirement: (
+                        <DatasetRequirementBasicTable
+                            queryParam={{
+                                network: "calibration",
+                                queryFilter: {
+                                    ...defaultTableQueryParams,
+                                    conditions: [{ datasetId: id }],
+                                },
+                            }}
+                        />
+                    ),
                 })
             )
         }

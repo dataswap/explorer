@@ -85,6 +85,7 @@ export default ({ data, pagination, loading, onChange }: IProps) => {
         replicaIndex: item.replicaIndex,
         associatedMappingFilesMatchingID: item.associatedMappingFilesMatchingID,
         dataType: item.dataType,
+        matchingId: item.matchingId,
         size: item.size,
         subsidy: item.subsidy,
     }))

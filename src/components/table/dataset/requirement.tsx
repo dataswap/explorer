@@ -72,6 +72,7 @@ export default ({ data, pagination, loading, onChange }: IProps) => {
                 {item.datasetId}
             </Link>
         ),
+        index: item.index,
         dataPreparers: item.dataPreparers,
         storageProviders: item.storageProviders,
         regionCode: item.regionCode,
