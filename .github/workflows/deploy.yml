@@ -50,7 +50,7 @@ jobs:
          sudo docker rm explorer
 
          sudo docker pull "${{ secrets.DOCKERHUB_USERNAME }}/explorer:${latest_version}"
-         sudo docker run -d -p ${{ vars.PORT}}:${{ vars.PORT}} --name explorer "${{ secrets.DOCKERHUB_USERNAME }}/explorer:${latest_version}"
+         sudo docker run -d -p ${{ vars.EXTERNAL_PORT}}:${{ vars.PORT}} --name explorer "${{ secrets.DOCKERHUB_USERNAME }}/explorer:${latest_version}"
          sleep 10
          container_status=$(sudo docker inspect -f '{{.State.Status}}' explorer)
 
