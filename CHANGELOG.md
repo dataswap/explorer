@@ -1,5 +1,12 @@
 
 
+## [0.2.1](https://github.com/dataswap/explorer/compare/0.2.0...0.2.1) (2024-01-10)
+
+
+### Bug Fixes
+
+* 🐛 Page default access port ([a00bda9](https://github.com/dataswap/explorer/commit/a00bda90bb208eec1e45d2941b68a46c22b00d9f)), closes [#79](https://github.com/dataswap/explorer/issues/79)
+
 # [0.2.0](https://github.com/dataswap/explorer/compare/0.1.3...0.2.0) (2024-01-10)
 
 
