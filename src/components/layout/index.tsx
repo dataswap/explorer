@@ -2,6 +2,7 @@
 import { Layout, theme } from "antd"
 import Menu from "@/components/menu"
 import { UserOutlined, GithubOutlined } from "@ant-design/icons"
+import Package from "../../../package.json"
 
 const { Header, Content, Footer } = Layout
 
@@ -21,7 +22,10 @@ export default ({ children }: any) => {
             >
                 <Menu />
                 <div>
-                    <UserOutlined style={{ color: "white" }} />
+                    <span style={{ color: "white" }}>
+                        Version: v{Package.version}
+                    </span>
+                    {/* <UserOutlined style={{ color: "white" }} /> */}
                 </div>
             </Header>
             <Content style={{ padding: "0 50px" }}>
@@ -33,7 +37,7 @@ export default ({ children }: any) => {
                 </div>
             </Content>
             <Footer style={{ textAlign: "center" }}>
-                Dataswap ©2023 Created by Dataswap &nbsp;&nbsp;
+                Dataswap ©2024 Created by Dataswap &nbsp;&nbsp;
                 <a href="https://github.com/dataswap">
                     <GithubOutlined />
                 </a>
