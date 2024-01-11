@@ -42,6 +42,7 @@ interface MatchingTabelItem
         | "dataType"
         | "size"
         | "subsidy"
+        | "cars"
     > {
     key: React.ReactNode
     id: React.ReactNode //matchingId
@@ -62,9 +63,10 @@ export default ({ data, pagination, loading, onChange }: IProps) => {
         replicaIndex: "7.5%",
         matchingId: "7.5%",
         associatedMappingFilesMatchingID: "15%",
-        dataType: "15%",
+        dataType: "10%",
         size: "7.5%",
-        subsidy: "15%",
+        subsidy: "10%",
+        cars: "10%",
     })
 
     const tabelItems: MatchingTabelItem[] = convertDataToTableItems<
@@ -88,6 +90,7 @@ export default ({ data, pagination, loading, onChange }: IProps) => {
         matchingId: item.matchingId,
         size: item.size,
         subsidy: item.subsidy,
+        cars: item.cars,
     }))
 
     return (

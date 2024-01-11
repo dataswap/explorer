@@ -77,7 +77,7 @@ export default () => {
                             }}
                         />
                     ),
-                    requirement: (
+                    replicaRequirement: (
                         <DatasetRequirementBasicTable
                             queryParam={{
                                 network: "calibration",
