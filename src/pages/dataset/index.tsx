@@ -3,7 +3,7 @@ import { InferGetServerSidePropsType, NextPageContext } from "next"
 import { Button } from "antd"
 import { PlusOutlined } from "@ant-design/icons"
 import { useRouter } from "next/router"
-import DatasetBasicTable from "../basic/tabel/dataset"
+import DatasetBasicTable from "../basic/table/dataset"
 import { defaultTableQueryParams } from "../../config/params"
 
 export async function getServerSideProps(context: NextPageContext) {

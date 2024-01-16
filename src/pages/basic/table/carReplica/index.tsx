@@ -1,12 +1,15 @@
 import React from "react"
 import { QueryParam } from "@/shared/messagehub/queryParams"
 import CommonTable from "@/components/table/index"
-import Tabel from "@/components/table/view/car"
-import { Car } from "@dataswapjs/dataswapjs"
-import { getCar, getCarCount } from "../../../../shared/messagehub/get"
+import Table from "@/components/table/view/carReplica"
+import { CarReplica } from "@dataswapjs/dataswapjs"
+import {
+    getCarReplica,
+    getCarReplicaCount,
+} from "../../../../shared/messagehub/get"
 
 interface IProps {
-    queryParam: QueryParam<Car>
+    queryParam: QueryParam<CarReplica>
 }
 
 export default function index({ queryParam }: IProps) {
@@ -14,13 +17,13 @@ export default function index({ queryParam }: IProps) {
         <>
             {
                 <CommonTable
-                    dynamicTable={Tabel}
+                    dynamicTable={Table}
                     queryParam={queryParam}
                     fuzzySearchKeys={{
-                        stringIncludeKeys: ["hash"],
+                        stringIncludeKeys: [],
                     }}
-                    getObjects={getCar}
-                    getObjectsCount={getCarCount}
+                    getObjects={getCarReplica}
+                    getObjectsCount={getCarReplicaCount}
                 />
             }
         </>

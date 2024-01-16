@@ -1,15 +1,15 @@
 import React from "react"
 import { QueryParam } from "@/shared/messagehub/queryParams"
 import CommonTable from "@/components/table/index"
-import Tabel from "@/components/table/view/matching"
-import { MatchingMetadata } from "@dataswapjs/dataswapjs"
+import Table from "@/components/table/view/message"
+import { DataswapMessage } from "@dataswapjs/dataswapjs"
 import {
-    getMatchingMetadata,
-    getMatchingMetadataCount,
+    getDataswapMessage,
+    getDataswapMessageCount,
 } from "../../../../shared/messagehub/get"
 
 interface IProps {
-    queryParam: QueryParam<MatchingMetadata>
+    queryParam: QueryParam<DataswapMessage>
 }
 
 export default function index({ queryParam }: IProps) {
@@ -17,13 +17,14 @@ export default function index({ queryParam }: IProps) {
         <>
             {
                 <CommonTable
-                    dynamicTable={Tabel}
+                    dynamicTable={Table}
                     queryParam={queryParam}
                     fuzzySearchKeys={{
-                        stringIncludeKeys: ["initiator"],
+                        stringIncludeKeys: ["method", "from", "to"],
+                        intEqualKeys: ["height"],
                     }}
-                    getObjects={getMatchingMetadata}
-                    getObjectsCount={getMatchingMetadataCount}
+                    getObjects={getDataswapMessage}
+                    getObjectsCount={getDataswapMessageCount}
                 />
             }
         </>

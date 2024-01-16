@@ -1,6 +1,6 @@
 import React from "react"
 import { InferGetServerSidePropsType, NextPageContext } from "next"
-import MatchingBasicTable from "../basic/tabel/matchingMetadata"
+import MatchingBasicTable from "../basic/table/matchingMetadata"
 import { defaultTableQueryParams } from "../../config/params"
 
 export async function getServerSideProps(context: NextPageContext) {

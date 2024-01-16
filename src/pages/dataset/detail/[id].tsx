@@ -4,9 +4,9 @@ import { useRouter } from "next/router"
 import { DatasetMetadataDescription } from "@/components/description/dataset"
 import { DatasetRequirementDescription } from "@/components/description/dataset/requirement"
 import { DatasetProofDescription } from "@/components/description/dataset/proofMetadata"
-import CarTable from "../../basic/tabel/car"
-import MessageTable from "../../basic/tabel/message"
-import DatasetRequirementBasicTable from "../../basic/tabel/datasetRequirement"
+import CarTable from "../../basic/table/car"
+import MessageTable from "../../basic/table/message"
+import DatasetRequirementBasicTable from "../../basic/table/datasetRequirement"
 import {
     DatasetMetadata,
     DatasetRequirement,

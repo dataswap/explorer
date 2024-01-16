@@ -9,8 +9,8 @@ import axios from "axios"
 import { convertDataToItems } from "@unipackage/webkit"
 import { ValueFields } from "@unipackage/utils"
 import { MatchingBid } from "@/shared/types"
-import CarReplicaPage from "../../basic/tabel/carReplica"
-import MessageBasicPage from "../../basic/tabel/message"
+import CarReplicaPage from "../../basic/table/carReplica"
+import MessageBasicPage from "../../basic/table/message"
 import { getMatchingMetadata } from "@/shared/messagehub/get"
 
 const onChange = (key: string) => {

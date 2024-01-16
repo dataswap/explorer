@@ -1,7 +1,7 @@
 import React from "react"
 import { QueryParam } from "@/shared/messagehub/queryParams"
 import CommonTable from "@/components/table/index"
-import Tabel from "@/components/table/view/dataset"
+import Table from "@/components/table/view/dataset"
 import { DatasetMetadata } from "@dataswapjs/dataswapjs"
 import {
     getDatasetMetadata,
@@ -17,7 +17,7 @@ export default function index({ queryParam }: IProps) {
         <>
             {
                 <CommonTable
-                    dynamicTable={Tabel}
+                    dynamicTable={Table}
                     queryParam={queryParam}
                     fuzzySearchKeys={{
                         stringIncludeKeys: [
