@@ -8,7 +8,7 @@ import { Table } from "antd"
 import { DatasetMetadata } from "@dataswapjs/dataswapjs"
 import { ValueFields } from "@unipackage/utils"
 import Link from "next/link"
-import { config_datasetDetailPageRoot } from "../../../config/links"
+import { config_datasetDetailPageRoot } from "../../../../config/links"
 
 interface TabelItem
     extends Pick<

@@ -25,23 +25,21 @@ import {
     ITableProps,
 } from "@unipackage/webkit"
 import { Table } from "antd"
-import { MatchingMetadata } from "@dataswapjs/dataswapjs"
-import { ValueFields } from "@unipackage/utils"
+import { DatasetRequirement } from "@dataswapjs/dataswapjs"
 import Link from "next/link"
-import {
-    config_matchingDetailPageRoot,
-    config_datasetDetailPageRoot,
-} from "../../../config/links"
+import { ValueFields } from "@unipackage/utils"
+import { config_datasetDetailPageRoot } from "../../../../config/links"
 
 interface TabelItem
     extends Pick<
-        ValueFields<MatchingMetadata>,
-        | "matchingId"
+        ValueFields<DatasetRequirement>,
         | "datasetId"
-        | "replicaIndex"
-        | "initiator"
-        | "createdBlockNumber"
-        | "biddingThreshold"
+        | "index"
+        | "dataPreparers"
+        | "storageProviders"
+        | "regionCode"
+        | "cityCodes"
+        | "countryCode"
     > {
     key: React.ReactNode
 }
@@ -51,32 +49,26 @@ export default ({
     pagination,
     loading,
     onChange,
-}: ITableProps<ValueFields<MatchingMetadata>>) => {
+}: ITableProps<ValueFields<DatasetRequirement>>) => {
     const columns = generateTableColumns<TabelItem>({
         shared: {
             ellipsis: true,
         },
         independent: {
-            matchingId: {
-                width: "10%",
-                render: (value) => (
-                    <Link href={`/${config_matchingDetailPageRoot}/${value}`}>
-                        {value}
-                    </Link>
-                ),
-            },
+            index: { width: "10%" },
             datasetId: {
-                width: "10%",
+                width: "15%",
                 render: (value) => (
-                    <Link href={`/${config_datasetDetailPageRoot}/${value}`}>
+                    <Link href={`${config_datasetDetailPageRoot}/${value}`}>
                         {value}
                     </Link>
                 ),
             },
-            replicaIndex: { width: "7.5%" },
-            initiator: { width: "15%" },
-            createdBlockNumber: { width: "7.5%" },
-            biddingThreshold: { width: "7.5%" },
+            dataPreparers: { width: "15%" },
+            storageProviders: { width: "15%" },
+            regionCode: { width: "15%" },
+            countryCode: { width: "15%" },
+            cityCodes: { width: "15%" },
         },
     })
 
@@ -84,8 +76,8 @@ export default ({
         <Table<TabelItem>
             columns={columns}
             dataSource={extendWithKeyForTableData<
-                ValueFields<MatchingMetadata>
-            >({ dataArray: data, keyField: "matchingId" })}
+                ValueFields<DatasetRequirement>
+            >({ dataArray: data, keyField: "index" })}
             pagination={pagination}
             loading={loading}
             onChange={onChange}

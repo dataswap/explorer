@@ -11,7 +11,7 @@ import {
     config_matchingDetailPageRoot,
     config_datasetDetailPageRoot,
     config_messageDetailPageRoot,
-} from "../../../config/links"
+} from "../../../../config/links"
 
 interface TableItem
     extends Pick<

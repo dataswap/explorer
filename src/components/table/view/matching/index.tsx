@@ -25,21 +25,23 @@ import {
     ITableProps,
 } from "@unipackage/webkit"
 import { Table } from "antd"
-import { DatasetRequirement } from "@dataswapjs/dataswapjs"
-import Link from "next/link"
+import { MatchingMetadata } from "@dataswapjs/dataswapjs"
 import { ValueFields } from "@unipackage/utils"
-import { config_datasetDetailPageRoot } from "../../../config/links"
+import Link from "next/link"
+import {
+    config_matchingDetailPageRoot,
+    config_datasetDetailPageRoot,
+} from "../../../../config/links"
 
 interface TabelItem
     extends Pick<
-        ValueFields<DatasetRequirement>,
+        ValueFields<MatchingMetadata>,
+        | "matchingId"
         | "datasetId"
-        | "index"
-        | "dataPreparers"
-        | "storageProviders"
-        | "regionCode"
-        | "cityCodes"
-        | "countryCode"
+        | "replicaIndex"
+        | "initiator"
+        | "createdBlockNumber"
+        | "biddingThreshold"
     > {
     key: React.ReactNode
 }
@@ -49,26 +51,32 @@ export default ({
     pagination,
     loading,
     onChange,
-}: ITableProps<ValueFields<DatasetRequirement>>) => {
+}: ITableProps<ValueFields<MatchingMetadata>>) => {
     const columns = generateTableColumns<TabelItem>({
         shared: {
             ellipsis: true,
         },
         independent: {
-            index: { width: "10%" },
-            datasetId: {
-                width: "15%",
+            matchingId: {
+                width: "10%",
                 render: (value) => (
-                    <Link href={`${config_datasetDetailPageRoot}/${value}`}>
+                    <Link href={`/${config_matchingDetailPageRoot}/${value}`}>
                         {value}
                     </Link>
                 ),
             },
-            dataPreparers: { width: "15%" },
-            storageProviders: { width: "15%" },
-            regionCode: { width: "15%" },
-            countryCode: { width: "15%" },
-            cityCodes: { width: "15%" },
+            datasetId: {
+                width: "10%",
+                render: (value) => (
+                    <Link href={`/${config_datasetDetailPageRoot}/${value}`}>
+                        {value}
+                    </Link>
+                ),
+            },
+            replicaIndex: { width: "7.5%" },
+            initiator: { width: "15%" },
+            createdBlockNumber: { width: "7.5%" },
+            biddingThreshold: { width: "7.5%" },
         },
     })
 
@@ -76,8 +84,8 @@ export default ({
         <Table<TabelItem>
             columns={columns}
             dataSource={extendWithKeyForTableData<
-                ValueFields<DatasetRequirement>
-            >({ dataArray: data, keyField: "index" })}
+                ValueFields<MatchingMetadata>
+            >({ dataArray: data, keyField: "matchingId" })}
             pagination={pagination}
             loading={loading}
             onChange={onChange}

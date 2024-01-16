@@ -8,7 +8,7 @@ import {
     ITableProps,
 } from "@unipackage/webkit"
 import { Car } from "@dataswapjs/dataswapjs"
-import { config_datasetDetailPageRoot } from "../../../config/links"
+import { config_datasetDetailPageRoot } from "../../../../config/links"
 
 interface TabelItem
     extends Pick<
