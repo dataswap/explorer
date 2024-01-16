@@ -1,84 +1,87 @@
 import React from "react"
+import { Table } from "antd"
+import Link from "next/link"
 import {
     generateTableColumns,
-    convertDataToTableItems,
+    extendWithKeyForTableData,
+    ITableProps,
 } from "@unipackage/webkit"
-import { Table } from "antd"
 import { DataswapMessage } from "@dataswapjs/dataswapjs"
-import { FromType } from "@unipackage/utils"
-import Link from "next/link"
-import type { TablePaginationConfig } from "antd/es/table"
 import {
     config_matchingDetailPageRoot,
     config_datasetDetailPageRoot,
     config_messageDetailPageRoot,
 } from "../../../config/links"
 
-interface MessageTableItem
-    extends FromType<
+interface TableItem
+    extends Pick<
         DataswapMessage,
-        "height" | "timestamp" | "from" | "to" | "method" | "status" | "return"
+        | "cid"
+        | "datasetId"
+        | "matchingId"
+        | "height"
+        | "timestamp"
+        | "from"
+        | "to"
+        | "method"
+        | "status"
+        | "return"
     > {
     key: React.ReactNode
-    cid: React.ReactNode
-    datasetId: React.ReactNode
-    matchingId: React.ReactNode
 }
 
-interface IProps {
-    data: DataswapMessage[]
-    pagination: TablePaginationConfig
-    loading: boolean
-    onChange: (pagination: TablePaginationConfig) => void
-}
-
-export default ({ data, pagination, loading, onChange }: IProps) => {
-    const columns = generateTableColumns<MessageTableItem>({
-        cid: "10%",
-        datasetId: "10%",
-        matchingId: "10%",
-        height: "10%",
-        timestamp: "10%",
-        from: "7.5%",
-        to: "7.5%",
-        method: "15%",
-        status: "10%",
-        return: "10%",
+export default ({
+    data,
+    pagination,
+    loading,
+    onChange,
+}: ITableProps<DataswapMessage>) => {
+    const columns = generateTableColumns<TableItem>({
+        shared: {
+            ellipsis: true,
+        },
+        independent: {
+            cid: {
+                width: "10%",
+                render: (data) => (
+                    <Link href={`${config_messageDetailPageRoot}/${data["/"]}`}>
+                        {data["/"]}
+                    </Link>
+                ),
+            },
+            datasetId: {
+                width: "10%",
+                render: (data) => (
+                    <Link href={`${config_datasetDetailPageRoot}/${data}`}>
+                        {data}
+                    </Link>
+                ),
+            },
+            matchingId: {
+                width: "10%",
+                render: (data) => (
+                    <Link href={`${config_matchingDetailPageRoot}/${data}`}>
+                        {data}
+                    </Link>
+                ),
+            },
+            height: { width: "10%" },
+            timestamp: { width: "10%" },
+            from: { width: "7.5%" },
+            to: { width: "7.5%" },
+            method: { width: "15%" },
+            status: { width: "10%" },
+            return: { width: "10%" },
+        },
     })
 
-    const tabelItems: MessageTableItem[] = convertDataToTableItems<
-        DataswapMessage,
-        MessageTableItem
-    >(data, (item) => ({
-        key: item.cid["/"],
-        cid: (
-            <Link href={`${config_messageDetailPageRoot}/${item.cid["/"]}`}>
-                {item.cid["/"]}
-            </Link>
-        ),
-        datasetId: (
-            <Link href={`${config_datasetDetailPageRoot}/${item.datasetId}`}>
-                {item.datasetId}
-            </Link>
-        ),
-        matchingId: (
-            <Link href={`${config_matchingDetailPageRoot}/${item.matchingId}`}>
-                {item.matchingId}
-            </Link>
-        ),
-        height: item.height,
-        timestamp: item.timestamp,
-        from: item.from,
-        to: item.to,
-        method: item.method,
-        status: item.status,
-        return: item.return,
-    }))
-
     return (
-        <Table<MessageTableItem>
+        <Table<TableItem>
             columns={columns}
-            dataSource={tabelItems}
+            dataSource={extendWithKeyForTableData<DataswapMessage>({
+                dataArray: data,
+                keyField: "cid",
+            })}
             pagination={pagination}
             loading={loading}
             onChange={onChange}

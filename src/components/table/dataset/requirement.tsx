@@ -21,18 +21,19 @@
 import React from "react"
 import {
     generateTableColumns,
-    convertDataToTableItems,
+    extendWithKeyForTableData,
+    ITableProps,
 } from "@unipackage/webkit"
 import { Table } from "antd"
 import { DatasetRequirement } from "@dataswapjs/dataswapjs"
 import Link from "next/link"
-import { FromType, ValueFields } from "@unipackage/utils"
-import type { TablePaginationConfig } from "antd/es/table"
+import { ValueFields } from "@unipackage/utils"
 import { config_datasetDetailPageRoot } from "../../../config/links"
 
-interface DatasetRequirementTabelItem
-    extends FromType<
+interface TabelItem
+    extends Pick<
         ValueFields<DatasetRequirement>,
+        | "datasetId"
         | "index"
         | "dataPreparers"
         | "storageProviders"
@@ -41,49 +42,42 @@ interface DatasetRequirementTabelItem
         | "countryCode"
     > {
     key: React.ReactNode
-    datasetId: React.ReactNode
 }
 
-interface IProps {
-    data: ValueFields<DatasetRequirement>[]
-    pagination: TablePaginationConfig
-    loading: boolean
-    onChange: (pagination: TablePaginationConfig) => void
-}
-
-export default ({ data, pagination, loading, onChange }: IProps) => {
-    const columns = generateTableColumns<DatasetRequirementTabelItem>({
-        index: "10%",
-        datasetId: "15%",
-        dataPreparers: "15%",
-        storageProviders: "15%",
-        regionCode: "15%",
-        countryCode: "15%",
-        cityCodes: "15%",
+export default ({
+    data,
+    pagination,
+    loading,
+    onChange,
+}: ITableProps<ValueFields<DatasetRequirement>>) => {
+    const columns = generateTableColumns<TabelItem>({
+        shared: {
+            ellipsis: true,
+        },
+        independent: {
+            index: { width: "10%" },
+            datasetId: {
+                width: "15%",
+                render: (value) => (
+                    <Link href={`${config_datasetDetailPageRoot}/${value}`}>
+                        {value}
+                    </Link>
+                ),
+            },
+            dataPreparers: { width: "15%" },
+            storageProviders: { width: "15%" },
+            regionCode: { width: "15%" },
+            countryCode: { width: "15%" },
+            cityCodes: { width: "15%" },
+        },
     })
 
-    const tabelItems: DatasetRequirementTabelItem[] = convertDataToTableItems<
-        ValueFields<DatasetRequirement>,
-        DatasetRequirementTabelItem
-    >(data, (item) => ({
-        key: item.index?.toString(),
-        datasetId: (
-            <Link href={`${config_datasetDetailPageRoot}/${item.datasetId}`}>
-                {item.datasetId}
-            </Link>
-        ),
-        index: item.index,
-        dataPreparers: item.dataPreparers,
-        storageProviders: item.storageProviders,
-        regionCode: item.regionCode,
-        countryCode: item.countryCode,
-        cityCodes: item.cityCodes,
-    }))
-
     return (
-        <Table<DatasetRequirementTabelItem>
+        <Table<TabelItem>
             columns={columns}
-            dataSource={tabelItems}
+            dataSource={extendWithKeyForTableData<
+                ValueFields<DatasetRequirement>
+            >({ dataArray: data, keyField: "index" })}
             pagination={pagination}
             loading={loading}
             onChange={onChange}

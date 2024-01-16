@@ -1,62 +1,66 @@
 import React from "react"
+import Link from "next/link"
+import { ValueFields } from "@unipackage/utils"
+import { Table } from "antd"
 import {
     generateTableColumns,
-    convertDataToTableItems,
+    extendWithKeyForTableData,
+    ITableProps,
 } from "@unipackage/webkit"
-import { Table } from "antd"
 import { Car } from "@dataswapjs/dataswapjs"
-import { FromType, ValueFields } from "@unipackage/utils"
-import Link from "next/link"
-import type { TablePaginationConfig } from "antd/es/table"
 import { config_datasetDetailPageRoot } from "../../../config/links"
 
-interface CarTabelItem
-    extends FromType<
+interface TabelItem
+    extends Pick<
         ValueFields<Car>,
-        "carId" | "hash" | "matchingIds" | "replicasCount" | "size"
+        | "datasetId"
+        | "carId"
+        | "hash"
+        | "matchingIds"
+        | "replicasCount"
+        | "size"
     > {
     key: React.ReactNode
-    datasetId: React.ReactNode
 }
 
-interface IProps {
-    data: ValueFields<Car>[]
-    pagination: TablePaginationConfig
-    loading: boolean
-    onChange: (pagination: TablePaginationConfig) => void
-}
-
-export default ({ data, pagination, loading, onChange }: IProps) => {
-    const columns = generateTableColumns<CarTabelItem>({
-        carId: "10%",
-        datasetId: "18%",
-        hash: "18%",
-        size: "18%",
-        replicasCount: "18%",
-        matchingIds: "18%",
+export default ({
+    data,
+    pagination,
+    loading,
+    onChange,
+}: ITableProps<ValueFields<Car>>) => {
+    const columns = generateTableColumns<TabelItem>({
+        shared: {
+            ellipsis: true,
+        },
+        independent: {
+            carId: {
+                width: "10%",
+            },
+            datasetId: {
+                width: "18%",
+                render: (value) => (
+                    <Link href={`${config_datasetDetailPageRoot}/${value}`}>
+                        {value}
+                    </Link>
+                ),
+            },
+            hash: {
+                width: "18%",
+            },
+            size: { width: "18%" },
+            replicasCount: { width: "18%" },
+            matchingIds: { width: "18%" },
+        },
     })
 
-    const tabelItems: CarTabelItem[] = convertDataToTableItems<
-        ValueFields<Car>,
-        CarTabelItem
-    >(data, (item) => ({
-        key: item.carId.toString(),
-        datasetId: (
-            <Link href={`${config_datasetDetailPageRoot}/${item.datasetId}`}>
-                {item.datasetId}
-            </Link>
-        ),
-        carId: item.carId,
-        hash: item.hash,
-        matchingIds: item.matchingIds,
-        replicasCount: item.replicasCount,
-        size: item.size,
-    }))
-
     return (
-        <Table<CarTabelItem>
+        <Table<TabelItem>
             columns={columns}
-            dataSource={tabelItems}
+            dataSource={extendWithKeyForTableData<ValueFields<Car>>({
+                dataArray: data,
+                keyField: "carId",
+            })}
             pagination={pagination}
             loading={loading}
             onChange={onChange}

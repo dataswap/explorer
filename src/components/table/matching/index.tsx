@@ -21,78 +21,71 @@
 import React from "react"
 import {
     generateTableColumns,
-    convertDataToTableItems,
+    extendWithKeyForTableData,
+    ITableProps,
 } from "@unipackage/webkit"
 import { Table } from "antd"
 import { MatchingMetadata } from "@dataswapjs/dataswapjs"
-import { FromType, ValueFields } from "@unipackage/utils"
-import type { TablePaginationConfig } from "antd/es/table"
+import { ValueFields } from "@unipackage/utils"
 import Link from "next/link"
 import {
     config_matchingDetailPageRoot,
     config_datasetDetailPageRoot,
 } from "../../../config/links"
 
-interface MatchingTabelItem
-    extends FromType<
+interface TabelItem
+    extends Pick<
         ValueFields<MatchingMetadata>,
-        "initiator" | "createdBlockNumber"
+        | "matchingId"
+        | "datasetId"
+        | "replicaIndex"
+        | "initiator"
+        | "createdBlockNumber"
+        | "biddingThreshold"
     > {
     key: React.ReactNode
-    id: React.ReactNode //matchingId
-    datasetId: React.ReactNode //datasetID
-    replicaId?: string //replicaIndex
-    createdTime: string
-    initialPrice: string //biddingThreshold
-    status: string //TODO,add by metadata
 }
 
-interface IProps {
-    data: ValueFields<MatchingMetadata>[]
-    pagination: TablePaginationConfig
-    loading: boolean
-    onChange: (pagination: TablePaginationConfig) => void
-}
-
-export default ({ data, pagination, loading, onChange }: IProps) => {
-    const columns = generateTableColumns<MatchingTabelItem>({
-        id: "7.5%",
-        datasetId: "10%",
-        replicaId: "7.5%",
-        createdBlockNumber: "7.5%",
-        createdTime: "15%",
-        initiator: "15%",
-        initialPrice: "7.5%",
-        status: "15%",
+export default ({
+    data,
+    pagination,
+    loading,
+    onChange,
+}: ITableProps<ValueFields<MatchingMetadata>>) => {
+    const columns = generateTableColumns<TabelItem>({
+        shared: {
+            ellipsis: true,
+        },
+        independent: {
+            matchingId: {
+                width: "10%",
+                render: (value) => (
+                    <Link href={`/${config_matchingDetailPageRoot}/${value}`}>
+                        {value}
+                    </Link>
+                ),
+            },
+            datasetId: {
+                width: "10%",
+                render: (value) => (
+                    <Link href={`/${config_datasetDetailPageRoot}/${value}`}>
+                        {value}
+                    </Link>
+                ),
+            },
+            replicaIndex: { width: "7.5%" },
+            initiator: { width: "15%" },
+            createdBlockNumber: { width: "7.5%" },
+            biddingThreshold: { width: "7.5%" },
+        },
     })
 
-    const tabelItems: MatchingTabelItem[] = convertDataToTableItems<
-        ValueFields<MatchingMetadata>,
-        MatchingTabelItem
-    >(data, (item) => ({
-        key: item.matchingId,
-        id: (
-            <Link href={`/${config_matchingDetailPageRoot}/${item.matchingId}`}>
-                {item.matchingId}
-            </Link>
-        ),
-        datasetId: (
-            <Link href={`/${config_datasetDetailPageRoot}/${item.datasetId}`}>
-                {item.datasetId}
-            </Link>
-        ),
-        replicaId: item.replicaIndex?.toString(),
-        createdTime: "",
-        initialPrice: item.biddingThreshold.toString(),
-        status: "",
-        initiator: item.initiator,
-        createdBlockNumber: item.createdBlockNumber,
-    }))
-
     return (
-        <Table<MatchingTabelItem>
+        <Table<TabelItem>
             columns={columns}
-            dataSource={tabelItems}
+            dataSource={extendWithKeyForTableData<
+                ValueFields<MatchingMetadata>
+            >({ dataArray: data, keyField: "matchingId" })}
             pagination={pagination}
             loading={loading}
             onChange={onChange}

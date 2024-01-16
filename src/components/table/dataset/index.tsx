@@ -1,74 +1,72 @@
 import React from "react"
 import {
     generateTableColumns,
-    convertDataToTableItems,
+    extendWithKeyForTableData,
+    ITableProps,
 } from "@unipackage/webkit"
 import { Table } from "antd"
 import { DatasetMetadata } from "@dataswapjs/dataswapjs"
-import { FromType, ValueFields } from "@unipackage/utils"
-import type { TablePaginationConfig } from "antd/es/table"
+import { ValueFields } from "@unipackage/utils"
 import Link from "next/link"
 import { config_datasetDetailPageRoot } from "../../../config/links"
 
-interface DatasetTabelItem
-    extends FromType<
+interface TabelItem
+    extends Pick<
         ValueFields<DatasetMetadata>,
-        "accessMethod" | "submitter" | "status"
+        | "datasetId"
+        | "name"
+        | "createdBlockNumber"
+        | "sizeInBytes"
+        | "accessMethod"
+        | "submitter"
+        | "status"
     > {
     key: React.ReactNode
-    id: React.ReactNode
-    name: React.ReactNode
-    createdHeight?: number
-    createdTime: string
-    size: string
 }
 
-interface IProps {
-    data: ValueFields<DatasetMetadata>[]
-    pagination: TablePaginationConfig
-    loading: boolean
-    onChange: (pagination: TablePaginationConfig) => void
-}
-
-export default ({ data, pagination, loading, onChange }: IProps) => {
-    const columns = generateTableColumns<DatasetTabelItem>({
-        id: "7%",
-        name: "15%",
-        accessMethod: "15%",
-        size: "8%",
-        createdHeight: "15%",
-        createdTime: "15%",
-        submitter: "10%",
-        status: "15%",
+export default ({
+    data,
+    pagination,
+    loading,
+    onChange,
+}: ITableProps<ValueFields<DatasetMetadata>>) => {
+    const columns = generateTableColumns<TabelItem>({
+        shared: {
+            ellipsis: true,
+        },
+        independent: {
+            datasetId: {
+                width: "7%",
+                render: (value) => (
+                    <Link href={`${config_datasetDetailPageRoot}/${value}`}>
+                        {value}
+                    </Link>
+                ),
+            },
+            name: {
+                width: "15%",
+                render: (_, record) => (
+                    <Link
+                        href={`${config_datasetDetailPageRoot}/${record.datasetId}`}
+                    >
+                        {record.name}
+                    </Link>
+                ),
+            },
+            accessMethod: { width: "15%" },
+            sizeInBytes: { width: "8%" },
+            createdBlockNumber: { width: "15%" },
+            submitter: { width: "10%" },
+            status: { width: "15%" },
+        },
     })
 
-    const tabelItems: DatasetTabelItem[] = convertDataToTableItems<
-        ValueFields<DatasetMetadata>,
-        DatasetTabelItem
-    >(data, (item) => ({
-        key: item.datasetId,
-        id: (
-            <Link href={`${config_datasetDetailPageRoot}/${item.datasetId}`}>
-                {item.datasetId}
-            </Link>
-        ),
-        name: (
-            <Link href={`${config_datasetDetailPageRoot}/${item.datasetId}`}>
-                {item.name}
-            </Link>
-        ),
-        createdHeight: item.createdBlockNumber,
-        createdTime: "",
-        size: item.sizeInBytes.toString(),
-        status: item.status,
-        submitter: item.submitter,
-        accessMethod: item.accessMethod,
-    }))
-
     return (
-        <Table<DatasetTabelItem>
+        <Table<TabelItem>
             columns={columns}
-            dataSource={tabelItems}
+            dataSource={extendWithKeyForTableData<ValueFields<DatasetMetadata>>(
+                { dataArray: data, keyField: "datasetId" }
+            )}
             pagination={pagination}
             loading={loading}
             onChange={onChange}
