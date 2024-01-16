@@ -5,13 +5,12 @@ import { MatchingTargetDescription } from "@/components/description/matching/tar
 import { MatchingWinnerDescription } from "@/components/description/matching/winner"
 import { MatchingMetadata, MatchingTarget } from "@dataswapjs/dataswapjs"
 import { useEffect, useState } from "react"
-import axios from "axios"
 import { convertDataToItems } from "@unipackage/webkit"
 import { ValueFields } from "@unipackage/utils"
 import { MatchingBid } from "@/shared/types"
 import CarReplicaPage from "../../basic/table/carReplica"
 import MessageBasicPage from "../../basic/table/message"
-import { getMatchingMetadata } from "@/shared/messagehub/get"
+import { getMatchingMetadata, getMatchingTarget } from "@/shared/messagehub/get"
 
 const onChange = (key: string) => {
     console.log(key)
@@ -21,6 +20,7 @@ export default () => {
     const router = useRouter()
     const { id } = router.query
     const [overview, setOverview] = useState<ValueFields<MatchingMetadata>>()
+    const [target, setTarget] = useState<ValueFields<MatchingTarget>>()
     const [tabItems, setTabItems] = useState<any>()
 
     useEffect(() => {
@@ -60,6 +60,15 @@ export default () => {
                 //TODO
                 setOverview(datasetMetadata![0])
             })
+
+            getMatchingTarget({
+                network: "calibration",
+                queryFilter: { conditions: [{ matchingId: id }] },
+            }).then((res) => {
+                const datasetMetadata = res.data
+                //TODO
+                setTarget(datasetMetadata![0])
+            })
         }
     }, [id])
 
@@ -68,10 +77,14 @@ export default () => {
             {overview && (
                 <>
                     <MatchingMetadataDescription data={overview} />
-                    <MatchingTargetDescription data={{} as MatchingTarget} />
-                    <MatchingWinnerDescription data={{} as MatchingBid} />
                 </>
             )}
+            {target && (
+                <>
+                    <MatchingTargetDescription data={target} />
+                </>
+            )}
+            {/* <MatchingWinnerDescription data={{} as MatchingBid} /> */}
             <Tabs
                 defaultActiveKey="Bids"
                 items={tabItems}

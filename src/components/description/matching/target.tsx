@@ -1,41 +1,61 @@
 import React from "react"
-import Link from "next/link"
-import { MatchingTarget } from "@dataswapjs/dataswapjs"
-import { convertDataToItems, Descriptions } from "@unipackage/webkit"
+import { Descriptions } from "antd"
 import { ValueFields } from "@unipackage/utils"
+import {
+    DescriptionsItemTypeWithOptionalChildren,
+    convertDataToDescriptionsItems,
+} from "@unipackage/webkit"
+import Link from "next/link"
 import {
     config_datasetDetailPageRoot,
     config_matchingDetailPageRoot,
 } from "../../../config/links"
+import { MatchingTarget } from "@dataswapjs/dataswapjs"
 
 interface IProps {
     data: ValueFields<MatchingTarget>
 }
 
-function getMapper(data: ValueFields<MatchingTarget>) {
+function generateSpecialItem(data: ValueFields<MatchingTarget>): {
+    [key in keyof MatchingTarget]?: DescriptionsItemTypeWithOptionalChildren
+} {
     return {
-        matchingId: (value: any) =>
-            value ? (
-                <Link href={`${config_matchingDetailPageRoot}/${value}`}>
-                    {value}
+        datasetID: {
+            children: (
+                <Link
+                    href={`${config_datasetDetailPageRoot}/${data.datasetID}`}
+                >
+                    {data.datasetID}
                 </Link>
-            ) : (
-                ""
             ),
-        datasetId: (value: any) => (
-            <Link href={`${config_datasetDetailPageRoot}/${value}`}>
-                {value}
-            </Link>
-        ),
-        cars: (value: any) => value?.join(","),
-        dataType: (value: any) => (value ? "MappingFiles" : "Source"),
+        },
+        matchingId: {
+            children: (
+                <Link
+                    href={`${config_matchingDetailPageRoot}/${data.matchingId}`}
+                >
+                    {data.matchingId}
+                </Link>
+            ),
+        },
+        cars: {
+            children: data.cars.join(","),
+        },
+        dataType: {
+            children: data.dataType ? "MappingFiles" : "Source",
+        },
     }
 }
 
 export function MatchingTargetDescription({ data }: IProps) {
-    const descriptionItems = convertDataToItems(data, getMapper(data), {
-        keyBlacklist: ["id"],
-    })
+    const descriptionItems = convertDataToDescriptionsItems(
+        data,
+        generateSpecialItem(data),
+        {
+            //@ts-ignore
+            keyBlacklist: ["id", "_id", "__v"],
+        }
+    )
     return (
         <Descriptions title="Matching Target Info" items={descriptionItems} />
     )

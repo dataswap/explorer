@@ -1,56 +1,77 @@
 import React from "react"
-import Link from "next/link"
-import { MatchingMetadata } from "@dataswapjs/dataswapjs"
-import { convertDataToItems, Descriptions } from "@unipackage/webkit"
+import { Descriptions } from "antd"
 import { ValueFields } from "@unipackage/utils"
+import {
+    DescriptionsItemTypeWithOptionalChildren,
+    convertDataToDescriptionsItems,
+} from "@unipackage/webkit"
+import Link from "next/link"
 import {
     config_datasetDetailPageRoot,
     config_matchingDetailPageRoot,
 } from "../../../config/links"
+import { MatchingMetadata } from "@dataswapjs/dataswapjs"
 
 interface IProps {
     data: ValueFields<MatchingMetadata>
 }
 
-function getMapper(data: ValueFields<MatchingMetadata>) {
+function generateSpecialItem(data: ValueFields<MatchingMetadata>): {
+    [key in keyof MatchingMetadata]?: DescriptionsItemTypeWithOptionalChildren
+} {
     return {
-        matchingId: (value: any) =>
-            value ? (
-                <Link href={`${config_matchingDetailPageRoot}/${value}`}>
-                    {value}
+        datasetId: {
+            children: (
+                <Link
+                    href={`${config_datasetDetailPageRoot}/${data.datasetId}`}
+                >
+                    {data.datasetId}
                 </Link>
-            ) : (
-                ""
             ),
-        datasetId: (value: any) => (
-            <Link href={`${config_datasetDetailPageRoot}/${value}`}>
-                {value}
-            </Link>
-        ),
+            span: 1,
+        },
+        matchingId: {
+            children: (
+                <Link
+                    href={`${config_matchingDetailPageRoot}/${data.matchingId}`}
+                >
+                    {data.matchingId}
+                </Link>
+            ),
+            span: 1,
+        },
     }
 }
 
 export function MatchingMetadataDescription({ data }: IProps) {
-    const descriptionItems = convertDataToItems(data, getMapper(data), {
-        //@ts-ignore
-        keyBlacklist: ["id", "_id", "__v"],
-    })
+    const descriptionItems = convertDataToDescriptionsItems(
+        data,
+        generateSpecialItem(data),
+        {
+            //@ts-ignore
+            keyBlacklist: ["id", "_id", "__v"],
+        }
+    )
     return (
         <Descriptions title="Matching Metadata Info" items={descriptionItems} />
     )
 }
 
 export function MatchingOverviewDescription({ data }: IProps) {
-    const descriptionItems = convertDataToItems(data, getMapper(data), {
-        keyWhitelist: [
-            "datasetId",
-            "replicaIndex",
-            "matchingId",
-            "initiator",
-            "createdBlockNumber",
-            "bidSelectionRule",
-        ],
-    })
+    const descriptionItems = convertDataToDescriptionsItems(
+        data,
+        generateSpecialItem(data),
+        {
+            keyWhitelist: [
+                "datasetId",
+                "replicaIndex",
+                "matchingId",
+                "initiator",
+                "createdBlockNumber",
+                "bidSelectionRule",
+            ],
+        }
+    )
     return (
         <Descriptions title="Matching Overview Info" items={descriptionItems} />
     )
