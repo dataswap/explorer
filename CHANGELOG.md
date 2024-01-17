@@ -1,5 +1,16 @@
 
 
+## [0.3.1](https://github.com/dataswap/explorer/compare/0.3.0...0.3.1) (2024-01-17)
+
+
+### Bug Fixes
+
+* 🐛 add network dropdown menu ([e5d72cc](https://github.com/dataswap/explorer/commit/e5d72cc2bb1b8a61e72f437c022349da9c0d6d2d))
+* 🐛 car and requirement display ([f42ef55](https://github.com/dataswap/explorer/commit/f42ef557ca85f8b7edd0a7c6647f8b64393e5ffa))
+* 🐛 display order ([94d523b](https://github.com/dataswap/explorer/commit/94d523bdb995dfffb8fb3e8d10d843277e79b443))
+* 🐛 double key issue ([8dc1896](https://github.com/dataswap/explorer/commit/8dc18966551dc3ccbd926f2cfbe4f7dedcedebfb))
+* 🐛 network dropdown color ([09e5c24](https://github.com/dataswap/explorer/commit/09e5c241d73b3e95fbdc087244075071c9205dbb))
+
 # [0.3.0](https://github.com/dataswap/explorer/compare/0.2.3...0.3.0) (2024-01-17)
 
 
