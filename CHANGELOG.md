@@ -1,5 +1,30 @@
 
 
+# [0.3.0](https://github.com/dataswap/explorer/compare/0.2.3...0.3.0) (2024-01-17)
+
+
+### Bug Fixes
+
+* 🐛 [#81](https://github.com/dataswap/explorer/issues/81) ([c81c1d4](https://github.com/dataswap/explorer/commit/c81c1d46b381bea85cf31111669965325801ca26))
+* 🐛 [#82](https://github.com/dataswap/explorer/issues/82) ([ed1777c](https://github.com/dataswap/explorer/commit/ed1777c8dd60b61bd289847f5c15dce0760656cc))
+* 🐛 [#83](https://github.com/dataswap/explorer/issues/83) ([b0b0ace](https://github.com/dataswap/explorer/commit/b0b0acee0075a76fe57df68c334e49861fe09f5c))
+* 🐛 add detail pages ([6b0f9fc](https://github.com/dataswap/explorer/commit/6b0f9fc1a632a9170fe7274536a116abf2f5fc1e))
+* 🐛 carreplica use asc sort ([02e0f3b](https://github.com/dataswap/explorer/commit/02e0f3ba6506fb52b797e89faae73afdac5211e4))
+* 🐛 fixed ci ([195bea5](https://github.com/dataswap/explorer/commit/195bea59294c25b752dbfcbf0004a1f2af5f662d))
+* 🐛 rename some word ([59b5560](https://github.com/dataswap/explorer/commit/59b556090056f89db72c4f6be533662cfdf02830))
+* 🐛 tabel->table ([8262727](https://github.com/dataswap/explorer/commit/826272714e00f346793ec4f9ed2f3af3726532ef))
+* 🐛 update car table ([8fc5871](https://github.com/dataswap/explorer/commit/8fc58711eb91db242ab3eb822138cba676f7e730))
+* 🐛 update dataswapjs ([f544f49](https://github.com/dataswap/explorer/commit/f544f4941f646d7cc975dd88588da69e2bdb6558))
+* 🐛 update msg desc ([edbc89c](https://github.com/dataswap/explorer/commit/edbc89c5eb2ac4faaefe6d9717e4f8015bc7ee39))
+* 🐛 update requirement  sample ([a5e0d58](https://github.com/dataswap/explorer/commit/a5e0d5805c2a0e06ead18f8f583c29deffa4a27e))
+* 🐛 update table component ([015bf9c](https://github.com/dataswap/explorer/commit/015bf9ced54f7e719e761cf30693c0ec3198716a))
+
+
+### Features
+
+* 🎸 update desc ([8a39ffb](https://github.com/dataswap/explorer/commit/8a39ffbb9e48c6c9bfdc4ae7ef6647eb5acc9f83))
+* 🎸 update webkit to 1.0.0 ([0dd5326](https://github.com/dataswap/explorer/commit/0dd5326e8e9a4d26f0fed78033d5ab3c5d4f91c2))
+
 ## [0.2.3](https://github.com/dataswap/explorer/compare/0.2.2...0.2.3) (2024-01-11)
 
 
