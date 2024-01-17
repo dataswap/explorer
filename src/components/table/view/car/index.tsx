@@ -7,7 +7,7 @@ import {
     extendWithKeyForTableData,
     ITableProps,
 } from "@unipackage/webkit"
-import { Car } from "@dataswapjs/dataswapjs"
+import { Car, CarReplica, CarReplicaState } from "@dataswapjs/dataswapjs"
 import { config_datasetDetailPageRoot } from "../../../../config/links"
 
 interface TabelItem
@@ -16,9 +16,12 @@ interface TabelItem
         | "datasetId"
         | "carId"
         | "hash"
-        | "matchingIds"
         | "replicasCount"
+        | "matchingIds"
         | "size"
+        | "dataType"
+        | "cid"
+        | "replicaInfos"
     > {
     key: React.ReactNode
 }
@@ -49,8 +52,30 @@ export default ({
                 width: "18%",
             },
             size: { width: "18%" },
-            replicasCount: { width: "18%" },
+            replicasCount: {
+                width: "18%",
+                hidden: true,
+            },
             matchingIds: { width: "18%" },
+            cid: { width: "18%" },
+            dataType: { width: "18%" },
+            replicaInfos: {
+                title: "Completion Rate",
+                width: "18%",
+                render: (values: CarReplica[], record) => (
+                    <>
+                        {
+                            values.filter((value) => {
+                                return (
+                                    Number(value.state) ===
+                                    Number(CarReplicaState.Stored)
+                                )
+                            }).length
+                        }{" "}
+                        / {record.replicasCount}
+                    </>
+                ),
+            },
         },
     })
 
