@@ -1,4 +1,7 @@
 import { getVersion, getSyncStatus, SyncStatus } from "@/shared/messagehub/get"
+import { SyncStatusDescription } from "@/components/description/about/syncstatus"
+import { VersionDescription } from "@/components/description/about/version"
+import Package from "../../../package.json"
 import React, { useEffect, useState } from "react"
 
 export default () => {
@@ -22,14 +25,22 @@ export default () => {
     }, [])
     return (
         <>
-            <div>Messagehub version: {msghubVersion}</div>
-            <div>
-                calibration network sync status:
-                {JSON.stringify(calibrationSyncStatus)}
-            </div>
-            <div>
-                main network sync status: {JSON.stringify(mainSyncStatus)}
-            </div>
+            <VersionDescription
+                title="Explorer version"
+                data={Package.version ? Package.version : ""}
+            />
+            <VersionDescription
+                title="MessageHub version"
+                data={msghubVersion ? msghubVersion : ""}
+            />
+            <SyncStatusDescription
+                title="Calibration network messageHub sync status"
+                data={calibrationSyncStatus}
+            />
+            <SyncStatusDescription
+                title="Main network messageHub sync status"
+                data={mainSyncStatus}
+            />
         </>
     )
 }

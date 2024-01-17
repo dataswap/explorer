@@ -3,20 +3,22 @@ import type { MenuProps } from "antd"
 import { Menu } from "antd"
 import { useRouter } from "next/router"
 import {
-    HomeOutlined,
-    CloudServerOutlined,
+    // HomeOutlined,
+    // CloudServerOutlined,
     AuditOutlined,
     SwapOutlined,
-    GlobalOutlined,
+    // GlobalOutlined,
     MessageOutlined,
+    ExclamationCircleOutlined,
 } from "@ant-design/icons"
 import {
     config_dataset,
-    config_home,
+    // config_home,
     config_matching,
-    config_members,
+    // config_members,
     config_message,
-    config_storage,
+    // config_storage,
+    config_about,
 } from "../../config/links"
 
 export type MenuItem = Required<MenuProps>["items"][number]
@@ -38,12 +40,13 @@ export function getItem(
 }
 
 const items: MenuItem[] = [
-    getItem("Home", `/${config_home}`, <HomeOutlined />),
+    // getItem("Home", `/${config_home}`, <HomeOutlined />),
     getItem("Message", `/${config_message}`, <MessageOutlined />),
     getItem("Dataset", `/${config_dataset}`, <AuditOutlined />),
     getItem("Matching", `/${config_matching}`, <SwapOutlined />),
-    getItem("Storage", `/${config_storage}`, <CloudServerOutlined />),
-    getItem("Community members", `/${config_members}`, <GlobalOutlined />),
+    // getItem("Storage", `/${config_storage}`, <CloudServerOutlined />),
+    // getItem("Community members", `/${config_members}`, <GlobalOutlined />),
+    getItem("About", `/${config_about}`, <ExclamationCircleOutlined />),
 ]
 
 // eslint-disable-next-line import/no-anonymous-default-export, react/display-name
@@ -65,12 +68,14 @@ export default () => {
                 setCurrent(`/${config_dataset}`)
             } else if (currentPath.startsWith(`/${config_message}`)) {
                 setCurrent(`/${config_message}`)
-            } else if (currentPath.startsWith(`/${config_home}`)) {
-                setCurrent(`/${config_home}`)
-            } else if (currentPath.startsWith(`/${config_storage}`)) {
-                setCurrent(`/${config_storage}`)
-            } else if (currentPath.startsWith(`/${config_members}`)) {
-                setCurrent(`/${config_members}`)
+                // } else if (currentPath.startsWith(`/${config_home}`)) {
+                //     setCurrent(`/${config_home}`)
+                // } else if (currentPath.startsWith(`/${config_storage}`)) {
+                //     setCurrent(`/${config_storage}`)
+                // } else if (currentPath.startsWith(`/${config_members}`)) {
+                //     setCurrent(`/${config_members}`)
+            } else if (currentPath.startsWith(`/${config_about}`)) {
+                setCurrent(`/${config_about}`)
             } else {
                 setCurrent(currentPath)
             }
