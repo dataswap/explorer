@@ -2,8 +2,8 @@ import { useEffect, useState } from "react"
 import { Tabs } from "antd"
 import { useRouter } from "next/router"
 import { DatasetMetadataDescription } from "@/components/description/dataset"
-import { DatasetProofDescription } from "@/components/description/dataset/proofMetadata"
 import { ReplicasCountDescription } from "@/components/description/dataset/replicasCount"
+import DatasetProofMetadataTable from "../../basic/table/datasetProofMetadata"
 import CarTable from "../../basic/table/car"
 import MessageTable from "../../basic/table/message"
 import DatasetRequirementBasicTable from "../../basic/table/datasetRequirement"
@@ -73,6 +73,18 @@ export default () => {
                             }}
                         />
                     ),
+                    proofMetadata: (
+                        <DatasetProofMetadataTable
+                            queryParam={{
+                                network: "calibration",
+                                queryFilter: {
+                                    ...defaultTableQueryParams,
+                                    conditions: [{ datasetId: id }],
+                                    sort: [{ field: "dataType", order: "asc" }],
+                                },
+                            }}
+                        />
+                    ),
                     car: (
                         <CarTable
                             queryParam={{
@@ -80,7 +92,7 @@ export default () => {
                                 queryFilter: {
                                     ...defaultTableQueryParams,
                                     conditions: [{ datasetId: id }],
-                                    sort: [{ field: "carId", order: "desc" }],
+                                    sort: [{ field: "carId", order: "asc" }],
                                 },
                             }}
                         />
@@ -92,6 +104,7 @@ export default () => {
                                 queryFilter: {
                                     ...defaultTableQueryParams,
                                     conditions: [{ datasetId: id }],
+                                    sort: [{ field: "index", order: "asc" }],
                                 },
                             }}
                         />
@@ -105,9 +118,6 @@ export default () => {
         <>
             {datasetMetadata && (
                 <DatasetMetadataDescription data={datasetMetadata} />
-            )}
-            {datasetProofMeta && (
-                <DatasetProofDescription data={datasetProofMeta} />
             )}
             <ReplicasCountDescription
                 data={replicasCount ? replicasCount : 0}
