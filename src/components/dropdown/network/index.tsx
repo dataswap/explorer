@@ -21,7 +21,7 @@ const items: MenuProps["items"] = [
 const App: React.FC = () => (
     <Dropdown menu={{ items, onClick }}>
         <a onClick={(e) => e.preventDefault()}>
-            <Space>
+            <Space style={{ color: "white" }}>
                 Network
                 <DownOutlined />
             </Space>
