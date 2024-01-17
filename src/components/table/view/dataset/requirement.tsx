@@ -101,7 +101,7 @@ export default ({
                         <>
                             {record.matchings?.reduce((sum, currentValue) => {
                                 return sum + Number(currentValue.finishedSize)
-                            }, 0)}{" "}
+                            }, 0)}
                             / totalSize(datasetProof)
                         </>
                     )

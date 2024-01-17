@@ -73,6 +73,18 @@ export default () => {
                             }}
                         />
                     ),
+                    replicaRequirement: (
+                        <DatasetRequirementBasicTable
+                            queryParam={{
+                                network: "calibration",
+                                queryFilter: {
+                                    ...defaultTableQueryParams,
+                                    conditions: [{ datasetId: id }],
+                                    sort: [{ field: "index", order: "asc" }],
+                                },
+                            }}
+                        />
+                    ),
                     proofMetadata: (
                         <DatasetProofMetadataTable
                             queryParam={{
@@ -93,18 +105,6 @@ export default () => {
                                     ...defaultTableQueryParams,
                                     conditions: [{ datasetId: id }],
                                     sort: [{ field: "carId", order: "asc" }],
-                                },
-                            }}
-                        />
-                    ),
-                    replicaRequirement: (
-                        <DatasetRequirementBasicTable
-                            queryParam={{
-                                network: "calibration",
-                                queryFilter: {
-                                    ...defaultTableQueryParams,
-                                    conditions: [{ datasetId: id }],
-                                    sort: [{ field: "index", order: "asc" }],
                                 },
                             }}
                         />
