@@ -1,11 +1,9 @@
 import React from "react"
 import { DownOutlined } from "@ant-design/icons"
 import type { MenuProps } from "antd"
-import { Dropdown, message, Space } from "antd"
-
-const onClick: MenuProps["onClick"] = ({ key }) => {
-    message.info(`Click on item ${key}`)
-}
+import { Dropdown, Space } from "antd"
+import { useDispatch } from "react-redux"
+import { setNetwork } from "../../../redux/slices/networkSlice"
 
 const items: MenuProps["items"] = [
     {
@@ -18,15 +16,33 @@ const items: MenuProps["items"] = [
     },
 ]
 
-const App: React.FC = () => (
-    <Dropdown menu={{ items, onClick }}>
-        <a onClick={(e) => e.preventDefault()}>
-            <Space style={{ color: "white" }}>
-                Network
-                <DownOutlined />
-            </Space>
-        </a>
-    </Dropdown>
-)
+const App: React.FC = () => {
+    const dispatch = useDispatch()
+
+    const onClick: MenuProps["onClick"] = ({ key }) => {
+        switch (key) {
+            case "MainNet":
+                dispatch(setNetwork("main"))
+                break
+
+            case "CalibrationNet":
+                dispatch(setNetwork("calibration"))
+                break
+            default:
+                break
+        }
+    }
+
+    return (
+        <Dropdown menu={{ items, onClick }}>
+            <a onClick={(e) => e.preventDefault()}>
+                <Space style={{ color: "white" }}>
+                    Network
+                    <DownOutlined />
+                </Space>
+            </a>
+        </Dropdown>
+    )
+}
 
 export default App

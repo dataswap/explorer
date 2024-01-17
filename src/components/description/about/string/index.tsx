@@ -5,7 +5,7 @@ interface IProps {
     title: string
     data: string
 }
-export function VersionDescription({ title, data }: IProps) {
+export function StringDescription({ title, data }: IProps) {
     const descriptionItems = [
         {
             key: data,
