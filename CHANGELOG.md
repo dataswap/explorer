@@ -1,5 +1,12 @@
 
 
+# [0.4.0](https://github.com/dataswap/explorer/compare/0.3.1...0.4.0) (2024-01-17)
+
+
+### Features
+
+* 🎸 add bids table ([9c5526e](https://github.com/dataswap/explorer/commit/9c5526e6f5191d8f88fb24a2ca98c943b9f101b6))
+
 ## [0.3.1](https://github.com/dataswap/explorer/compare/0.3.0...0.3.1) (2024-01-17)
 
 
