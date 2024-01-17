@@ -1,5 +1,13 @@
 
 
+# [0.5.0](https://github.com/dataswap/explorer/compare/0.4.0...0.5.0) (2024-01-17)
+
+
+### Features
+
+* 🎸 add network redux ([110d253](https://github.com/dataswap/explorer/commit/110d2531492e77b3b418a017f72b7e5f8aae41d7))
+* 🎸 add network set ([44f8d9b](https://github.com/dataswap/explorer/commit/44f8d9b86a4cac72f7410e3a20f27df7d086a0be))
+
 # [0.4.0](https://github.com/dataswap/explorer/compare/0.3.1...0.4.0) (2024-01-17)
 
 
