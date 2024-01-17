@@ -1,5 +1,5 @@
 import CreateMatchingBidForm from "@/components/form/matching/bid"
-import { MatchingBid } from "@/shared/types"
+import { MatchingBid } from "@dataswapjs/dataswapjs"
 import { useRouter } from "next/router"
 
 const initialValues: MatchingBid = {} as MatchingBid
