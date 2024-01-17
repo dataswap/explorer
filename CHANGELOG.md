@@ -1,5 +1,12 @@
 
 
+## [0.5.1](https://github.com/dataswap/explorer/compare/0.5.0...0.5.1) (2024-01-17)
+
+
+### Bug Fixes
+
+* 🐛 build ci issue ([9a3812e](https://github.com/dataswap/explorer/commit/9a3812e9d29c278833091fe7efe2a1282046789e))
+
 # [0.5.0](https://github.com/dataswap/explorer/compare/0.4.0...0.5.0) (2024-01-17)
 
 
