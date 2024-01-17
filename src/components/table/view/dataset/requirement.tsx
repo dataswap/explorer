@@ -28,7 +28,10 @@ import { Table } from "antd"
 import { DatasetRequirement, MatchingInfo } from "@dataswapjs/dataswapjs"
 import Link from "next/link"
 import { ValueFields } from "@unipackage/utils"
-import { config_datasetDetailPageRoot } from "../../../../config/links"
+import {
+    config_datasetDetailPageRoot,
+    config_requirementDetailPageRoot,
+} from "../../../../config/links"
 
 interface TabelItem
     extends Pick<
@@ -58,7 +61,16 @@ export default ({
             ellipsis: true,
         },
         independent: {
-            index: { width: "10%" },
+            index: {
+                width: "10%",
+                render: (value, record) => (
+                    <Link
+                        href={`${config_requirementDetailPageRoot}?datasetid=${record.datasetId}&index=${value}`}
+                    >
+                        {value}
+                    </Link>
+                ),
+            },
             datasetId: {
                 width: "15%",
                 render: (value) => (

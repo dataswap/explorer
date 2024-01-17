@@ -24,8 +24,16 @@ export const config_matching = "matching"
 export const config_home = "home"
 export const config_storage = "storage"
 export const config_members = "members"
+export const config_car = "car"
+export const config_carreplica = "carreplica"
+export const config_requirement = "requirement"
+export const config_proofmetadata = "proofmetadata"
 
 const config_detail = "detail"
 export const config_messageDetailPageRoot = `/${config_message}/${config_detail}`
 export const config_datasetDetailPageRoot = `/${config_dataset}/${config_detail}`
 export const config_matchingDetailPageRoot = `/${config_matching}/${config_detail}`
+export const config_carDetailPageRoot = `/${config_dataset}/${config_car}/${config_detail}`
+export const config_carReplicaDetailPageRoot = `/${config_matching}/${config_carreplica}/${config_detail}`
+export const config_requirementDetailPageRoot = `/${config_dataset}/${config_detail}/${config_requirement}`
+export const config_proofmetadataDetailPageRoot = `/${config_dataset}/${config_detail}/${config_proofmetadata}`

@@ -28,7 +28,10 @@ import { Table } from "antd"
 import { ValueFields } from "@unipackage/utils"
 import Link from "next/link"
 import { DatasetProofMetadata } from "@dataswapjs/dataswapjs"
-import { config_datasetDetailPageRoot } from "../../../../config/links"
+import {
+    config_datasetDetailPageRoot,
+    config_proofmetadataDetailPageRoot,
+} from "../../../../config/links"
 
 interface TabelItem
     extends Pick<
@@ -59,7 +62,16 @@ export default ({
             },
             dataType: { width: "15%" },
             mappingFilesAccessMethod: { width: "15%" },
-            rootHash: { width: "15%" },
+            rootHash: {
+                width: "15%",
+                render: (value) => (
+                    <Link
+                        href={`${config_proofmetadataDetailPageRoot}/${value}`}
+                    >
+                        {value}
+                    </Link>
+                ),
+            },
         },
     })
 

@@ -8,7 +8,10 @@ import {
     ITableProps,
 } from "@unipackage/webkit"
 import { Car, CarReplica, CarReplicaState } from "@dataswapjs/dataswapjs"
-import { config_datasetDetailPageRoot } from "../../../../config/links"
+import {
+    config_carDetailPageRoot,
+    config_datasetDetailPageRoot,
+} from "../../../../config/links"
 
 interface TabelItem
     extends Pick<
@@ -39,6 +42,11 @@ export default ({
         independent: {
             carId: {
                 width: "10%",
+                render: (value) => (
+                    <Link href={`${config_carDetailPageRoot}/${value}`}>
+                        {value}
+                    </Link>
+                ),
             },
             datasetId: {
                 width: "18%",

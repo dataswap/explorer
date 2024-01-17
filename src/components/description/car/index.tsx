@@ -2,12 +2,12 @@ import React from "react"
 import { Descriptions } from "antd"
 import { convertDataToDescriptionsItems } from "@unipackage/webkit"
 import { ValueFields } from "@unipackage/utils"
-import { DatasetProofMetadata } from "@dataswapjs/dataswapjs"
+import { Car } from "@dataswapjs/dataswapjs"
 
 interface IProps {
-    data: ValueFields<DatasetProofMetadata>
+    data: ValueFields<Car>
 }
-export function DatasetProofMetadataDescription({ data }: IProps) {
+export function CarDescription({ data }: IProps) {
     const descriptionItems = convertDataToDescriptionsItems(
         data,
         {
@@ -15,14 +15,17 @@ export function DatasetProofMetadataDescription({ data }: IProps) {
                 children: data.dataType ? "MappingFiles" : "Source",
                 span: 2,
             },
-            mappingFilesAccessMethod: {
-                span: 3,
-            },
         },
         {
             //@ts-ignore
             keyBlacklist: ["id", "_id", "__v"],
         }
     )
-    return <Descriptions title="Proof Info" items={descriptionItems} />
+    return (
+        <Descriptions
+            title="Car Detail Info"
+            items={descriptionItems}
+            column={1}
+        />
+    )
 }

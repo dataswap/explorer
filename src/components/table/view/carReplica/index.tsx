@@ -1,4 +1,5 @@
 import React from "react"
+import Link from "next/link"
 import {
     generateTableColumns,
     extendWithKeyForTableData,
@@ -7,6 +8,7 @@ import {
 import { Table } from "antd"
 import { CarReplica } from "@dataswapjs/dataswapjs"
 import { ValueFields } from "@unipackage/utils"
+import { config_carReplicaDetailPageRoot } from "@/config/links"
 
 interface TabelItem
     extends Pick<
@@ -27,7 +29,14 @@ export default ({
             ellipsis: true,
         },
         independent: {
-            carId: { width: "20%" },
+            carId: {
+                width: "20%",
+                render: (value) => (
+                    <Link href={`${config_carReplicaDetailPageRoot}/${value}`}>
+                        {value}
+                    </Link>
+                ),
+            },
             matchingId: { width: "20%" },
             filecoinClaimId: { width: "30%" },
             state: { width: "30%" },
