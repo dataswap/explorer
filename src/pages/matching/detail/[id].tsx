@@ -47,7 +47,7 @@ export default () => {
                                 network: "calibration",
                                 queryFilter: {
                                     conditions: [{ matchingId: id }],
-                                    sort: [{ field: "carId", order: "desc" }],
+                                    sort: [{ field: "carId", order: "asc" }],
                                 },
                             }}
                         />
