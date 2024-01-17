@@ -2,6 +2,7 @@ import React from "react"
 import { InferGetServerSidePropsType, NextPageContext } from "next"
 import MatchingBasicTable from "../basic/table/matchingMetadata"
 import { defaultTableQueryParams } from "../../config/params"
+import { useSelector } from "react-redux"
 
 export async function getServerSideProps(context: NextPageContext) {
     return {
@@ -12,6 +13,9 @@ export async function getServerSideProps(context: NextPageContext) {
 export default function IndexPage({}: InferGetServerSidePropsType<
     typeof getServerSideProps
 >) {
+    const network = useSelector(
+        (state: { network: { network: string } }) => state.network.network
+    )
     return (
         <>
             <div
@@ -26,7 +30,7 @@ export default function IndexPage({}: InferGetServerSidePropsType<
             {
                 <MatchingBasicTable
                     queryParam={{
-                        network: "calibration",
+                        network,
                         queryFilter: {
                             ...defaultTableQueryParams,
                         },

@@ -15,6 +15,7 @@ import CarReplicaPage from "../../basic/table/carReplica"
 import MessageBasicPage from "../../basic/table/message"
 import MatchingBidBasicPage from "../../basic/table/matchingBid"
 import { getMatchingMetadata, getMatchingTarget } from "@/shared/messagehub/get"
+import { useSelector } from "react-redux"
 
 const onChange = (key: string) => {
     console.log(key)
@@ -26,6 +27,9 @@ export default () => {
     const [overview, setOverview] = useState<ValueFields<MatchingMetadata>>()
     const [target, setTarget] = useState<ValueFields<MatchingTarget>>()
     const [tabItems, setTabItems] = useState<any>()
+    const network = useSelector(
+        (state: { network: { network: string } }) => state.network.network
+    )
 
     useEffect(() => {
         if (id) {
@@ -34,7 +38,7 @@ export default () => {
                     messasge: (
                         <MessageBasicPage
                             queryParam={{
-                                network: "calibration",
+                                network,
                                 queryFilter: {
                                     conditions: [{ matchingId: id }],
                                     sort: [{ field: "height", order: "desc" }],
@@ -45,7 +49,7 @@ export default () => {
                     carReplica: (
                         <CarReplicaPage
                             queryParam={{
-                                network: "calibration",
+                                network,
                                 queryFilter: {
                                     conditions: [{ matchingId: id }],
                                     sort: [{ field: "carId", order: "asc" }],
@@ -56,7 +60,7 @@ export default () => {
                     bids: (
                         <MatchingBidBasicPage
                             queryParam={{
-                                network: "calibration",
+                                network,
                                 queryFilter: {
                                     conditions: [{ matchingId: id }],
                                 },
@@ -67,7 +71,7 @@ export default () => {
             )
 
             getMatchingMetadata({
-                network: "calibration",
+                network,
                 queryFilter: { conditions: [{ matchingId: id }] },
             }).then((res) => {
                 const datasetMetadata = res.data
@@ -76,7 +80,7 @@ export default () => {
             })
 
             getMatchingTarget({
-                network: "calibration",
+                network,
                 queryFilter: { conditions: [{ matchingId: id }] },
             }).then((res) => {
                 const datasetMetadata = res.data

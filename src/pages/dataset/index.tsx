@@ -5,6 +5,7 @@ import { PlusOutlined } from "@ant-design/icons"
 import { useRouter } from "next/router"
 import DatasetBasicTable from "../basic/table/dataset"
 import { defaultTableQueryParams } from "../../config/params"
+import { useSelector } from "react-redux"
 
 export async function getServerSideProps(context: NextPageContext) {
     return {
@@ -16,6 +17,9 @@ export default function IndexPage({}: InferGetServerSidePropsType<
     typeof getServerSideProps
 >) {
     const router = useRouter()
+    const network = useSelector(
+        (state: { network: { network: string } }) => state.network.network
+    )
 
     const onClick = () => {
         router.push("/dataset/submit/dataset")
@@ -41,7 +45,7 @@ export default function IndexPage({}: InferGetServerSidePropsType<
             {
                 <DatasetBasicTable
                     queryParam={{
-                        network: "calibration",
+                        network,
                         queryFilter: {
                             ...defaultTableQueryParams,
                         },

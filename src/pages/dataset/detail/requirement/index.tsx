@@ -4,16 +4,20 @@ import { useRouter } from "next/router"
 import { DatasetRequirementDescription } from "@/components/description/dataset/requirement"
 import { DatasetRequirement } from "@dataswapjs/dataswapjs"
 import { getDatasetRequirement } from "../../../../shared/messagehub/get"
+import { useSelector } from "react-redux"
 
 export default function index() {
     const [data, setData] = useState<ValueFields<DatasetRequirement>>()
     const router = useRouter()
     const { datasetid, index } = router.query
+    const network = useSelector(
+        (state: { network: { network: string } }) => state.network.network
+    )
 
     useEffect(() => {
         if (datasetid) {
             getDatasetRequirement({
-                network: "calibration",
+                network,
                 queryFilter: {
                     and: [
                         { conditions: [{ datasetId: Number(datasetid) }] },

@@ -4,16 +4,20 @@ import { ValueFields } from "@unipackage/utils"
 import { DatasetProofMetadataDescription } from "@/components/description/dataset/proofMetadata"
 import { DatasetProofMetadata } from "@dataswapjs/dataswapjs"
 import { getDatasetProofMetadata } from "../../../../shared/messagehub/get"
+import { useSelector } from "react-redux"
 
 export default () => {
     const router = useRouter()
     const { id } = router.query
     const [data, setData] = useState<ValueFields<DatasetProofMetadata>>()
+    const network = useSelector(
+        (state: { network: { network: string } }) => state.network.network
+    )
 
     useEffect(() => {
         if (id) {
             getDatasetProofMetadata({
-                network: "calibration",
+                network,
                 queryFilter: { conditions: [{ rootHash: id }] },
             }).then((res) => {
                 const result = res.data

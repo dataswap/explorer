@@ -16,6 +16,7 @@ import {
 } from "../../../shared/messagehub/get"
 import { ValueFields } from "@unipackage/utils"
 import { defaultTableQueryParams } from "../../../config/params"
+import { useSelector } from "react-redux"
 
 const onChange = (key: string) => {
     console.log(key)
@@ -30,11 +31,14 @@ export default () => {
         useState<ValueFields<DatasetProofMetadata>>()
     const [replicasCount, setReplicasCount] = useState<number>()
     const [tabItems, setTabItems] = useState<any>()
+    const network = useSelector(
+        (state: { network: { network: string } }) => state.network.network
+    )
 
     useEffect(() => {
         if (id) {
             getDatasetMetadata({
-                network: "calibration",
+                network,
                 queryFilter: { conditions: [{ datasetId: id }] },
             }).then((res) => {
                 const datasetMetadata = res.data
@@ -43,7 +47,7 @@ export default () => {
             })
 
             getDatasetProofMetadata({
-                network: "calibration",
+                network,
                 queryFilter: { conditions: [{ datasetId: id }] },
             }).then((res) => {
                 const datasetMetadata = res.data
@@ -52,7 +56,7 @@ export default () => {
             })
 
             getDatasetRequirementCount({
-                network: "calibration",
+                network,
                 queryFilter: { conditions: [{ datasetId: id }] },
             }).then((res) => {
                 const datasetMetadata = res.data
@@ -64,7 +68,7 @@ export default () => {
                     messasge: (
                         <MessageTable
                             queryParam={{
-                                network: "calibration",
+                                network,
                                 queryFilter: {
                                     ...defaultTableQueryParams,
                                     conditions: [{ datasetId: id }],
@@ -76,7 +80,7 @@ export default () => {
                     replicaRequirement: (
                         <DatasetRequirementBasicTable
                             queryParam={{
-                                network: "calibration",
+                                network,
                                 queryFilter: {
                                     ...defaultTableQueryParams,
                                     conditions: [{ datasetId: id }],
@@ -88,7 +92,7 @@ export default () => {
                     proofMetadata: (
                         <DatasetProofMetadataTable
                             queryParam={{
-                                network: "calibration",
+                                network,
                                 queryFilter: {
                                     ...defaultTableQueryParams,
                                     conditions: [{ datasetId: id }],
@@ -100,7 +104,7 @@ export default () => {
                     car: (
                         <CarTable
                             queryParam={{
-                                network: "calibration",
+                                network,
                                 queryFilter: {
                                     ...defaultTableQueryParams,
                                     conditions: [{ datasetId: id }],
