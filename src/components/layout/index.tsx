@@ -2,7 +2,7 @@
 import { Layout, theme } from "antd"
 import Menu from "@/components/menu"
 import { UserOutlined, GithubOutlined } from "@ant-design/icons"
-import Package from "../../../package.json"
+import NetworkDropdown from "../dropdown/network"
 
 const { Header, Content, Footer } = Layout
 
@@ -22,9 +22,7 @@ export default ({ children }: any) => {
             >
                 <Menu />
                 <div>
-                    <span style={{ color: "white" }}>
-                        Version: v{Package.version}
-                    </span>
+                    <NetworkDropdown />
                     {/* <UserOutlined style={{ color: "white" }} /> */}
                 </div>
             </Header>
