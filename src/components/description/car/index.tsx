@@ -15,6 +15,9 @@ export function CarDescription({ data }: IProps) {
                 children: data.dataType ? "MappingFiles" : "Source",
                 span: 2,
             },
+            replicaInfos: {
+                children: JSON.stringify(data.replicaInfos),
+            },
         },
         {
             //@ts-ignore

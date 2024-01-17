@@ -64,7 +64,18 @@ export default ({
                 width: "18%",
                 hidden: true,
             },
-            matchingIds: { width: "18%" },
+            matchingIds: {
+                width: "18%",
+                render: (_, record) => (
+                    <>
+                        {record.replicaInfos
+                            ?.map((value) => {
+                                return value.matchingId
+                            })
+                            ?.join(",")}
+                    </>
+                ),
+            },
             cid: { width: "18%" },
             dataType: { width: "18%" },
             replicaInfos: {
@@ -79,7 +90,7 @@ export default ({
                                     Number(CarReplicaState.Stored)
                                 )
                             }).length
-                        }{" "}
+                        }
                         / {record.replicasCount}
                     </>
                 ),

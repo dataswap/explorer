@@ -38,6 +38,9 @@ export function DatasetRequirementDescription({ data }: IProps) {
                     </div>
                 ),
             },
+            matchings: {
+                children: JSON.stringify(data.matchings),
+            },
         },
         {
             //@ts-ignore

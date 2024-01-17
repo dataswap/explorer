@@ -90,9 +90,15 @@ export default ({
             },
             matchingIds: {
                 width: "15%",
-                render: (_, record) => {
-                    return <></>
-                },
+                render: (_, record) => (
+                    <>
+                        {record.matchings
+                            ?.map((value) => {
+                                return value.matchingId
+                            })
+                            ?.join(",")}
+                    </>
+                ),
             },
             completionRate: {
                 width: "15%",
