@@ -6,6 +6,7 @@ import {
     DatasetProofMetadata,
     DatasetRequirement,
     DataswapMessage,
+    MatchingBid,
     MatchingMetadata,
     MatchingTarget,
 } from "@dataswapjs/dataswapjs"
@@ -147,6 +148,18 @@ export async function getMatchingTargetCount(
     queryParam: QueryParam<MatchingTarget>
 ): Promise<Result<number>> {
     return await getDswap<MatchingTarget>("/matchingtarget/total", queryParam)
+}
+
+export async function getMatchingBids(
+    queryParam: QueryParam<MatchingBid>
+): Promise<Result<ValueFields<MatchingBid>[]>> {
+    return await getDswap<MatchingBid>("/matchingbids/query", queryParam)
+}
+
+export async function getMatchingBidsCount(
+    queryParam: QueryParam<MatchingBid>
+): Promise<Result<number>> {
+    return await getDswap<MatchingBid>("/matchingbids/total", queryParam)
 }
 
 export interface SyncStatus {

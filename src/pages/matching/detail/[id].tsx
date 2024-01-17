@@ -13,6 +13,7 @@ import { convertDataToItems } from "@unipackage/webkit"
 import { ValueFields } from "@unipackage/utils"
 import CarReplicaPage from "../../basic/table/carReplica"
 import MessageBasicPage from "../../basic/table/message"
+import MatchingBidBasicPage from "../../basic/table/matchingBid"
 import { getMatchingMetadata, getMatchingTarget } from "@/shared/messagehub/get"
 
 const onChange = (key: string) => {
@@ -48,6 +49,16 @@ export default () => {
                                 queryFilter: {
                                     conditions: [{ matchingId: id }],
                                     sort: [{ field: "carId", order: "asc" }],
+                                },
+                            }}
+                        />
+                    ),
+                    bids: (
+                        <MatchingBidBasicPage
+                            queryParam={{
+                                network: "calibration",
+                                queryFilter: {
+                                    conditions: [{ matchingId: id }],
                                 },
                             }}
                         />
