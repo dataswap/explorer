@@ -60,7 +60,7 @@ export default ({
             matchingId: {
                 width: "10%",
                 render: (value) => (
-                    <Link href={`/${config_matchingDetailPageRoot}/${value}`}>
+                    <Link href={`${config_matchingDetailPageRoot}/${value}`}>
                         {value}
                     </Link>
                 ),
@@ -68,7 +68,7 @@ export default ({
             datasetId: {
                 width: "10%",
                 render: (value) => (
-                    <Link href={`/${config_datasetDetailPageRoot}/${value}`}>
+                    <Link href={`${config_datasetDetailPageRoot}/${value}`}>
                         {value}
                     </Link>
                 ),
