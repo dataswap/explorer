@@ -3,11 +3,14 @@ import { useRouter } from "next/router"
 import { MatchingMetadataDescription } from "@/components/description/matching"
 import { MatchingTargetDescription } from "@/components/description/matching/target"
 import { MatchingWinnerDescription } from "@/components/description/matching/winner"
-import { MatchingMetadata, MatchingTarget } from "@dataswapjs/dataswapjs"
+import {
+    MatchingMetadata,
+    MatchingTarget,
+    MatchingBid,
+} from "@dataswapjs/dataswapjs"
 import { useEffect, useState } from "react"
 import { convertDataToItems } from "@unipackage/webkit"
 import { ValueFields } from "@unipackage/utils"
-import { MatchingBid } from "@/shared/types"
 import CarReplicaPage from "../../basic/table/carReplica"
 import MessageBasicPage from "../../basic/table/message"
 import { getMatchingMetadata, getMatchingTarget } from "@/shared/messagehub/get"

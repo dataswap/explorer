@@ -25,7 +25,7 @@ import {
     ITableProps,
 } from "@unipackage/webkit"
 import { Table } from "antd"
-import { DatasetRequirement } from "@dataswapjs/dataswapjs"
+import { DatasetRequirement, MatchingInfo } from "@dataswapjs/dataswapjs"
 import Link from "next/link"
 import { ValueFields } from "@unipackage/utils"
 import { config_datasetDetailPageRoot } from "../../../../config/links"
@@ -40,8 +40,11 @@ interface TabelItem
         | "regionCode"
         | "cityCodes"
         | "countryCode"
+        | "matchings"
     > {
     key: React.ReactNode
+    matchingIds?: React.ReactNode
+    completionRate?: React.ReactNode
 }
 
 export default ({
@@ -69,6 +72,29 @@ export default ({
             regionCode: { width: "15%" },
             countryCode: { width: "15%" },
             cityCodes: { width: "15%" },
+            matchings: {
+                width: "15%",
+                hidden: true,
+            },
+            matchingIds: {
+                width: "15%",
+                render: (_, record) => {
+                    return <></>
+                },
+            },
+            completionRate: {
+                width: "15%",
+                render: (_, record) => {
+                    return (
+                        <>
+                            {record.matchings?.reduce((sum, currentValue) => {
+                                return sum + Number(currentValue.finishedSize)
+                            }, 0)}{" "}
+                            / totalSize(datasetProof)
+                        </>
+                    )
+                },
+            },
         },
     })
 

@@ -14,7 +14,7 @@
     "@ant-design/cssinjs": "^1.17.0",
     "@ant-design/icons": "^5.2.6",
     "@babel/preset-react": "^7.22.15",
-    "@dataswapjs/dataswapjs": "^0.17.1",
+    "@dataswapjs/dataswapjs": "^0.17.3",
     "@types/node": "20.6.2",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
