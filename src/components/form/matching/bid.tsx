@@ -1,7 +1,7 @@
 import React from "react"
 import { InputNumber } from "antd"
 import { Form, convertDataToFormFields } from "@unipackage/webkit"
-import { MatchingBid } from "../../../shared/types/index"
+import { MatchingBid } from "@dataswapjs/dataswapjs"
 
 const overwriteFieldRules = {
     amount: {
@@ -17,8 +17,7 @@ interface IProps {
 export default ({ data, onFinish }: IProps) => {
     const fields = convertDataToFormFields<MatchingBid>(
         data,
-        overwriteFieldRules,
-        { blacklist: ["bidBlockNumer"] }
+        overwriteFieldRules
     )
 
     return (

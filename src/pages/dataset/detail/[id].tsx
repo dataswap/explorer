@@ -3,18 +3,16 @@ import { Tabs } from "antd"
 import { useRouter } from "next/router"
 import { DatasetMetadataDescription } from "@/components/description/dataset"
 import { DatasetProofDescription } from "@/components/description/dataset/proofMetadata"
+import { ReplicasCountDescription } from "@/components/description/dataset/replicasCount"
 import CarTable from "../../basic/table/car"
 import MessageTable from "../../basic/table/message"
 import DatasetRequirementBasicTable from "../../basic/table/datasetRequirement"
-import {
-    DatasetMetadata,
-    DatasetRequirement,
-    DatasetProofMetadata,
-} from "@dataswapjs/dataswapjs"
+import { DatasetMetadata, DatasetProofMetadata } from "@dataswapjs/dataswapjs"
 import { convertDataToItems } from "@unipackage/webkit"
 import {
     getDatasetMetadata,
     getDatasetProofMetadata,
+    getDatasetRequirementCount,
 } from "../../../shared/messagehub/get"
 import { ValueFields } from "@unipackage/utils"
 import { defaultTableQueryParams } from "../../../config/params"
@@ -30,6 +28,7 @@ export default () => {
         useState<ValueFields<DatasetMetadata>>()
     const [datasetProofMeta, setDatasetProofMeta] =
         useState<ValueFields<DatasetProofMetadata>>()
+    const [replicasCount, setReplicasCount] = useState<number>()
     const [tabItems, setTabItems] = useState<any>()
 
     useEffect(() => {
@@ -42,6 +41,7 @@ export default () => {
                 //TODO
                 setDatasetMetadata(datasetMetadata![0])
             })
+
             getDatasetProofMetadata({
                 network: "calibration",
                 queryFilter: { conditions: [{ datasetId: id }] },
@@ -50,6 +50,15 @@ export default () => {
                 //TODO
                 setDatasetProofMeta(datasetMetadata![0])
             })
+
+            getDatasetRequirementCount({
+                network: "calibration",
+                queryFilter: { conditions: [{ datasetId: id }] },
+            }).then((res) => {
+                const datasetMetadata = res.data
+                setReplicasCount(datasetMetadata)
+            })
+
             setTabItems(
                 convertDataToItems({
                     messasge: (
@@ -100,6 +109,9 @@ export default () => {
             {datasetProofMeta && (
                 <DatasetProofDescription data={datasetProofMeta} />
             )}
+            <ReplicasCountDescription
+                data={replicasCount ? replicasCount : 0}
+            />
 
             <Tabs
                 defaultActiveKey="Proof"
