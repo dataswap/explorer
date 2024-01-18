@@ -4,6 +4,7 @@ import { useRouter } from "next/router"
 import { DatasetMetadataDescription } from "@/components/description/dataset"
 import { ReplicasCountDescription } from "@/components/description/dataset/replicasCount"
 import DatasetProofMetadataTable from "../../../components/table/service/datasetProofMetadata"
+import DatasetChallengeTable from "../../../components/table/service/challenge"
 import CarTable from "../../../components/table/service/car"
 import MessageTable from "../../../components/table/service/message"
 import DatasetRequirementTable from "../../../components/table/service/datasetRequirement"
@@ -113,6 +114,17 @@ export default () => {
                                     ...defaultTableQueryParams,
                                     conditions: [{ datasetId: id }],
                                     sort: [{ field: "carId", order: "asc" }],
+                                },
+                            }}
+                        />
+                    ),
+                    challenge: (
+                        <DatasetChallengeTable
+                            queryParam={{
+                                network,
+                                queryFilter: {
+                                    ...defaultTableQueryParams,
+                                    conditions: [{ datasetId: id }],
                                 },
                             }}
                         />

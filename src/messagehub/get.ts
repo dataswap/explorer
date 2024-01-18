@@ -4,6 +4,7 @@ import { QueryParam } from "./queryParams"
 import {
     Car,
     CarReplica,
+    DatasetChallenge,
     DatasetMetadata,
     DatasetProofMetadata,
     DatasetRequirement,
@@ -160,6 +161,24 @@ export async function getMatchingBidsCount(
     queryParam: QueryParam<MatchingBid>
 ): Promise<Result<number>> {
     return await getDswap<MatchingBid>("/matchingbids/total", queryParam)
+}
+
+export async function getDatasetChallenges(
+    queryParam: QueryParam<DatasetChallenge>
+): Promise<Result<ValueFields<DatasetChallenge>[]>> {
+    return await getDswap<DatasetChallenge>(
+        "/datasetchallenge/query",
+        queryParam
+    )
+}
+
+export async function getDatasetChallengesCount(
+    queryParam: QueryParam<DatasetChallenge>
+): Promise<Result<number>> {
+    return await getDswap<DatasetChallenge>(
+        "/datasetchallenge/total",
+        queryParam
+    )
 }
 
 export interface SyncStatus {
