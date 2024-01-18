@@ -18,7 +18,7 @@ import { getMatchingMetadata, getMatchingTarget } from "@/messagehub/get"
 import { useSelector } from "react-redux"
 
 const onChange = (key: string) => {
-    console.log(key)
+    // console.log(key)
 }
 
 export default () => {

@@ -69,7 +69,6 @@ export default function index<T>({
 
     // get count when refresh page,do one time
     useEffect(() => {
-        console.log("before getDataswapMessageCount", pagination)
         getObjectsCount(currentQueryParams).then((res) => {
             const totalRes = res.data
             setPagination({
@@ -82,7 +81,6 @@ export default function index<T>({
     // get count when use click page number,do multi times
     useEffect(() => {
         if (pagination.total) {
-            console.log("before getDataswapMessage", pagination)
             setLoading(true)
             getObjects(currentQueryParams).then((res) => {
                 setDataList(res.data)

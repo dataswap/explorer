@@ -53,7 +53,6 @@ export default ({
             datasetId: {
                 title: "Dataset/Matching Id",
                 width: "15%",
-                align: "center",
                 render: (data, record) => (
                     <>
                         {" "}

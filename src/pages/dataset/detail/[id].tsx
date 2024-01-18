@@ -19,7 +19,7 @@ import { defaultTableQueryParams } from "../../../config/params"
 import { useSelector } from "react-redux"
 
 const onChange = (key: string) => {
-    console.log(key)
+    // console.log(key)
 }
 
 export default () => {
