@@ -35,6 +35,15 @@ export default () => {
                 data={Package.version ? Package.version : ""}
             />
             <StringDescription
+                title="Dataswapjs version"
+                label="Version"
+                data={
+                    Package.dependencies["@dataswapjs/dataswapjs"]
+                        ? Package.dependencies["@dataswapjs/dataswapjs"]
+                        : ""
+                }
+            />
+            <StringDescription
                 title="MessageHub version"
                 label="Version:"
                 data={msghubVersion ? msghubVersion : ""}
