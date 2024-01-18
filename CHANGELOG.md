@@ -1,5 +1,12 @@
 
 
+## [0.7.2](https://github.com/dataswap/explorer/compare/0.7.1...0.7.2) (2024-01-18)
+
+
+### Bug Fixes
+
+* 🐛 network display ([0a7cffe](https://github.com/dataswap/explorer/commit/0a7cffebede77ee4690c5d8d7407cc6a1336a130))
+
 ## [0.7.1](https://github.com/dataswap/explorer/compare/0.7.0...0.7.1) (2024-01-18)
 
 
