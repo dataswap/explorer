@@ -1,5 +1,12 @@
 
 
+## [0.6.3](https://github.com/dataswap/explorer/compare/0.6.2...0.6.3) (2024-01-18)
+
+
+### Bug Fixes
+
+* 🐛 [#84](https://github.com/dataswap/explorer/issues/84) [#87](https://github.com/dataswap/explorer/issues/87) ([f853db1](https://github.com/dataswap/explorer/commit/f853db1e8942c143a69333092450b13df5490be4))
+
 ## [0.6.2](https://github.com/dataswap/explorer/compare/0.6.1...0.6.2) (2024-01-18)
 
 
