@@ -1,5 +1,13 @@
 
 
+## [0.6.2](https://github.com/dataswap/explorer/compare/0.6.1...0.6.2) (2024-01-18)
+
+
+### Bug Fixes
+
+* 🐛 un-display log ([8a3fd67](https://github.com/dataswap/explorer/commit/8a3fd6701d96a8b25c7a160e870a9e1dfa9319fe))
+* 🐛 un-display some word in target ([448efdb](https://github.com/dataswap/explorer/commit/448efdb573f8da5787275ffd7e42b90146d79970))
+
 ## [0.6.1](https://github.com/dataswap/explorer/compare/0.6.0...0.6.1) (2024-01-18)
 
 
