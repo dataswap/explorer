@@ -1,5 +1,12 @@
 
 
+## [0.6.1](https://github.com/dataswap/explorer/compare/0.6.0...0.6.1) (2024-01-18)
+
+
+### Bug Fixes
+
+* 🐛 add dataswapjs version ([498a8e1](https://github.com/dataswap/explorer/commit/498a8e1cbaf4fb34910067f90d21fd65a67908a1))
+
 # [0.6.0](https://github.com/dataswap/explorer/compare/0.5.2...0.6.0) (2024-01-18)
 
 
