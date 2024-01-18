@@ -1,5 +1,12 @@
 
 
+# [0.6.0](https://github.com/dataswap/explorer/compare/0.5.2...0.6.0) (2024-01-18)
+
+
+### Features
+
+* 🎸 update table display ([01899f3](https://github.com/dataswap/explorer/commit/01899f3802231857b420c63aa7b36ebfcbd4d213))
+
 ## [0.5.2](https://github.com/dataswap/explorer/compare/0.5.1...0.5.2) (2024-01-18)
 
 
