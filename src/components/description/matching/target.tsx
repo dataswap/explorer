@@ -41,6 +41,7 @@ function generateSpecialItem(data: ValueFields<MatchingTarget>): {
         },
         cars: {
             children: data.cars.join(","),
+            span: 3,
         },
         dataType: {
             children: enumToString(DataType, data.dataType!),
@@ -79,8 +80,18 @@ export function MatchingTargetDescription({ data }: IProps) {
         data,
         generateSpecialItem(data),
         {
-            //@ts-ignore
-            keyBlacklist: ["id", "_id", "__v"],
+            keyBlacklist: [
+                "id",
+                //@ts-ignore
+                "_id",
+                //@ts-ignore
+                "__v",
+                "datasetID",
+                "matchingId",
+                "replicaIndex",
+                "size",
+                "subsidy",
+            ],
         }
     )
     return (
