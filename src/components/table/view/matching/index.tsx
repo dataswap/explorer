@@ -41,6 +41,7 @@ interface TabelItem
         | "datasetId"
         | "replicaIndex"
         | "initiator"
+        | "requirement"
         | "currentPrice"
         | "size"
         | "subsidy"
@@ -73,7 +74,7 @@ export default ({
             },
             datasetId: {
                 title: "Dataset/Replica Id",
-                width: "12%",
+                width: "15%",
                 render: (value, record) => (
                     <>
                         <Link href={`${config_datasetDetailPageRoot}/${value}`}>
@@ -91,6 +92,12 @@ export default ({
                 ),
             },
             replicaIndex: { width: "10%", hidden: true },
+            requirement: {
+                title: "Country",
+                width: "10%",
+                render: (_, record) =>
+                    record.requirement?.countryCode.toString(),
+            },
             initiator: { width: "15%" },
             size: { width: "10%" },
             currentPrice: { width: "10%" },
