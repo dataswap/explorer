@@ -21,13 +21,11 @@ function generateSpecialItem(data: ValueFields<DatasetMetadata>): {
             span: 3,
         },
         source: {
-            children: <Link href={`${data.source}`}>{data.source}</Link>,
+            children: <a href={`${data.source}`}>{data.source}</a>,
             span: 3,
         },
         accessMethod: {
-            children: (
-                <Link href={`${data.accessMethod}`}>{data.accessMethod}</Link>
-            ),
+            children: <a href={`${data.accessMethod}`}>{data.accessMethod}</a>,
             span: 3,
         },
         datasetId: {

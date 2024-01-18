@@ -25,12 +25,13 @@ import {
     ITableProps,
 } from "@unipackage/webkit"
 import { Table } from "antd"
-import { MatchingMetadata } from "@dataswapjs/dataswapjs"
-import { ValueFields } from "@unipackage/utils"
+import { MatchingMetadata, MatchingState } from "@dataswapjs/dataswapjs"
+import { ValueFields, enumToString } from "@unipackage/utils"
 import Link from "next/link"
 import {
     config_matchingDetailPageRoot,
     config_datasetDetailPageRoot,
+    config_requirementDetailPageRoot,
 } from "../../../../config/links"
 
 interface TabelItem
@@ -40,8 +41,12 @@ interface TabelItem
         | "datasetId"
         | "replicaIndex"
         | "initiator"
-        | "createdBlockNumber"
-        | "biddingThreshold"
+        | "currentPrice"
+        | "size"
+        | "subsidy"
+        | "status"
+        | "biddingStartBlock"
+        | "biddingEndBlock"
     > {
     key: React.ReactNode
 }
@@ -55,6 +60,7 @@ export default ({
     const columns = generateTableColumns<TabelItem>({
         shared: {
             ellipsis: true,
+            align: "center",
         },
         independent: {
             matchingId: {
@@ -66,17 +72,41 @@ export default ({
                 ),
             },
             datasetId: {
-                width: "10%",
-                render: (value) => (
-                    <Link href={`${config_datasetDetailPageRoot}/${value}`}>
-                        {value}
-                    </Link>
+                title: "Dataset/Replica Id",
+                width: "12%",
+                render: (value, record) => (
+                    <>
+                        <Link href={`${config_datasetDetailPageRoot}/${value}`}>
+                            {value}
+                        </Link>
+                        {" - "}
+                        <Link
+                            href={`${config_requirementDetailPageRoot}?datasetid=${
+                                record.datasetId
+                            }&index=${record.replicaIndex?.toString()}`}
+                        >
+                            {record.replicaIndex?.toString()}
+                        </Link>
+                    </>
                 ),
             },
-            replicaIndex: { width: "7.5%" },
+            replicaIndex: { width: "10%", hidden: true },
             initiator: { width: "15%" },
-            createdBlockNumber: { width: "7.5%" },
-            biddingThreshold: { width: "7.5%" },
+            size: { width: "10%" },
+            currentPrice: { width: "10%" },
+            subsidy: { width: "10%" },
+            biddingStartBlock: {
+                title: "Start time",
+                width: "10%",
+            },
+            biddingEndBlock: {
+                title: "End time",
+                width: "10%",
+            },
+            status: {
+                width: "10%",
+                render: (value) => enumToString(MatchingState, value),
+            },
         },
     })
 

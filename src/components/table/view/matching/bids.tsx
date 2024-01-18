@@ -33,7 +33,11 @@ import { MatchingBid } from "@dataswapjs/dataswapjs"
 interface TabelItem
     extends Pick<
         ValueFields<MatchingBid>,
-        "matchingId" | "bidder" | "amount" | "complyFilplusRule"
+        | "matchingId"
+        | "bidder"
+        | "amount"
+        | "complyFilplusRule"
+        | "createdBlockNumber"
     > {
     key: React.ReactNode
 }
@@ -47,8 +51,13 @@ export default ({
     const columns = generateTableColumns<TabelItem>({
         shared: {
             ellipsis: true,
+            align: "center",
         },
         independent: {
+            createdBlockNumber: {
+                width: "10%",
+            },
+
             matchingId: {
                 width: "10%",
                 render: (value) => (
@@ -56,15 +65,17 @@ export default ({
                         {value}
                     </Link>
                 ),
+                hidden: true,
             },
             bidder: {
-                width: "10%",
+                width: "20%",
             },
             amount: {
                 width: "10%",
             },
             complyFilplusRule: {
                 width: "10%",
+                render: (value: boolean) => (value ? "Yes" : "No"),
             },
         },
     })

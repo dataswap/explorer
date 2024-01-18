@@ -1,6 +1,6 @@
 import React from "react"
 import { Descriptions } from "antd"
-import { ValueFields } from "@unipackage/utils"
+import { ValueFields, enumToString } from "@unipackage/utils"
 import {
     DescriptionsItemTypeWithOptionalChildren,
     convertDataToDescriptionsItems,
@@ -11,7 +11,7 @@ import {
     config_matchingDetailPageRoot,
     config_requirementDetailPageRoot,
 } from "../../../config/links"
-import { MatchingTarget } from "@dataswapjs/dataswapjs"
+import { MatchingTarget, DataType } from "@dataswapjs/dataswapjs"
 
 interface IProps {
     data: ValueFields<MatchingTarget>
@@ -43,7 +43,7 @@ function generateSpecialItem(data: ValueFields<MatchingTarget>): {
             children: data.cars.join(","),
         },
         dataType: {
-            children: data.dataType ? "MappingFiles" : "Source",
+            children: enumToString(DataType, data.dataType!),
         },
         replicaIndex: {
             children: (

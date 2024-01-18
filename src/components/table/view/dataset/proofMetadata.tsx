@@ -25,9 +25,9 @@ import {
     ITableProps,
 } from "@unipackage/webkit"
 import { Table } from "antd"
-import { ValueFields } from "@unipackage/utils"
+import { ValueFields, enumToString } from "@unipackage/utils"
 import Link from "next/link"
-import { DatasetProofMetadata } from "@dataswapjs/dataswapjs"
+import { DatasetProofMetadata, DataType } from "@dataswapjs/dataswapjs"
 import {
     config_datasetDetailPageRoot,
     config_proofmetadataDetailPageRoot,
@@ -36,7 +36,13 @@ import {
 interface TabelItem
     extends Pick<
         ValueFields<DatasetProofMetadata>,
-        "datasetId" | "dataType" | "mappingFilesAccessMethod" | "rootHash"
+        | "datasetId"
+        | "dataType"
+        | "mappingFilesAccessMethod"
+        | "rootHash"
+        | "datasetSize"
+        | "valid"
+        | "id"
     > {
     key: React.ReactNode
 }
@@ -50,18 +56,15 @@ export default ({
     const columns = generateTableColumns<TabelItem>({
         shared: {
             ellipsis: true,
+            align: "center",
         },
         independent: {
-            datasetId: {
-                width: "15%",
-                render: (value) => (
-                    <Link href={`${config_datasetDetailPageRoot}/${value}`}>
-                        {value}
-                    </Link>
-                ),
+            id: {
+                width: "10%",
+                title: "No.",
+                dataIndex: "key",
+                render: (value) => Number(value) + 1,
             },
-            dataType: { width: "15%" },
-            mappingFilesAccessMethod: { width: "15%" },
             rootHash: {
                 width: "15%",
                 render: (value) => (
@@ -71,6 +74,30 @@ export default ({
                         {value}
                     </Link>
                 ),
+            },
+            datasetId: {
+                width: "15%",
+                render: (value) => (
+                    <Link href={`${config_datasetDetailPageRoot}/${value}`}>
+                        {value}
+                    </Link>
+                ),
+                hidden: true,
+            },
+            dataType: {
+                width: "15%",
+                render: (value: DataType) => enumToString(DataType, value),
+            },
+            datasetSize: { width: "15%" },
+            mappingFilesAccessMethod: {
+                width: "30%",
+                render: (value) => (
+                    <>{value ? <a href={`${value}`}>{value}</a> : "None"}</>
+                ),
+            },
+            valid: {
+                width: "15%",
+                render: (value: boolean) => (value ? "Yes" : "No"),
             },
         },
     })

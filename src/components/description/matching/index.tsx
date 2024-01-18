@@ -11,7 +11,11 @@ import {
     config_matchingDetailPageRoot,
     config_requirementDetailPageRoot,
 } from "../../../config/links"
-import { MatchingMetadata, MatchingState } from "@dataswapjs/dataswapjs"
+import {
+    MatchingMetadata,
+    MatchingState,
+    BidSelectionRule,
+} from "@dataswapjs/dataswapjs"
 
 interface IProps {
     data: ValueFields<MatchingMetadata>
@@ -56,6 +60,9 @@ function generateSpecialItem(data: ValueFields<MatchingMetadata>): {
                     {data.replicaIndex?.toString()}
                 </Link>
             ),
+        },
+        bidSelectionRule: {
+            children: enumToString(BidSelectionRule, data.bidSelectionRule),
         },
     }
 }

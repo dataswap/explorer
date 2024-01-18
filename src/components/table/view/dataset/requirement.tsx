@@ -25,13 +25,15 @@ import {
     ITableProps,
 } from "@unipackage/webkit"
 import { Table } from "antd"
-import { DatasetRequirement, MatchingInfo } from "@dataswapjs/dataswapjs"
+import { DatasetRequirement } from "@dataswapjs/dataswapjs"
 import Link from "next/link"
 import { ValueFields } from "@unipackage/utils"
 import {
     config_datasetDetailPageRoot,
     config_requirementDetailPageRoot,
+    config_matchingDetailPageRoot,
 } from "../../../../config/links"
+import { MatchingState } from "@dataswapjs/dataswapjs/dist/module/matching/metadata/types"
 
 interface TabelItem
     extends Pick<
@@ -59,10 +61,11 @@ export default ({
     const columns = generateTableColumns<TabelItem>({
         shared: {
             ellipsis: true,
+            align: "center",
         },
         independent: {
             index: {
-                width: "10%",
+                width: "16%",
                 render: (value, record) => (
                     <Link
                         href={`${config_requirementDetailPageRoot}?datasetid=${record.datasetId}&index=${value}`}
@@ -78,37 +81,73 @@ export default ({
                         {value}
                     </Link>
                 ),
+                hidden: true,
             },
-            dataPreparers: { width: "15%" },
-            storageProviders: { width: "15%" },
+            dataPreparers: { width: "15%", hidden: true },
+            storageProviders: { width: "15%", hidden: true },
             regionCode: { width: "15%" },
-            countryCode: { width: "15%" },
-            cityCodes: { width: "15%" },
-            matchings: {
+            countryCode: {
                 width: "15%",
+            },
+            cityCodes: {
+                width: "22%",
+                render: (_, record) => {
+                    return record.cityCodes.join(", ")
+                },
+            },
+            matchings: {
+                width: "16%",
                 hidden: true,
             },
             matchingIds: {
-                width: "15%",
+                width: "16%",
                 render: (_, record) => (
                     <>
-                        {record.matchings
-                            ?.map((value) => {
-                                return value.matchingId
-                            })
-                            ?.join(",")}
+                        {record.matchings?.map((value, index) => (
+                            <React.Fragment key={value.matchingId}>
+                                {index > 0 && ", "}
+                                <Link
+                                    href={`${config_matchingDetailPageRoot}/${value.matchingId}`}
+                                >
+                                    {value.matchingId}
+                                </Link>
+                            </React.Fragment>
+                        ))}
                     </>
                 ),
             },
             completionRate: {
-                width: "15%",
+                width: "16%",
                 render: (_, record) => {
                     return (
                         <>
                             {record.matchings?.reduce((sum, currentValue) => {
-                                return sum + Number(currentValue.finishedSize)
+                                if (
+                                    currentValue.matchingState !==
+                                        MatchingState.Cancelled &&
+                                    currentValue.matchingState !=
+                                        MatchingState.Failed
+                                ) {
+                                    return (
+                                        sum + Number(currentValue.finishedSize)
+                                    )
+                                } else {
+                                    return sum
+                                }
                             }, 0)}
-                            / totalSize(datasetProof)
+                            /
+                            {record.matchings?.reduce((sum, currentValue) => {
+                                if (
+                                    currentValue.matchingState !==
+                                        MatchingState.Cancelled &&
+                                    currentValue.matchingState !=
+                                        MatchingState.Failed
+                                ) {
+                                    return sum + Number(currentValue.totalSize)
+                                } else {
+                                    return sum
+                                }
+                            }, 0)}
                         </>
                     )
                 },

@@ -2,9 +2,9 @@ import React from "react"
 import { Descriptions } from "antd"
 import Link from "next/link"
 import { convertDataToDescriptionsItems } from "@unipackage/webkit"
-import { ValueFields } from "@unipackage/utils"
+import { ValueFields, enumToString } from "@unipackage/utils"
 import { config_datasetDetailPageRoot } from "../../../config/links"
-import { DatasetProofMetadata } from "@dataswapjs/dataswapjs"
+import { DatasetProofMetadata, DataType } from "@dataswapjs/dataswapjs"
 
 interface IProps {
     data: ValueFields<DatasetProofMetadata>
@@ -23,16 +23,16 @@ export function DatasetProofMetadataDescription({ data }: IProps) {
                 ),
             },
             dataType: {
-                children: data.dataType ? "MappingFiles" : "Source",
+                children: enumToString(DataType, data.dataType!),
                 span: 2,
             },
             mappingFilesAccessMethod: {
                 children: (
                     <>
                         {data.mappingFilesAccessMethod ? (
-                            <Link href={`${data.mappingFilesAccessMethod}`}>
+                            <a href={`${data.mappingFilesAccessMethod}`}>
                                 {data.mappingFilesAccessMethod}
-                            </Link>
+                            </a>
                         ) : (
                             "None"
                         )}

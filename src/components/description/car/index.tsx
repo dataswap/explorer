@@ -7,7 +7,7 @@ import {
     config_datasetDetailPageRoot,
     config_matchingDetailPageRoot,
 } from "../../../config/links"
-import { Car, CarReplicaState } from "@dataswapjs/dataswapjs"
+import { Car, CarReplicaState, DataType } from "@dataswapjs/dataswapjs"
 
 interface IProps {
     data: ValueFields<Car>
@@ -26,7 +26,7 @@ export function CarDescription({ data }: IProps) {
                 ),
             },
             dataType: {
-                children: data.dataType ? "MappingFiles" : "Source",
+                children: enumToString(DataType, data.dataType!),
                 span: 2,
             },
             replicaInfos: {

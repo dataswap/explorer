@@ -6,9 +6,12 @@ import {
     ITableProps,
 } from "@unipackage/webkit"
 import { Table } from "antd"
-import { CarReplica } from "@dataswapjs/dataswapjs"
-import { ValueFields } from "@unipackage/utils"
-import { config_carReplicaDetailPageRoot } from "@/config/links"
+import { CarReplica, CarReplicaState } from "@dataswapjs/dataswapjs"
+import { ValueFields, enumToString } from "@unipackage/utils"
+import {
+    config_carReplicaDetailPageRoot,
+    config_matchingDetailPageRoot,
+} from "@/config/links"
 
 interface TabelItem
     extends Pick<
@@ -27,6 +30,7 @@ export default ({
     const columns = generateTableColumns<TabelItem>({
         shared: {
             ellipsis: true,
+            align: "center",
         },
         independent: {
             carId: {
@@ -37,9 +41,23 @@ export default ({
                     </Link>
                 ),
             },
-            matchingId: { width: "20%" },
-            filecoinClaimId: { width: "30%" },
-            state: { width: "30%" },
+            matchingId: {
+                width: "20%",
+                render: (value) => (
+                    <Link href={`${config_matchingDetailPageRoot}/${value}`}>
+                        {value}
+                    </Link>
+                ),
+                hidden: true,
+            },
+            filecoinClaimId: {
+                width: "30%",
+                render: (value) => (value > 0 ? value : "None"),
+            },
+            state: {
+                width: "30%",
+                render: (value) => enumToString(CarReplicaState, value),
+            },
         },
     })
 

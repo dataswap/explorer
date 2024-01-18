@@ -39,6 +39,7 @@ export default ({
     const columns = generateTableColumns<TableItem>({
         shared: {
             ellipsis: true,
+            align: "center",
         },
         independent: {
             cid: {
@@ -50,11 +51,32 @@ export default ({
                 ),
             },
             datasetId: {
-                width: "10%",
-                render: (data) => (
-                    <Link href={`${config_datasetDetailPageRoot}/${data}`}>
-                        {data}
-                    </Link>
+                title: "Dataset/Matching Id",
+                width: "15%",
+                align: "center",
+                render: (data, record) => (
+                    <>
+                        {" "}
+                        {data && data > 0 ? (
+                            <Link
+                                href={`${config_datasetDetailPageRoot}/${data}`}
+                            >
+                                {data}
+                            </Link>
+                        ) : (
+                            "None"
+                        )}
+                        {"  /  "}
+                        {record.matchingId && record.matchingId > 0 ? (
+                            <Link
+                                href={`${config_matchingDetailPageRoot}/${record.matchingId}`}
+                            >
+                                {record.matchingId}
+                            </Link>
+                        ) : (
+                            "None"
+                        )}{" "}
+                    </>
                 ),
             },
             matchingId: {
@@ -64,12 +86,13 @@ export default ({
                         {data}
                     </Link>
                 ),
+                hidden: true,
             },
             height: { width: "10%" },
-            timestamp: { width: "10%" },
-            from: { width: "7.5%" },
-            to: { width: "7.5%" },
-            method: { width: "15%" },
+            timestamp: { width: "10%", hidden: true },
+            from: { width: "10%" },
+            to: { width: "10%" },
+            method: { width: "20%" },
             status: { width: "10%" },
             return: { width: "10%" },
         },

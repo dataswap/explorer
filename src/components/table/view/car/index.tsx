@@ -1,16 +1,22 @@
 import React from "react"
 import Link from "next/link"
-import { ValueFields } from "@unipackage/utils"
+import { ValueFields, enumToString } from "@unipackage/utils"
 import { Table } from "antd"
 import {
     generateTableColumns,
     extendWithKeyForTableData,
     ITableProps,
 } from "@unipackage/webkit"
-import { Car, CarReplica, CarReplicaState } from "@dataswapjs/dataswapjs"
+import {
+    Car,
+    CarReplica,
+    CarReplicaState,
+    DataType,
+} from "@dataswapjs/dataswapjs"
 import {
     config_carDetailPageRoot,
     config_datasetDetailPageRoot,
+    config_matchingDetailPageRoot,
 } from "../../../../config/links"
 
 interface TabelItem
@@ -38,6 +44,7 @@ export default ({
     const columns = generateTableColumns<TabelItem>({
         shared: {
             ellipsis: true,
+            align: "center",
         },
         independent: {
             carId: {
@@ -48,39 +55,54 @@ export default ({
                     </Link>
                 ),
             },
+            dataType: {
+                width: "15%",
+                render: (value: DataType) => enumToString(DataType, value),
+            },
             datasetId: {
-                width: "18%",
+                width: "15%",
                 render: (value) => (
                     <Link href={`${config_datasetDetailPageRoot}/${value}`}>
                         {value}
                     </Link>
                 ),
+                hidden: true,
             },
+            size: { width: "15%" },
             hash: {
                 width: "18%",
             },
-            size: { width: "18%" },
+            cid: { width: "15%" },
             replicasCount: {
                 width: "18%",
                 hidden: true,
             },
             matchingIds: {
-                width: "18%",
-                render: (_, record) => (
-                    <>
-                        {record.replicaInfos
-                            ?.map((value) => {
-                                return value.matchingId
-                            })
-                            ?.join(",")}
-                    </>
-                ),
+                width: "15%",
+                render: (_, record) => {
+                    const currentMatchingIds = record.replicaInfos
+                        ?.filter((value) => value.matchingId > 0)
+                        .map((value) => value.matchingId)
+
+                    return (
+                        <>
+                            {currentMatchingIds?.map((value, index) => (
+                                <React.Fragment key={value}>
+                                    {index > 0 && ", "}
+                                    <Link
+                                        href={`${config_matchingDetailPageRoot}/${value}`}
+                                    >
+                                        {value}
+                                    </Link>
+                                </React.Fragment>
+                            ))}
+                        </>
+                    )
+                },
             },
-            cid: { width: "18%" },
-            dataType: { width: "18%" },
             replicaInfos: {
                 title: "Completion Rate",
-                width: "18%",
+                width: "15%",
                 render: (values: CarReplica[], record) => (
                     <>
                         {

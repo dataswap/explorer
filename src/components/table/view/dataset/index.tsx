@@ -5,8 +5,8 @@ import {
     ITableProps,
 } from "@unipackage/webkit"
 import { Table } from "antd"
-import { DatasetMetadata } from "@dataswapjs/dataswapjs"
-import { ValueFields } from "@unipackage/utils"
+import { DatasetMetadata, DatasetState } from "@dataswapjs/dataswapjs"
+import { ValueFields, enumToString } from "@unipackage/utils"
 import Link from "next/link"
 import { config_datasetDetailPageRoot } from "../../../../config/links"
 
@@ -17,7 +17,7 @@ interface TabelItem
         | "name"
         | "createdBlockNumber"
         | "sizeInBytes"
-        | "accessMethod"
+        | "source"
         | "submitter"
         | "status"
     > {
@@ -33,10 +33,11 @@ export default ({
     const columns = generateTableColumns<TabelItem>({
         shared: {
             ellipsis: true,
+            align: "center",
         },
         independent: {
             datasetId: {
-                width: "7%",
+                width: "10%",
                 render: (value) => (
                     <Link href={`${config_datasetDetailPageRoot}/${value}`}>
                         {value}
@@ -45,19 +46,18 @@ export default ({
             },
             name: {
                 width: "15%",
-                render: (_, record) => (
-                    <Link
-                        href={`${config_datasetDetailPageRoot}/${record.datasetId}`}
-                    >
-                        {record.name}
-                    </Link>
-                ),
             },
-            accessMethod: { width: "15%" },
-            sizeInBytes: { width: "8%" },
+            source: {
+                width: "15%",
+                render: (value) => <a href={`${value}`}>{value}</a>,
+            },
+            submitter: { width: "15%" },
             createdBlockNumber: { width: "15%" },
-            submitter: { width: "10%" },
-            status: { width: "15%" },
+            sizeInBytes: { width: "15%" },
+            status: {
+                width: "15%",
+                render: (value) => enumToString(DatasetState, value),
+            },
         },
     })
 
