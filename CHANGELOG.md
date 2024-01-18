@@ -1,5 +1,12 @@
 
 
+# [0.7.0](https://github.com/dataswap/explorer/compare/0.6.3...0.7.0) (2024-01-18)
+
+
+### Features
+
+* 🎸 add challenge table and desc ([5abad9f](https://github.com/dataswap/explorer/commit/5abad9fbb7158b26891d7ce238eab08d82536002))
+
 ## [0.6.3](https://github.com/dataswap/explorer/compare/0.6.2...0.6.3) (2024-01-18)
 
 
