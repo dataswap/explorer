@@ -42,7 +42,6 @@ interface TabelItem
         | "rootHash"
         | "datasetSize"
         | "valid"
-        | "id"
     > {
     key: React.ReactNode
 }
@@ -59,12 +58,6 @@ export default ({
             align: "center",
         },
         independent: {
-            id: {
-                width: "10%",
-                title: "No.",
-                dataIndex: "key",
-                render: (value) => Number(value) + 1,
-            },
             rootHash: {
                 width: "15%",
                 render: (value) => (
