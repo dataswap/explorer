@@ -1,15 +1,15 @@
 import React from "react"
 import { QueryParam } from "@/messagehub/queryParams"
-import CommonTable from "@/components/table/index"
-import Table from "@/components/table/view/dataset/requirement"
-import { DatasetRequirement } from "@dataswapjs/dataswapjs"
+import CommonTable from "@/components/table/data"
+import Table from "@/components/table/view/matching/bids"
+import { MatchingBid } from "@dataswapjs/dataswapjs"
 import {
-    getDatasetRequirement,
-    getDatasetRequirementCount,
+    getMatchingBids,
+    getMatchingBidsCount,
 } from "../../../../messagehub/get"
 
 interface IProps {
-    queryParam: QueryParam<DatasetRequirement>
+    queryParam: QueryParam<MatchingBid>
 }
 
 export default function index({ queryParam }: IProps) {
@@ -20,10 +20,10 @@ export default function index({ queryParam }: IProps) {
                     dynamicTable={Table}
                     queryParam={queryParam}
                     fuzzySearchKeys={{
-                        stringIncludeKeys: [],
+                        stringIncludeKeys: ["bidder"],
                     }}
-                    getObjects={getDatasetRequirement}
-                    getObjectsCount={getDatasetRequirementCount}
+                    getObjects={getMatchingBids}
+                    getObjectsCount={getMatchingBidsCount}
                 />
             }
         </>

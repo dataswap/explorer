@@ -1,12 +1,15 @@
 import React from "react"
 import { QueryParam } from "@/messagehub/queryParams"
-import CommonTable from "@/components/table/index"
-import Table from "@/components/table/view/carReplica"
-import { CarReplica } from "@dataswapjs/dataswapjs"
-import { getCarReplica, getCarReplicaCount } from "../../../../messagehub/get"
+import CommonTable from "@/components/table/data"
+import Table from "@/components/table/view/dataset/proofMetadata"
+import { DatasetProofMetadata } from "@dataswapjs/dataswapjs"
+import {
+    getDatasetProofMetadata,
+    getDatasetProofMetadataCount,
+} from "../../../../messagehub/get"
 
 interface IProps {
-    queryParam: QueryParam<CarReplica>
+    queryParam: QueryParam<DatasetProofMetadata>
 }
 
 export default function index({ queryParam }: IProps) {
@@ -19,8 +22,8 @@ export default function index({ queryParam }: IProps) {
                     fuzzySearchKeys={{
                         stringIncludeKeys: [],
                     }}
-                    getObjects={getCarReplica}
-                    getObjectsCount={getCarReplicaCount}
+                    getObjects={getDatasetProofMetadata}
+                    getObjectsCount={getDatasetProofMetadataCount}
                 />
             }
         </>

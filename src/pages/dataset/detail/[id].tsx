@@ -3,15 +3,18 @@ import { Tabs } from "antd"
 import { useRouter } from "next/router"
 import { DatasetMetadataDescription } from "@/components/description/dataset"
 import { ReplicasCountDescription } from "@/components/description/dataset/replicasCount"
-import DatasetProofMetadataTable from "../../basic/table/datasetProofMetadata"
-import CarTable from "../../basic/table/car"
-import MessageTable from "../../basic/table/message"
-import DatasetRequirementBasicTable from "../../basic/table/datasetRequirement"
-import { DatasetMetadata, DatasetProofMetadata } from "@dataswapjs/dataswapjs"
+import DatasetProofMetadataTable from "../../../components/table/service/datasetProofMetadata"
+import CarTable from "../../../components/table/service/car"
+import MessageTable from "../../../components/table/service/message"
+import DatasetRequirementTable from "../../../components/table/service/datasetRequirement"
+import {
+    DatasetMetadata,
+    // DatasetProofMetadata
+} from "@dataswapjs/dataswapjs"
 import { convertDataToItems } from "@unipackage/webkit"
 import {
     getDatasetMetadata,
-    getDatasetProofMetadata,
+    // getDatasetProofMetadata,
     getDatasetRequirementCount,
 } from "../../../messagehub/get"
 import { ValueFields } from "@unipackage/utils"
@@ -27,8 +30,8 @@ export default () => {
     const { id } = router.query
     const [datasetMetadata, setDatasetMetadata] =
         useState<ValueFields<DatasetMetadata>>()
-    const [datasetProofMeta, setDatasetProofMeta] =
-        useState<ValueFields<DatasetProofMetadata>>()
+    // const [datasetProofMeta, setDatasetProofMeta] =
+    //     useState<ValueFields<DatasetProofMetadata>>()
     const [replicasCount, setReplicasCount] = useState<number>()
     const [tabItems, setTabItems] = useState<any>()
     const network = useSelector(
@@ -41,26 +44,27 @@ export default () => {
                 network,
                 queryFilter: { conditions: [{ datasetId: id }] },
             }).then((res) => {
-                const datasetMetadata = res.data
+                const result = res.data
                 //TODO
-                setDatasetMetadata(datasetMetadata![0])
+                setDatasetMetadata(result![0])
             })
 
+            /*
             getDatasetProofMetadata({
                 network,
                 queryFilter: { conditions: [{ datasetId: id }] },
             }).then((res) => {
-                const datasetMetadata = res.data
-                //TODO
-                setDatasetProofMeta(datasetMetadata![0])
+                const result = res.data
+                setDatasetProofMeta(result![0])
             })
+            */
 
             getDatasetRequirementCount({
                 network,
                 queryFilter: { conditions: [{ datasetId: id }] },
             }).then((res) => {
-                const datasetMetadata = res.data
-                setReplicasCount(datasetMetadata)
+                const result = res.data
+                setReplicasCount(result)
             })
 
             setTabItems(
@@ -78,7 +82,7 @@ export default () => {
                         />
                     ),
                     replicaRequirement: (
-                        <DatasetRequirementBasicTable
+                        <DatasetRequirementTable
                             queryParam={{
                                 network,
                                 queryFilter: {
@@ -128,7 +132,7 @@ export default () => {
             />
 
             <Tabs
-                defaultActiveKey="Proof"
+                defaultActiveKey="messasge"
                 items={tabItems}
                 onChange={onChange}
             />

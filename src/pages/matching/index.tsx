@@ -1,18 +1,9 @@
 import React from "react"
-import { InferGetServerSidePropsType, NextPageContext } from "next"
-import MatchingBasicTable from "../basic/table/matchingMetadata"
+import MatchingBasicTable from "../../components/table/service/matchingMetadata"
 import { defaultTableQueryParams } from "../../config/params"
 import { useSelector } from "react-redux"
 
-export async function getServerSideProps(context: NextPageContext) {
-    return {
-        props: {},
-    }
-}
-
-export default function IndexPage({}: InferGetServerSidePropsType<
-    typeof getServerSideProps
->) {
+export default () => {
     const network = useSelector(
         (state: { network: { network: string } }) => state.network.network
     )

@@ -1,15 +1,15 @@
 import React from "react"
 import { QueryParam } from "@/messagehub/queryParams"
-import CommonTable from "@/components/table/index"
-import Table from "@/components/table/view/dataset/proofMetadata"
-import { DatasetProofMetadata } from "@dataswapjs/dataswapjs"
+import CommonTable from "@/components/table/data"
+import Table from "@/components/table/view/matching"
+import { MatchingMetadata } from "@dataswapjs/dataswapjs"
 import {
-    getDatasetProofMetadata,
-    getDatasetProofMetadataCount,
+    getMatchingMetadata,
+    getMatchingMetadataCount,
 } from "../../../../messagehub/get"
 
 interface IProps {
-    queryParam: QueryParam<DatasetProofMetadata>
+    queryParam: QueryParam<MatchingMetadata>
 }
 
 export default function index({ queryParam }: IProps) {
@@ -20,10 +20,10 @@ export default function index({ queryParam }: IProps) {
                     dynamicTable={Table}
                     queryParam={queryParam}
                     fuzzySearchKeys={{
-                        stringIncludeKeys: [],
+                        stringIncludeKeys: ["initiator"],
                     }}
-                    getObjects={getDatasetProofMetadata}
-                    getObjectsCount={getDatasetProofMetadataCount}
+                    getObjects={getMatchingMetadata}
+                    getObjectsCount={getMatchingMetadataCount}
                 />
             }
         </>

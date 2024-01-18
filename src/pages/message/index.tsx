@@ -1,14 +1,7 @@
 import React from "react"
-import { NextPageContext } from "next"
-import MessageBasicPage from "../basic/table/message"
+import MessageBasicPage from "../../components/table/service/message"
 import { defaultTableQueryParams } from "../../config/params"
 import { useSelector } from "react-redux"
-
-export async function getServerSideProps(context: NextPageContext) {
-    return {
-        props: {},
-    }
-}
 
 export default () => {
     const network = useSelector(
@@ -16,6 +9,15 @@ export default () => {
     )
     return (
         <>
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                }}
+            >
+                <h4>Message List</h4>
+            </div>
             {
                 <MessageBasicPage
                     queryParam={{

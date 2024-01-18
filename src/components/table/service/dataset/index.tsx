@@ -1,6 +1,6 @@
 import React from "react"
 import { QueryParam } from "@/messagehub/queryParams"
-import CommonTable from "@/components/table/index"
+import CommonTable from "@/components/table/data"
 import Table from "@/components/table/view/dataset"
 import { DatasetMetadata } from "@dataswapjs/dataswapjs"
 import {

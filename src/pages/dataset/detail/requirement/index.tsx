@@ -6,7 +6,7 @@ import { DatasetRequirement } from "@dataswapjs/dataswapjs"
 import { getDatasetRequirement } from "../../../../messagehub/get"
 import { useSelector } from "react-redux"
 
-export default function index() {
+export default () => {
     const [data, setData] = useState<ValueFields<DatasetRequirement>>()
     const router = useRouter()
     const { datasetid, index } = router.query

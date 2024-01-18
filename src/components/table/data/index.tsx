@@ -7,7 +7,7 @@ import { QueryParam } from "@/messagehub/queryParams"
 import {
     onSearchBasic,
     handleTableChangeBasic,
-} from "@/components/table/shared"
+} from "@/components/table/data/shared"
 const { Search } = Input
 import { ITableProps } from "@unipackage/webkit"
 

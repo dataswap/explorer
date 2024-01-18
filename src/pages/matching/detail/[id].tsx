@@ -2,18 +2,13 @@ import { Tabs } from "antd"
 import { useRouter } from "next/router"
 import { MatchingMetadataDescription } from "@/components/description/matching"
 import { MatchingTargetDescription } from "@/components/description/matching/target"
-import { MatchingWinnerDescription } from "@/components/description/matching/winner"
-import {
-    MatchingMetadata,
-    MatchingTarget,
-    MatchingBid,
-} from "@dataswapjs/dataswapjs"
+import { MatchingMetadata, MatchingTarget } from "@dataswapjs/dataswapjs"
 import { useEffect, useState } from "react"
 import { convertDataToItems } from "@unipackage/webkit"
 import { ValueFields } from "@unipackage/utils"
-import CarReplicaPage from "../../basic/table/carReplica"
-import MessageBasicPage from "../../basic/table/message"
-import MatchingBidBasicPage from "../../basic/table/matchingBid"
+import CarReplicaTable from "../../../components/table/service/carReplica"
+import MessageTable from "../../../components/table/service/message"
+import MatchingBidTable from "../../../components/table/service/matchingBid"
 import { getMatchingMetadata, getMatchingTarget } from "@/messagehub/get"
 import { useSelector } from "react-redux"
 
@@ -36,7 +31,7 @@ export default () => {
             setTabItems(
                 convertDataToItems({
                     messasge: (
-                        <MessageBasicPage
+                        <MessageTable
                             queryParam={{
                                 network,
                                 queryFilter: {
@@ -47,7 +42,7 @@ export default () => {
                         />
                     ),
                     carReplica: (
-                        <CarReplicaPage
+                        <CarReplicaTable
                             queryParam={{
                                 network,
                                 queryFilter: {
@@ -58,7 +53,7 @@ export default () => {
                         />
                     ),
                     bids: (
-                        <MatchingBidBasicPage
+                        <MatchingBidTable
                             queryParam={{
                                 network,
                                 queryFilter: {
@@ -74,18 +69,18 @@ export default () => {
                 network,
                 queryFilter: { conditions: [{ matchingId: id }] },
             }).then((res) => {
-                const datasetMetadata = res.data
+                const result = res.data
                 //TODO
-                setOverview(datasetMetadata![0])
+                setOverview(result![0])
             })
 
             getMatchingTarget({
                 network,
                 queryFilter: { conditions: [{ matchingId: id }] },
             }).then((res) => {
-                const datasetMetadata = res.data
+                const result = res.data
                 //TODO
-                setTarget(datasetMetadata![0])
+                setTarget(result![0])
             })
         }
     }, [id])
@@ -102,9 +97,8 @@ export default () => {
                     <MatchingTargetDescription data={target} />
                 </>
             )}
-            {/* <MatchingWinnerDescription data={{} as MatchingBid} /> */}
             <Tabs
-                defaultActiveKey="Bids"
+                defaultActiveKey="messasge"
                 items={tabItems}
                 onChange={onChange}
             />
