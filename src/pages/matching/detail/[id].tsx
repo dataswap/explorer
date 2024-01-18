@@ -14,7 +14,7 @@ import { ValueFields } from "@unipackage/utils"
 import CarReplicaPage from "../../basic/table/carReplica"
 import MessageBasicPage from "../../basic/table/message"
 import MatchingBidBasicPage from "../../basic/table/matchingBid"
-import { getMatchingMetadata, getMatchingTarget } from "@/shared/messagehub/get"
+import { getMatchingMetadata, getMatchingTarget } from "@/messagehub/get"
 import { useSelector } from "react-redux"
 
 const onChange = (key: string) => {

@@ -1,13 +1,13 @@
 import React from "react"
 import { Descriptions } from "antd"
-import { ValueFields } from "@unipackage/utils"
+import { ValueFields, enumToString } from "@unipackage/utils"
 import {
     DescriptionsItemTypeWithOptionalChildren,
     convertDataToDescriptionsItems,
 } from "@unipackage/webkit"
 import Link from "next/link"
-import { DatasetMetadata } from "@dataswapjs/dataswapjs"
 import { config_datasetDetailPageRoot } from "../../../config/links"
+import { DatasetMetadata, DatasetState } from "@dataswapjs/dataswapjs"
 
 interface IProps {
     data: ValueFields<DatasetMetadata>
@@ -21,9 +21,13 @@ function generateSpecialItem(data: ValueFields<DatasetMetadata>): {
             span: 3,
         },
         source: {
+            children: <Link href={`${data.source}`}>{data.source}</Link>,
             span: 3,
         },
         accessMethod: {
+            children: (
+                <Link href={`${data.accessMethod}`}>{data.accessMethod}</Link>
+            ),
             span: 3,
         },
         datasetId: {
@@ -38,6 +42,11 @@ function generateSpecialItem(data: ValueFields<DatasetMetadata>): {
         },
         isPublic: {
             children: data.isPublic ? "Yes" : "No",
+        },
+        status: {
+            children: data.status
+                ? enumToString(DatasetState, data.status)
+                : "None",
         },
     }
 }

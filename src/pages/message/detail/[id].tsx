@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { MessageDescription } from "@/components/description/message"
 import { DataswapMessage } from "@dataswapjs/dataswapjs"
-import { getDataswapMessage } from "../../../shared/messagehub/get"
+import { getDataswapMessage } from "../../../messagehub/get"
 import { ValueFields } from "@unipackage/utils"
 import { useSelector } from "react-redux"
 

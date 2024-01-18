@@ -1,9 +1,9 @@
 import React from "react"
-import { QueryParam } from "@/shared/messagehub/queryParams"
+import { QueryParam } from "@/messagehub/queryParams"
 import CommonTable from "@/components/table/index"
 import Table from "@/components/table/view/car"
 import { Car } from "@dataswapjs/dataswapjs"
-import { getCar, getCarCount } from "../../../../shared/messagehub/get"
+import { getCar, getCarCount } from "../../../../messagehub/get"
 
 interface IProps {
     queryParam: QueryParam<Car>

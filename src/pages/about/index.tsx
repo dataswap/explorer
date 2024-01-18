@@ -1,6 +1,6 @@
-import { getVersion, getSyncStatus, SyncStatus } from "@/shared/messagehub/get"
-import { SyncStatusDescription } from "@/components/description/about/syncstatus"
-import { StringDescription } from "@/components/description/about/string"
+import { getVersion, getSyncStatus, SyncStatus } from "@/messagehub/get"
+import { SyncStatusDescription } from "@/components/description/syncstatus"
+import { StringDescription } from "@/components/description/string"
 import Package from "../../../package.json"
 import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
@@ -31,13 +31,19 @@ export default () => {
         <>
             <StringDescription
                 title="Explorer version"
+                label="Version"
                 data={Package.version ? Package.version : ""}
             />
             <StringDescription
                 title="MessageHub version"
+                label="Version:"
                 data={msghubVersion ? msghubVersion : ""}
             />
-            <StringDescription title="Network:" data={network ? network : ""} />
+            <StringDescription
+                title="Network"
+                label="network:"
+                data={network ? network : ""}
+            />
             <SyncStatusDescription
                 title="Calibration network messageHub sync status"
                 data={calibrationSyncStatus}

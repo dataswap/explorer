@@ -1,4 +1,6 @@
+import { ValueFields, Result } from "@unipackage/utils"
 import { axiosEx } from "./axiosEx"
+import { QueryParam } from "./queryParams"
 import {
     Car,
     CarReplica,
@@ -10,8 +12,6 @@ import {
     MatchingMetadata,
     MatchingTarget,
 } from "@dataswapjs/dataswapjs"
-import { QueryParam } from "./queryParams"
-import { ValueFields, Result } from "@unipackage/utils"
 
 export async function getVersion(): Promise<string> {
     try {

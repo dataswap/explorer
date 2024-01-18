@@ -9,6 +9,7 @@ import Link from "next/link"
 import {
     config_datasetDetailPageRoot,
     config_matchingDetailPageRoot,
+    config_requirementDetailPageRoot,
 } from "../../../config/links"
 import { MatchingTarget } from "@dataswapjs/dataswapjs"
 
@@ -43,6 +44,32 @@ function generateSpecialItem(data: ValueFields<MatchingTarget>): {
         },
         dataType: {
             children: data.dataType ? "MappingFiles" : "Source",
+        },
+        replicaIndex: {
+            children: (
+                <Link
+                    href={`${config_requirementDetailPageRoot}?datasetid=${
+                        data.datasetID
+                    }&index=${data.replicaIndex?.toString()}`}
+                >
+                    {data.replicaIndex?.toString()}
+                </Link>
+            ),
+        },
+        associatedMappingFilesMatchingID: {
+            children: (
+                <>
+                    {data.associatedMappingFilesMatchingID ? (
+                        <Link
+                            href={`${config_matchingDetailPageRoot}/${data.associatedMappingFilesMatchingID}`}
+                        >
+                            {data.associatedMappingFilesMatchingID}
+                        </Link>
+                    ) : (
+                        "None"
+                    )}
+                </>
+            ),
         },
     }
 }

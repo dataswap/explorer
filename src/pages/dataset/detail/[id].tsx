@@ -13,7 +13,7 @@ import {
     getDatasetMetadata,
     getDatasetProofMetadata,
     getDatasetRequirementCount,
-} from "../../../shared/messagehub/get"
+} from "../../../messagehub/get"
 import { ValueFields } from "@unipackage/utils"
 import { defaultTableQueryParams } from "../../../config/params"
 import { useSelector } from "react-redux"

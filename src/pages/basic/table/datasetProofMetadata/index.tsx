@@ -1,12 +1,12 @@
 import React from "react"
-import { QueryParam } from "@/shared/messagehub/queryParams"
+import { QueryParam } from "@/messagehub/queryParams"
 import CommonTable from "@/components/table/index"
 import Table from "@/components/table/view/dataset/proofMetadata"
 import { DatasetProofMetadata } from "@dataswapjs/dataswapjs"
 import {
     getDatasetProofMetadata,
     getDatasetProofMetadataCount,
-} from "../../../../shared/messagehub/get"
+} from "../../../../messagehub/get"
 
 interface IProps {
     queryParam: QueryParam<DatasetProofMetadata>

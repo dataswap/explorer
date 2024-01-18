@@ -1,6 +1,6 @@
 import React from "react"
 import { Descriptions } from "antd"
-import { ValueFields } from "@unipackage/utils"
+import { ValueFields, enumToString } from "@unipackage/utils"
 import {
     DescriptionsItemTypeWithOptionalChildren,
     convertDataToDescriptionsItems,
@@ -9,8 +9,9 @@ import Link from "next/link"
 import {
     config_datasetDetailPageRoot,
     config_matchingDetailPageRoot,
+    config_requirementDetailPageRoot,
 } from "../../../config/links"
-import { MatchingMetadata } from "@dataswapjs/dataswapjs"
+import { MatchingMetadata, MatchingState } from "@dataswapjs/dataswapjs"
 
 interface IProps {
     data: ValueFields<MatchingMetadata>
@@ -39,6 +40,22 @@ function generateSpecialItem(data: ValueFields<MatchingMetadata>): {
                 </Link>
             ),
             span: 1,
+        },
+        status: {
+            children: data.status
+                ? enumToString(MatchingState, data.status)
+                : "None",
+        },
+        replicaIndex: {
+            children: (
+                <Link
+                    href={`${config_requirementDetailPageRoot}?datasetid=${
+                        data.datasetId
+                    }&index=${data.replicaIndex?.toString()}`}
+                >
+                    {data.replicaIndex?.toString()}
+                </Link>
+            ),
         },
     }
 }

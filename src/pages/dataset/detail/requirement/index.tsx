@@ -3,7 +3,7 @@ import { ValueFields } from "@unipackage/utils"
 import { useRouter } from "next/router"
 import { DatasetRequirementDescription } from "@/components/description/dataset/requirement"
 import { DatasetRequirement } from "@dataswapjs/dataswapjs"
-import { getDatasetRequirement } from "../../../../shared/messagehub/get"
+import { getDatasetRequirement } from "../../../../messagehub/get"
 import { useSelector } from "react-redux"
 
 export default function index() {

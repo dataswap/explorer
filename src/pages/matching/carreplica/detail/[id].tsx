@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import { ValueFields } from "@unipackage/utils"
 import { CarReplicaDescription } from "@/components/description/carReplica"
 import { CarReplica } from "@dataswapjs/dataswapjs"
-import { getCarReplica } from "../../../../shared/messagehub/get"
+import { getCarReplica } from "../../../../messagehub/get"
 import { useSelector } from "react-redux"
 
 export default () => {

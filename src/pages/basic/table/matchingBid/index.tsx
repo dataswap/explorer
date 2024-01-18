@@ -1,12 +1,12 @@
 import React from "react"
-import { QueryParam } from "@/shared/messagehub/queryParams"
+import { QueryParam } from "@/messagehub/queryParams"
 import CommonTable from "@/components/table/index"
 import Table from "@/components/table/view/matching/bids"
 import { MatchingBid } from "@dataswapjs/dataswapjs"
 import {
     getMatchingBids,
     getMatchingBidsCount,
-} from "../../../../shared/messagehub/get"
+} from "../../../../messagehub/get"
 
 interface IProps {
     queryParam: QueryParam<MatchingBid>

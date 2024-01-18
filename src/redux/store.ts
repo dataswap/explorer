@@ -1,4 +1,3 @@
-// store.ts
 import { configureStore } from "@reduxjs/toolkit"
 import { networkReducer } from "./slices/networkSlice"
 

@@ -1,12 +1,12 @@
 import React from "react"
-import { QueryParam } from "@/shared/messagehub/queryParams"
+import { QueryParam } from "@/messagehub/queryParams"
 import CommonTable from "@/components/table/index"
 import Table from "@/components/table/view/dataset/requirement"
 import { DatasetRequirement } from "@dataswapjs/dataswapjs"
 import {
     getDatasetRequirement,
     getDatasetRequirementCount,
-} from "../../../../shared/messagehub/get"
+} from "../../../../messagehub/get"
 
 interface IProps {
     queryParam: QueryParam<DatasetRequirement>

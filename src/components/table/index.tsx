@@ -3,8 +3,11 @@ import { TablePaginationConfig } from "antd"
 import { Input, Space } from "antd"
 import { Result, ValueFields } from "@unipackage/utils"
 import { QueryFilter } from "@unipackage/datastore"
-import { QueryParam } from "@/shared/messagehub/queryParams"
-import { onSearchBasic, handleTableChangeBasic } from "@/shared/table"
+import { QueryParam } from "@/messagehub/queryParams"
+import {
+    onSearchBasic,
+    handleTableChangeBasic,
+} from "@/components/table/shared"
 const { Search } = Input
 import { ITableProps } from "@unipackage/webkit"
 

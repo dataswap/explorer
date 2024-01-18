@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import { ValueFields } from "@unipackage/utils"
 import { DatasetProofMetadataDescription } from "@/components/description/dataset/proofMetadata"
 import { DatasetProofMetadata } from "@dataswapjs/dataswapjs"
-import { getDatasetProofMetadata } from "../../../../shared/messagehub/get"
+import { getDatasetProofMetadata } from "../../../../messagehub/get"
 import { useSelector } from "react-redux"
 
 export default () => {
