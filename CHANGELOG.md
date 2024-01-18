@@ -1,5 +1,12 @@
 
 
+## [0.5.2](https://github.com/dataswap/explorer/compare/0.5.1...0.5.2) (2024-01-18)
+
+
+### Bug Fixes
+
+* 🐛 enhance page display for desc ([04119f9](https://github.com/dataswap/explorer/commit/04119f97bb813a93609f86a222c74ddaca807c8d))
+
 ## [0.5.1](https://github.com/dataswap/explorer/compare/0.5.0...0.5.1) (2024-01-17)
 
 
