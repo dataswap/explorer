@@ -1,5 +1,12 @@
 
 
+## [0.7.1](https://github.com/dataswap/explorer/compare/0.7.0...0.7.1) (2024-01-18)
+
+
+### Bug Fixes
+
+* 🐛 delete id for proofmetadata ([5ab8420](https://github.com/dataswap/explorer/commit/5ab84206d18f6cb887466e4067c4114685b7cd78))
+
 # [0.7.0](https://github.com/dataswap/explorer/compare/0.6.3...0.7.0) (2024-01-18)
 
 
