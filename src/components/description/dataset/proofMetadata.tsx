@@ -40,6 +40,9 @@ export function DatasetProofMetadataDescription({ data }: IProps) {
                 ),
                 span: 3,
             },
+            valid: {
+                children: data.valid ? "Yes" : "No",
+            },
         },
         {
             //@ts-ignore
