@@ -72,8 +72,16 @@ export function MatchingMetadataDescription({ data }: IProps) {
         data,
         generateSpecialItem(data),
         {
-            //@ts-ignore
-            keyBlacklist: ["winner", "_id", "__v"],
+            keyBlacklist: [
+                "winner",
+                //@ts-ignore
+                "_id",
+                //@ts-ignore
+                "__v",
+                "datasetId",
+                "replicaIndex",
+                "size",
+            ],
             extra: {
                 winner: {
                     children: data.winner ? data.winner : "None",

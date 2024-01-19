@@ -86,10 +86,7 @@ export function MatchingTargetDescription({ data }: IProps) {
                 "_id",
                 //@ts-ignore
                 "__v",
-                "datasetID",
                 "matchingId",
-                "replicaIndex",
-                "size",
                 "subsidy",
             ],
         }
