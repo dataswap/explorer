@@ -8,23 +8,28 @@ import { useSelector } from "react-redux"
 
 export default () => {
     const router = useRouter()
-    const { id } = router.query
+    const { carId, matchingId } = router.query
     const [carReplica, setCarReplica] = useState<ValueFields<CarReplica>>()
     const network = useSelector(
         (state: { network: { network: string } }) => state.network.network
     )
 
     useEffect(() => {
-        if (id) {
+        if (matchingId) {
             getCarReplica({
                 network,
-                queryFilter: { conditions: [{ carId: id }] },
+                queryFilter: {
+                    and: [
+                        { conditions: [{ carId }] },
+                        { conditions: [{ matchingId }] },
+                    ],
+                },
             }).then((res) => {
                 const result = res.data
                 setCarReplica(result![0])
             })
         }
-    }, [id])
+    }, [matchingId])
 
     return <>{carReplica && <CarReplicaDescription data={carReplica} />}</>
 }

@@ -35,8 +35,10 @@ export default ({
         independent: {
             carId: {
                 width: "20%",
-                render: (value) => (
-                    <Link href={`${config_carReplicaDetailPageRoot}/${value}`}>
+                render: (value, record) => (
+                    <Link
+                        href={`${config_carReplicaDetailPageRoot}?carId=${value}&matchingId=${record.matchingId}`}
+                    >
                         {value}
                     </Link>
                 ),
