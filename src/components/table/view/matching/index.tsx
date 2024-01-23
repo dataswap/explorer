@@ -80,7 +80,7 @@ export default ({
                         <Link href={`${config_datasetDetailPageRoot}/${value}`}>
                             {value}
                         </Link>
-                        {" - "}
+                        {" / "}
                         <Link
                             href={`${config_requirementDetailPageRoot}?datasetid=${
                                 record.datasetId

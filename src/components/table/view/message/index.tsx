@@ -63,7 +63,7 @@ export default ({
                                 {data}
                             </Link>
                         ) : (
-                            "None"
+                            "-"
                         )}
                         {"  /  "}
                         {record.matchingId && record.matchingId > 0 ? (
@@ -73,7 +73,7 @@ export default ({
                                 {record.matchingId}
                             </Link>
                         ) : (
-                            "None"
+                            "-"
                         )}{" "}
                     </>
                 ),
