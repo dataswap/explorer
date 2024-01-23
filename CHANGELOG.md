@@ -1,5 +1,12 @@
 
 
+## [0.7.4](https://github.com/dataswap/explorer/compare/0.7.3...0.7.4) (2024-01-23)
+
+
+### Bug Fixes
+
+* 🐛 display from "None" to "-" ([4e6463a](https://github.com/dataswap/explorer/commit/4e6463a7490a8d58b3e5b2781669bd2889b88514))
+
 ## [0.7.3](https://github.com/dataswap/explorer/compare/0.7.2...0.7.3) (2024-01-19)
 
 
